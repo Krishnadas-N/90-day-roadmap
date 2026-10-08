@@ -815,13 +815,37 @@ const RESUME_REQ = [
 /* =========================================================================
    STATE
    ========================================================================= */
+const STAGES = ["Target","Referral asked","Applied","Screen","Tech round","Machine coding","HLD","HR / Final","Offer","Rejected","Dropped"];
 const KEY = "roadmap90.v1";
 const defaultState = () => ({done:{}, start:"", prompts:{}, fillers:[], apps:[], score:{}, notes:{}, activity:{}, badges:{}, ui:{tab:"dash", hideDone:false, week:null, topic:"dsa"}});
+/* Coerce untrusted state (localStorage / imported JSON) into expected types before it reaches the DOM */
+function normalize(d){
+  const s = defaultState(); if(!d || typeof d !== "object") return s;
+  const obj = v => (v && typeof v === "object" && !Array.isArray(v)) ? v : {};
+  const num = v => { const n = Math.floor(Number(v)); return Number.isFinite(n) && n >= 0 ? n : 0; };
+  const str = v => typeof v === "string" ? v : (typeof v === "number" ? String(v) : "");
+  const date = v => /^d{4}-d{2}-d{2}$/.test(v) ? v : "";
+  Object.entries(obj(d.done)).forEach(([k,v])=>{ s.done[k] = num(v) || Date.now(); });
+  s.start = date(d.start);
+  Object.entries(obj(d.prompts)).forEach(([k,v])=>{ if(/^d+$/.test(k)) s.prompts[k] = num(v); });
+  Object.entries(obj(d.activity)).forEach(([k,v])=>{ if(date(k)) s.activity[k] = num(v); });
+  Object.entries(obj(d.badges)).forEach(([k,v])=>{ s.badges[k] = num(v); });
+  Object.entries(obj(d.notes)).forEach(([k,v])=>{ s.notes[k] = str(v); });
+  Object.entries(obj(d.score)).forEach(([w,row])=>{ s.score[w] = {}; Object.entries(obj(row)).forEach(([k,v])=>{ s.score[w][k] = str(v); }); });
+  s.fillers = (Array.isArray(d.fillers) ? d.fillers : []).map(x=>({id:str(x&&x.id), d:date(x&&x.d), f:String(num(x&&x.f)), r:String(num(x&&x.r)), p:String(num(x&&x.p)||1)}));
+  s.apps = (Array.isArray(d.apps) ? d.apps : []).map(a=>({id:str(a&&a.id), c:str(a&&a.c), t:["A","B","C"].includes(a&&a.t)?a.t:"C", r:str(a&&a.r), ch:str(a&&a.ch), ref:str(a&&a.ref), stage:STAGES.includes(a&&a.stage)?a.stage:"Target", d:date(a&&a.d), n:str(a&&a.n)}));
+  const ui = obj(d.ui);
+  s.ui.tab = typeof ui.tab === "string" ? ui.tab : "dash";
+  s.ui.hideDone = ui.hideDone === true;
+  s.ui.week = num(ui.week) || null;
+  s.ui.topic = typeof ui.topic === "string" ? ui.topic : "dsa";
+  return s;
+}
 let S = load();
 function load(){
   try{
     const raw = localStorage.getItem(KEY);
-    if(raw){ const d = JSON.parse(raw); const s = Object.assign(defaultState(), d); s.ui = Object.assign(defaultState().ui, d.ui||{}); return s; }
+    if(raw) return normalize(JSON.parse(raw));
   }catch(e){}
   return defaultState();
 }
@@ -1241,7 +1265,6 @@ function resume(m){
 /* =========================================================================
    PIPELINE
    ========================================================================= */
-const STAGES = ["Target","Referral asked","Applied","Screen","Tech round","Machine coding","HLD","HR / Final","Offer","Rejected","Dropped"];
 const COLS = [["🎯 Target",["Target"]],["🤝 Referral asked",["Referral asked"]],["📨 Applied",["Applied"]],["📞 Screen",["Screen"]],["💻 Interviewing",["Tech round","Machine coding","HLD","HR / Final"]],["🏆 Offer",["Offer"]],["🗂️ Closed",["Rejected","Dropped"]]];
 function pipeline(m){
   const applied = S.apps.filter(a=>!["Target","Referral asked"].includes(a.stage)).length;
@@ -1392,7 +1415,7 @@ document.addEventListener("change", e=>{
   }
   if(t.id === "importFile" && t.files[0]){
     const r = new FileReader();
-    r.onload = () => { try{ const d = JSON.parse(r.result); S = Object.assign(defaultState(), d); S.ui = Object.assign(defaultState().ui, d.ui||{}); save(); render(); toast("✅ Imported"); }catch(err){ alert("Invalid file."); } };
+    r.onload = () => { try{ const d = JSON.parse(r.result); S = normalize(d); save(); render(); toast("✅ Imported"); }catch(err){ alert("Invalid file."); } };
     r.readAsText(t.files[0]);
   }
 });
