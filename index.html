@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>90-Day Backend Roadmap</title>
+<meta name="description" content="12-week execution tracker: 2 YOE to 15+ LPA Backend / Full-Stack Engineer.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6fb; --surface:#ffffff; --surface-2:#f2f3f9; --border:#e4e6f0; --border-strong:#c9cce0;
+  --text:#14151f; --muted:#666a80; --accent:#5b5bf0; --accent-soft:#ececfe;
+  --ok:#16a34a; --warn:#b45309; --warn-soft:#fff6e5; --danger:#dc2626;
+  --pg:#3b82f6; --dist:#f97316; --hld:#8b5cf6; --dsa:#0d9488; --lld:#ca8a04; --proj:#6366f1; --career:#db2777; --speak:#65a30d;
+  --ph1:#6366f1; --ph2:#f59e0b; --ph3:#10b981;
+  --ring-bg:#eceef6; --hl:91,91,240; --h0:#eceef5;
+  --shadow:0 1px 2px rgba(20,21,40,.04),0 10px 30px -14px rgba(20,21,40,.14);
+  --grad:linear-gradient(135deg,#4338ca 0%,#7c3aed 55%,#0e7490 100%);
+  --radius:16px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0c14; --surface:#13141f; --surface-2:#1b1d2b; --border:#262839; --border-strong:#3a3d55;
+    --text:#ecedf5; --muted:#9a9db2; --accent:#8b8dff; --accent-soft:#1f2040;
+    --ok:#4ade80; --warn:#fbbf24; --warn-soft:#2a2112; --danger:#f87171;
+    --pg:#60a5fa; --dist:#fb923c; --hld:#a78bfa; --dsa:#2dd4bf; --lld:#facc15; --proj:#818cf8; --career:#f472b6; --speak:#a3e635;
+    --ph1:#818cf8; --ph2:#fbbf24; --ph3:#34d399;
+    --ring-bg:#23253a; --hl:139,141,255; --h0:#1d1f2e;
+    --shadow:0 1px 0 rgba(255,255,255,.03) inset;
+    --grad:linear-gradient(135deg,#3730a3 0%,#6d28d9 55%,#155e75 100%);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c14; --surface:#13141f; --surface-2:#1b1d2b; --border:#262839; --border-strong:#3a3d55;
+  --text:#ecedf5; --muted:#9a9db2; --accent:#8b8dff; --accent-soft:#1f2040;
+  --ok:#4ade80; --warn:#fbbf24; --warn-soft:#2a2112; --danger:#f87171;
+  --pg:#60a5fa; --dist:#fb923c; --hld:#a78bfa; --dsa:#2dd4bf; --lld:#facc15; --proj:#818cf8; --career:#f472b6; --speak:#a3e635;
+  --ph1:#818cf8; --ph2:#fbbf24; --ph3:#34d399;
+  --ring-bg:#23253a; --hl:139,141,255; --h0:#1d1f2e;
+  --shadow:0 1px 0 rgba(255,255,255,.03) inset;
+  --grad:linear-gradient(135deg,#3730a3 0%,#6d28d9 55%,#155e75 100%);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.disp{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.01em}
+h1{font-size:30px;line-height:1.15;margin:0}
+h2{font-size:22px;margin:0 0 12px}
+h3{font-size:16px;margin:0}
+a{color:var(--accent)}
+code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;background:var(--surface-2);padding:1px 6px;border-radius:5px}
+.muted{color:var(--muted)} .small{font-size:13px}
+.row{display:flex;align-items:center} .gap{gap:8px} .wrap{flex-wrap:wrap} .between{justify-content:space-between}
+.hidden{display:none!important}
+
+/* ---------- Layout ---------- */
+.app{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--surface);border-right:1px solid var(--border);padding:18px 14px;display:flex;flex-direction:column;gap:16px}
+.inner{max-width:1180px;margin:0 auto;padding:28px 28px 90px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:grid;place-items:center;font:700 16px "Space Grotesk",sans-serif;flex-shrink:0}
+.bt{font:700 15px "Space Grotesk",sans-serif}
+.bs{font-size:12px;color:var(--muted)}
+.brand .icon-btn{margin-left:auto}
+.icon-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);cursor:pointer;font-size:15px}
+.lvl{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:12px}
+.lvl-name{font-weight:600;font-size:13px}
+.streak{font-weight:700;font-size:13px}
+.xpbar{height:8px;border-radius:99px;background:var(--ring-bg);overflow:hidden;margin:8px 0 6px}
+.xpbar i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width .5s}
+.xpmeta{font-size:12px;color:var(--muted)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:var(--muted);padding:9px 12px;border-radius:10px;cursor:pointer;font:500 14px Inter,sans-serif;text-align:left}
+.nav button:hover{background:var(--surface-2);color:var(--text)}
+.nav button.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.nav .ic{width:22px;text-align:center}
+.side-foot{margin-top:auto;font-size:12px;color:var(--muted)}
+.linkbtn{border:0;background:none;color:var(--accent);cursor:pointer;font:inherit;padding:0;text-decoration:underline}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{position:sticky;top:0;z-index:30;height:auto;padding:10px 16px 8px;gap:8px;border-right:0;border-bottom:1px solid var(--border)}
+  .side .lvl,.side-foot{display:none}
+  .nav{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav button{white-space:nowrap;padding:7px 10px;font-size:13px}
+  .inner{padding:16px 16px 80px}
+  h1{font-size:24px}
+}
+.mob-stat{display:none;font-size:12px;font-weight:600;gap:10px;margin-left:auto}
+@media (max-width:900px){.mob-stat{display:flex}.brand .icon-btn{margin-left:8px}}
+
+/* ---------- Buttons & inputs ---------- */
+.btn{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:8px 14px;border-radius:10px;cursor:pointer;font:600 13px Inter,sans-serif;transition:transform .1s,border-color .15s}
+.btn:hover{border-color:var(--accent)} .btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ghost{background:transparent}
+.btn.light{background:#fff;color:#3730a3;border-color:#fff}
+.btn.sm{padding:5px 10px;font-size:12px;border-radius:8px}
+.btn.danger{color:var(--danger)}
+.f{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:8px 11px;font:14px Inter,sans-serif;min-width:0}
+.f:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+textarea.f{width:100%;min-height:90px;resize:vertical;line-height:1.5}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;cursor:pointer;user-select:none}
+.toggle input{position:absolute;opacity:0}
+.toggle span{width:34px;height:20px;border-radius:99px;background:var(--border-strong);position:relative;transition:background .2s}
+.toggle span::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s}
+.toggle input:checked + span{background:var(--accent)}
+.toggle input:checked + span::after{transform:translateX(14px)}
+
+/* ---------- Cards ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+.card-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid > .card{margin-bottom:0}
+.grid{margin-bottom:16px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:99px;background:color-mix(in srgb,var(--c,var(--accent)) 14%,transparent);color:var(--c,var(--accent));white-space:nowrap}
+.chip.ghost{background:var(--surface-2);color:var(--muted)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.empty{color:var(--muted);font-size:13px;padding:8px 10px;background:var(--surface-2);border-radius:10px}
+.note{background:var(--warn-soft);border:1px solid color-mix(in srgb,var(--warn) 30%,transparent);color:var(--text);padding:12px 14px;border-radius:12px;margin-bottom:16px;font-size:14px}
+.ticks{list-style:none;margin:0;padding:0}
+.ticks li{padding:6px 0 6px 26px;position:relative}
+.ticks li::before{content:"→";position:absolute;left:4px;color:var(--accent);font-weight:700}
+
+/* ---------- Ring ---------- */
+.ringbox{position:relative;display:inline-grid;place-items:center;flex-shrink:0}
+.ringbox svg circle.fg{transition:stroke-dashoffset .7s cubic-bezier(.2,.8,.2,1)}
+.ringbox .rl{position:absolute;inset:0;display:grid;place-content:center;text-align:center;line-height:1.1}
+.ringbox .rl b{font:700 1em "Space Grotesk",sans-serif}
+.ringbox .rl span{font-size:11px;opacity:.8}
+
+/* ---------- Items ---------- */
+.items{display:flex;flex-direction:column;gap:2px}
+.item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:10px;transition:background .15s}
+.item:hover{background:var(--surface-2)}
+.chk{display:flex;gap:12px;align-items:flex-start;flex:1;cursor:pointer;min-width:0;position:relative}
+.chk input{position:absolute;opacity:0;width:1px;height:1px}
+.box{width:20px;height:20px;border-radius:7px;border:2px solid var(--border-strong);flex-shrink:0;margin-top:1px;display:grid;place-items:center;transition:background .15s,border-color .15s,transform .15s}
+.chk:hover .box{border-color:var(--c,var(--accent))}
+.box svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:16;stroke-dashoffset:16;transition:stroke-dashoffset .25s .05s}
+.chk input:checked + .box{background:var(--c,var(--ok));border-color:var(--c,var(--ok));transform:scale(1.05)}
+.chk input:checked + .box svg{stroke-dashoffset:0}
+.chk input:focus-visible + .box{outline:2px solid var(--accent);outline-offset:2px}
+.txt{min-width:0}
+.txt .t{font-weight:500}
+.txt .d{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+.item.done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 60%,transparent)}
+.meta{display:flex;gap:6px;align-items:center;flex-shrink:0;padding-top:1px}
+.lc{font-size:12px;font-weight:600;text-decoration:none;padding:3px 9px;border-radius:99px;background:var(--surface-2);color:var(--text);border:1px solid var(--border);white-space:nowrap}
+.lc:hover{border-color:var(--dsa);color:var(--dsa)}
+.hide-done .item.done{display:none}
+
+/* ---------- Hero ---------- */
+.hero{background:var(--grad);color:#fff;border-radius:22px;padding:28px;display:flex;gap:24px;align-items:center;justify-content:space-between;margin-bottom:16px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%)}
+.hero h1{font-size:40px;margin:6px 0}
+.hero h1 span{opacity:.6;font-size:.6em}
+.hero p{margin:0 0 16px;opacity:.9}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.hero-stats div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:8px 14px;min-width:96px}
+.hero-stats b{display:block;font:700 20px "Space Grotesk",sans-serif}
+.hero-stats span{font-size:12px;opacity:.85}
+.hero .btn.light{margin-top:10px}
+.hero-r{position:relative;z-index:1}
+.hero .ringbox .rl b{font-size:30px}
+@media (max-width:700px){.hero{flex-direction:column;align-items:flex-start;padding:22px}.hero h1{font-size:30px}.hero-r{align-self:center}}
+
+/* ---------- Journey ---------- */
+.journey{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;position:relative}
+.jnode{border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;border-radius:12px;color:var(--text);font:inherit}
+.jnode:hover{background:var(--surface-2)}
+.jnode.now{background:var(--accent-soft)}
+.jnode .jl{font-size:11px;color:var(--muted)}
+.jnode.full .ringbox .rl b::after{content:" ✓"}
+.phase-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+.phase-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+@media (max-width:700px){.journey{grid-template-columns:repeat(6,1fr)}}
+
+/* ---------- Mission ---------- */
+.blocks{display:flex;flex-direction:column;gap:10px}
+.mblock{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;border:1px solid var(--border);border-left:4px solid var(--c);border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--c) 4%,var(--surface))}
+.mtime b{display:block;font:700 15px "JetBrains Mono",monospace}
+.mtime span{font-size:12px;font-weight:600;color:var(--c)}
+.mbody .item{padding:5px 6px}
+.prompt-mini .t{font-weight:600;margin:6px 0 2px}
+.prompt-mini .d{font-size:13px;color:var(--muted);margin-bottom:8px}
+@media (max-width:600px){.mblock{grid-template-columns:1fr;gap:4px}.mtime{display:flex;gap:8px;align-items:baseline}}
+
+/* ---------- Heatmap ---------- */
+.heat{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px}
+.hcol{display:flex;flex-direction:column;gap:4px}
+.heat i,.heat-leg i{display:block;width:16px;height:16px;border-radius:4px;background:var(--h0)}
+.h1{background:rgba(var(--hl),.3)!important}.h2{background:rgba(var(--hl),.55)!important}.h3{background:rgba(var(--hl),.8)!important}.h4{background:rgb(var(--hl))!important}
+.heat i.fut{opacity:.35}
+.heat i.today{outline:2px solid var(--text);outline-offset:1px}
+.heat-leg{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);margin-top:10px}
+.heat-leg i{width:12px;height:12px}
+
+/* ---------- Topic rings / badges ---------- */
+.track-rings{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.tring{border:1px solid var(--border);background:var(--surface);border-radius:14px;padding:12px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--text);font:600 12px Inter,sans-serif;text-align:center;transition:transform .15s,border-color .15s}
+.tring:hover{transform:translateY(-2px);border-color:var(--border-strong)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.badge{border:1px dashed var(--border-strong);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:2px;opacity:.5;filter:grayscale(1)}
+.badge .bi{font-size:26px}
+.badge b{font-size:13px}
+.badge span:last-child{font-size:12px;color:var(--muted)}
+.badge.on{opacity:1;filter:none;border-style:solid;border-color:color-mix(in srgb,var(--accent) 45%,transparent);background:color-mix(in srgb,var(--accent) 6%,var(--surface))}
+
+/* ---------- Week view ---------- */
+.weekchips{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-bottom:16px}
+.wchip{border:1px solid var(--border);border-radius:10px;padding:8px 0;cursor:pointer;font:700 13px "Space Grotesk",sans-serif;color:var(--text);position:relative;overflow:hidden;background:var(--surface)}
+.wchip::before{content:"";position:absolute;left:0;bottom:0;height:4px;width:var(--p);background:var(--phc)}
+.wchip.ph1{--phc:var(--ph1)}.wchip.ph2{--phc:var(--ph2)}.wchip.ph3{--phc:var(--ph3)}
+.wchip.sel{background:var(--phc);color:#fff;border-color:var(--phc)}
+.wchip.sel::before{background:rgba(255,255,255,.6)}
+.wchip.now::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--danger)}
+@media (max-width:700px){.weekchips{grid-template-columns:repeat(6,1fr)}}
+.week-hero{display:flex;gap:20px;justify-content:space-between;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.week-hero::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--phc,var(--c))}
+.week-hero.ph1{--phc:var(--ph1)}.week-hero.ph2{--phc:var(--ph2)}.week-hero.ph3{--phc:var(--ph3)}
+.week-hero .eyebrow{color:var(--phc,var(--c));opacity:1}
+.week-hero h1{margin:6px 0 12px}
+.nowtag{background:var(--danger);color:#fff;padding:1px 7px;border-radius:99px;font-size:10px}
+@media (max-width:700px){.week-hero{flex-direction:column;align-items:flex-start}.week-hero .wh-r{align-self:center}}
+.track-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-bottom:16px}
+@media (max-width:420px){.track-grid{grid-template-columns:1fr}}
+.tcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 12px 10px;box-shadow:var(--shadow);border-top:4px solid var(--c)}
+.tcard-h{display:flex;align-items:center;gap:8px;padding:0 6px}
+.tcard-h h3{flex:1}
+.tdot{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.tcount{font:700 13px "JetBrains Mono",monospace;color:var(--c)}
+.tbar{height:5px;border-radius:99px;background:var(--ring-bg);margin:10px 6px 8px;overflow:hidden}
+.tbar i{display:block;height:100%;background:var(--c);border-radius:99px;transition:width .5s}
+
+/* ---------- Topic view ---------- */
+.topicchips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tchip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:99px;padding:7px 14px;cursor:pointer;font:600 13px Inter,sans-serif}
+.tchip i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.tchip span{color:var(--muted);font-weight:500}
+.tchip.sel{background:var(--c);border-color:var(--c);color:#fff}
+.tchip.sel i{background:#fff}.tchip.sel span{color:rgba(255,255,255,.85)}
+.tl{position:relative;padding-left:8px}
+.tl-row{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;position:relative;padding-bottom:16px}
+.tl-row::before{content:"";position:absolute;left:19px;top:40px;bottom:0;width:2px;background:var(--border)}
+.tl-row:last-child::before{display:none}
+.tl-dot{width:40px;height:40px;border-radius:50%;border:2px solid var(--c);display:grid;place-items:center;font:700 14px "Space Grotesk",sans-serif;background:var(--surface);color:var(--c);z-index:1}
+.tl-row.full .tl-dot{background:var(--c);color:#fff}
+.tl-body{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 8px 8px;box-shadow:var(--shadow)}
+.tl-h{display:flex;align-items:baseline;gap:10px;padding:0 6px 6px;flex-wrap:wrap}
+.tl-p{margin-left:auto;font:700 13px "JetBrains Mono",monospace;color:var(--c)}
+
+/* ---------- Speaking ---------- */
+.drill{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow);border-top:4px solid var(--speak)}
+.drill-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:center}
+.clock{font:700 56px "JetBrains Mono",monospace;letter-spacing:-.03em;color:var(--speak);line-height:1}
+.drill-step{font:700 20px "Space Grotesk",sans-serif;margin:2px 0}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:18px}
+.step{font-size:12px;display:flex;flex-direction:column;gap:3px}
+.step span{color:var(--muted)}
+.step .sb{height:6px;border-radius:99px;background:var(--ring-bg);overflow:hidden}
+.step .sb i{display:block;height:100%;background:var(--speak);transition:width .3s}
+.step.cur b{color:var(--speak)}
+@media (max-width:700px){.drill-top{grid-template-columns:1fr;gap:10px}.steps{grid-template-columns:repeat(3,1fr)}.clock{font-size:44px}}
+.prompts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.pcard{border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.pcard.ok{border-color:color-mix(in srgb,var(--speak) 50%,transparent);background:color-mix(in srgb,var(--speak) 5%,var(--surface))}
+.pnum{font:700 12px "JetBrains Mono",monospace;color:var(--speak)}
+.pcard b{font-size:14.5px}
+.pcard .d{font-size:13px;color:var(--muted);flex:1}
+.dots{display:flex;gap:4px}
+.dots i{width:100%;height:6px;border-radius:99px;background:var(--ring-bg)}
+.dots i.on{background:var(--speak)}
+.counter{display:flex;align-items:center;gap:8px}
+.counter b{font:700 14px "JetBrains Mono",monospace;min-width:34px;text-align:center}
+.spark{width:100%;height:150px;display:block}
+.spark .line{fill:none;stroke:var(--speak);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.spark .pt{fill:var(--surface);stroke:var(--speak);stroke-width:2}
+.spark .target{stroke:var(--ok);stroke-dasharray:5 5;stroke-width:1.5}
+.spark .tlbl{fill:var(--ok);font:600 11px Inter,sans-serif}
+.tmpl{border-radius:14px;padding:14px;background:var(--surface-2)}
+.tmpl h3{margin-bottom:8px}
+.star{display:grid;grid-template-columns:32px 1fr;gap:6px 10px;font-size:13.5px}
+.star b{width:28px;height:28px;border-radius:8px;background:var(--speak);color:#0b0c14;display:grid;place-items:center;font-family:"Space Grotesk"}
+
+/* ---------- Project ---------- */
+.flow{display:flex;flex-direction:column;align-items:center;gap:0}
+.fnode{width:min(520px,100%);border:1px solid var(--border);border-left:4px solid var(--c,var(--proj));border-radius:12px;padding:10px 14px;background:var(--surface)}
+.fnode b{font-family:"Space Grotesk"}
+.fnode .small{color:var(--muted)}
+.farrow{width:2px;height:22px;background:var(--border-strong);position:relative}
+.farrow::after{content:"";position:absolute;bottom:-2px;left:-4px;border:5px solid transparent;border-top-color:var(--border-strong)}
+.fside{display:flex;gap:10px;width:min(520px,100%);flex-wrap:wrap}
+.fside .fnode{flex:1;min-width:200px}
+.tradeoffs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.tcardx{border:1px solid var(--border);border-radius:14px;padding:14px;background:var(--surface);display:flex;flex-direction:column;gap:8px;position:relative}
+.tcardx.on{border-color:color-mix(in srgb,var(--ok) 50%,transparent);background:color-mix(in srgb,var(--ok) 5%,var(--surface))}
+.tcardx h3{font-size:15px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px}
+.vs div{border-radius:10px;padding:8px}
+.vs .y{background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.vs .n{background:color-mix(in srgb,var(--danger) 10%,transparent)}
+.vs small{display:block;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.tcardx .why{font-size:13px;color:var(--muted)}
+.defend{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer;position:relative}
+
+/* ---------- Resume ---------- */
+.formula{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 14px}
+.formula span{padding:8px 14px;border-radius:12px;font-weight:600;font-size:14px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.formula em{color:var(--muted);font-style:normal;font-weight:700}
+.rw{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.rw div{border-radius:12px;padding:12px;font-size:14px}
+.rw .before{background:color-mix(in srgb,var(--danger) 8%,transparent);color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--danger) 50%,transparent)}
+.rw .after{background:color-mix(in srgb,var(--ok) 10%,transparent)}
+@media (max-width:700px){.rw{grid-template-columns:1fr}}
+
+/* ---------- Pipeline ---------- */
+.kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:12px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px}
+.kcol{background:var(--surface-2);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:120px}
+.kcol-h{display:flex;justify-content:space-between;font-weight:700;font-size:13px;padding:2px 4px}
+.kcol-h span{color:var(--muted);font-family:"JetBrains Mono"}
+.kcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.kcard .f{padding:5px 8px;font-size:12.5px}
+.kcard details summary{cursor:pointer;color:var(--muted);font-size:12px}
+.tier{font:700 11px "JetBrains Mono",monospace;padding:2px 7px;border-radius:6px}
+.tier.tA{background:color-mix(in srgb,var(--career) 18%,transparent);color:var(--career)}
+.tier.tB{background:color-mix(in srgb,var(--hld) 18%,transparent);color:var(--hld)}
+.tier.tC{background:color-mix(in srgb,var(--dsa) 18%,transparent);color:var(--dsa)}
+.statbig{display:flex;flex-direction:column;gap:6px}
+.statbig .num{font:700 30px "Space Grotesk",sans-serif}
+.lbar{height:8px;border-radius:99px;background:var(--ring-bg);overflow:hidden}
+.lbar i{display:block;height:100%;border-radius:99px;background:var(--c,var(--accent))}
+.addrow{display:grid;grid-template-columns:2fr .7fr 1.5fr 1.3fr 1.5fr auto;gap:8px}
+@media (max-width:800px){.addrow{grid-template-columns:1fr 1fr}}
+.quote{background:var(--surface-2);border-radius:12px;padding:14px;font-size:14px;border-left:4px solid var(--career)}
+
+/* ---------- Schedule ---------- */
+.sched{display:flex;flex-direction:column;gap:6px}
+.srow{display:grid;grid-template-columns:120px 80px 1fr;gap:12px;align-items:center;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface)}
+.srow .tm{font:600 13px "JetBrains Mono",monospace}
+.srow.cur{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.srow.cur .tm::after{content:" ● now";color:var(--danger);font-family:Inter;font-size:11px;font-weight:700}
+.srow.quiet{opacity:.75}
+@media (max-width:600px){.srow{grid-template-columns:1fr auto}.srow .act{grid-column:1/-1}}
+
+/* ---------- Table ---------- */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--border);vertical-align:middle}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+.score-input{width:62px;text-align:center}
+
+/* ---------- Toast / confetti ---------- */
+#toasts{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:8px;z-index:100;pointer-events:none}
+.toast{background:var(--text);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:tin .25s ease-out;transition:opacity .4s,transform .4s}
+.toast.badge{background:var(--grad);color:#fff}
+.toast.out{opacity:0;transform:translateY(8px)}
+@keyframes tin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:99}
+@media (max-width:600px){#toasts{left:16px;right:16px;bottom:16px}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side"></aside>
+  <main class="main"><div class="inner" id="main"></div></main>
+</div>
+<div id="toasts"></div>
+<script>
+/* =========================================================================
+   DATA
+   Item string format: "Title|detail (optional)"
+   DSA format: ["Problem name","leetcode-slug"]
+   ========================================================================= */
+
+const TRACKS = {
+  pg:     {name:"PostgreSQL Internals", c:"--pg"},
+  dist:   {name:"Distributed Systems & Cloud", c:"--dist"},
+  hld:    {name:"System Design (HLD)", c:"--hld"},
+  dsa:    {name:"DSA", c:"--dsa"},
+  lld:    {name:"LLD / Machine Coding", c:"--lld"},
+  proj:   {name:"Project: Relay", c:"--proj"},
+  career: {name:"Career, Resume & Pipeline", c:"--career"},
+};
+
+const PHASES = {
+  1:{name:"Phase 1 — Depth", sub:"Know why, not just how", weeks:"Weeks 1–4",
+     exit:["Solve easy/medium in Week 1–4 patterns in ≤30 min","Explain an EXPLAIN ANALYZE plan out loud","Relay ingest + delivery path working locally","Parking Lot machine coding in 90 min"]},
+  2:{name:"Phase 2 — Scale", sub:"Prove it under load", weeks:"Weeks 5–8",
+     exit:["Relay deployed on AWS with real benchmark numbers","3 HLD designs explained out loud in 35 min each","5 machine codings completed","Resume v1 reviewed by 2 engineers"]},
+  3:{name:"Phase 3 — Convert", sub:"Interview mode. No new topics.", weeks:"Weeks 9–12",
+     exit:["80+ applications sent","20+ referral asks","8+ interview loops","≥1 offer at ₹15+ LPA"]},
+};
+
+const WEEKS = [
+/* ---------------- WEEK 1 ---------------- */
+{w:1, phase:1, title:"Storage, Hashing, SOLID",
+ pg:[
+  "Heap pages & tuples|8KB pages, line pointers, ctid; use pageinspect to look inside a page",
+  "MVCC fundamentals|xmin/xmax, snapshots, why UPDATE = new tuple version + dead tuple",
+  "VACUUM vs VACUUM FULL vs autovacuum|thresholds, scale factor, when autovacuum falls behind",
+  "Table & index bloat|measure via pg_stat_user_tables.n_dead_tup; pgstattuple",
+  "TOAST|how large values (>2KB) are compressed/stored out-of-line",
+  "Hands-on: create 1M-row table, run updates, observe dead tuples and vacuum",
+ ],
+ dist:[
+  "Docker image layers & build cache|order Dockerfile instructions for cache hits",
+  "Multi-stage builds|builder → slim runtime; measure image size before/after",
+  ".dockerignore, non-root USER, HEALTHCHECK",
+  "docker-compose: API + Postgres + Redis|named volumes, depends_on with healthcheck, env files",
+ ],
+ dsa:[["Two Sum","two-sum"],["Group Anagrams","group-anagrams"],["Top K Frequent Elements (bucket sort)","top-k-frequent-elements"],["Product of Array Except Self","product-of-array-except-self"],["Longest Consecutive Sequence","longest-consecutive-sequence"],["Valid Palindrome","valid-palindrome"],["3Sum","3sum"],["Container With Most Water","container-with-most-water"],["Sort Colors","sort-colors"],["Trapping Rain Water","trapping-rain-water"]],
+ lld:[
+  "Single Responsibility|write a violation + refactor in TypeScript",
+  "Open/Closed|extend behaviour without modifying class (e.g. new payment method)",
+  "Liskov Substitution|classic Rectangle/Square trap; why subclasses must honour contracts",
+  "Interface Segregation|split fat interfaces",
+  "Dependency Inversion|depend on abstractions; constructor injection",
+  "Composition over inheritance|interfaces vs abstract classes in TS",
+ ],
+ proj:[
+  "Repo scaffold|TypeScript + Fastify, ESLint, Prettier, tsconfig strict",
+  "docker-compose for Postgres + Redis + API",
+  "Migrations tool set up|node-pg-migrate or Drizzle",
+  "Schema v1|tenants, endpoints, events tables",
+ ],
+ career:[
+  "Check your notice period & company policy on side work / device use",
+  "Email manager asking for perf / tech-debt / on-call work|written paper trail",
+  "Identify one slow query/endpoint in the current codebase",
+  "Record speaking baseline|prompt #1, count fillers — this is your Day-1 number",
+ ]},
+/* ---------------- WEEK 2 ---------------- */
+{w:2, phase:1, title:"Indexes, Redis Caching, Creational Patterns",
+ pg:[
+  "B-tree internals|root/internal/leaf pages, page splits, fillfactor",
+  "Composite indexes|leftmost-prefix rule; column order by query shape & selectivity",
+  "Covering indexes|INCLUDE columns → index-only scans",
+  "Partial indexes|e.g. WHERE status = 'pending'",
+  "Expression indexes|e.g. lower(email)",
+  "Index-only scans & visibility map|why freshly updated tables can't use them",
+  "When indexes hurt|write amplification, killed HOT updates, unused indexes (pg_stat_user_indexes)",
+ ],
+ dist:[
+  "Redis data structures + one use case each|string, hash, list, set, sorted set, stream",
+  "Cache-aside vs read-through vs write-through vs write-behind",
+  "TTL strategy & eviction policies|allkeys-lru vs volatile-lru vs noeviction",
+  "Cache stampede|mutex/single-flight, TTL jitter, probabilistic early refresh",
+  "Cache invalidation on writes|delete-on-write vs update-on-write; race conditions",
+ ],
+ dsa:[["Best Time to Buy and Sell Stock","best-time-to-buy-and-sell-stock"],["Longest Substring Without Repeating Characters","longest-substring-without-repeating-characters"],["Longest Repeating Character Replacement","longest-repeating-character-replacement"],["Permutation in String","permutation-in-string"],["Minimum Window Substring","minimum-window-substring"],["Sliding Window Maximum (deque)","sliding-window-maximum"],["Subarray Sum Equals K (prefix sum)","subarray-sum-equals-k"],["Max Consecutive Ones III","max-consecutive-ones-iii"],["Fruit Into Baskets","fruit-into-baskets"]],
+ lld:[
+  "Factory & Abstract Factory",
+  "Builder|fluent builders for complex objects",
+  "Singleton|and why it hurts testability",
+  "Dependency Injection by hand|constructor injection, composition root",
+ ],
+ proj:[
+  "POST /v1/events with Idempotency-Key|UNIQUE(tenant_id, idempotency_key) + ON CONFLICT",
+  "API-key auth per tenant|store hashed keys",
+  "Request validation with zod",
+  "Integration tests with Testcontainers (Postgres)",
+ ],
+ career:[]},
+/* ---------------- WEEK 3 ---------------- */
+{w:3, phase:1, title:"EXPLAIN ANALYZE, Advanced Indexes, Behavioural Patterns",
+ pg:[
+  "EXPLAIN (ANALYZE, BUFFERS)|read cost, rows, loops, shared hit/read",
+  "Scan types|Seq Scan vs Index Scan vs Index Only vs Bitmap Heap Scan — when planner picks each",
+  "Join algorithms|Nested Loop, Hash Join, Merge Join",
+  "Planner statistics|estimated vs actual rows, ANALYZE, default_statistics_target",
+  "pg_stat_statements|find top-N queries by total time",
+  "GIN indexes|jsonb @>, full-text search, pg_trgm for ILIKE '%x%'",
+  "BRIN|append-only time-series tables",
+  "GiST|ranges, geo, exclusion constraints",
+ ],
+ dist:[
+  "Rate limiting algorithms|fixed window, sliding log, sliding window counter, token bucket",
+  "Atomic rate limiter in Redis via Lua script",
+  "Distributed lock|SET key val NX PX 30000, fencing tokens",
+  "Redlock controversy|read Kleppmann's critique; when locks are unsafe",
+  "Redis Pub/Sub vs Streams|consumer groups, XACK, pending entries list",
+ ],
+ dsa:[["Valid Parentheses","valid-parentheses"],["Min Stack","min-stack"],["Daily Temperatures (monotonic stack)","daily-temperatures"],["Largest Rectangle in Histogram","largest-rectangle-in-histogram"],["Evaluate Reverse Polish Notation","evaluate-reverse-polish-notation"],["Binary Search","binary-search"],["Search in Rotated Sorted Array","search-in-rotated-sorted-array"],["Find Minimum in Rotated Sorted Array","find-minimum-in-rotated-sorted-array"],["Koko Eating Bananas","koko-eating-bananas"],["Capacity To Ship Packages (binary search on answer)","capacity-to-ship-packages-within-d-days"],["Time Based Key-Value Store","time-based-key-value-store"]],
+ lld:[
+  "Strategy|e.g. retry policies, pricing rules",
+  "Observer|e.g. domain events → listeners",
+  "Decorator|e.g. logging/caching wrappers",
+  "Adapter|e.g. wrapping third-party SDKs",
+  "State|e.g. order/payment state machine",
+  "Chain of Responsibility|e.g. Express/Fastify middleware",
+ ],
+ proj:[
+  "Transactional outbox|insert event + outbox row in ONE transaction",
+  "Dispatcher|SELECT … FOR UPDATE SKIP LOCKED LIMIT 100 batch polling",
+  "Delivery worker|HTTP POST with timeout",
+  "HMAC-SHA256 signature header|timestamp + body, verify example in README",
+ ],
+ career:[
+  "EXPLAIN the slow work query; write up a fix proposal for manager",
+ ]},
+/* ---------------- WEEK 4 ---------------- */
+{w:4, phase:1, title:"Transactions & Locks, Queues, First Machine Coding",
+ pg:[
+  "ACID mapped to PG mechanisms|WAL = durability, MVCC = isolation, constraints = consistency",
+  "Isolation levels|Read Committed, Repeatable Read, Serializable (SSI)",
+  "Reproduce anomalies with 2 psql sessions|dirty read, non-repeatable read, phantom, lost update, write skew",
+  "Row locks|FOR UPDATE, FOR NO KEY UPDATE, SKIP LOCKED, NOWAIT",
+  "Advisory locks|pg_advisory_xact_lock use cases",
+  "Deadlocks|detection, consistent lock ordering fix",
+  "DDL lock levels & safe migrations|CREATE INDEX CONCURRENTLY, lock_timeout, ACCESS EXCLUSIVE dangers",
+ ],
+ dist:[
+  "Delivery semantics|at-most-once, at-least-once, 'exactly-once' = at-least-once + idempotent consumer",
+  "SQS Standard vs FIFO|message group ID, dedup ID, throughput limits",
+  "Visibility timeout, long polling",
+  "DLQ + maxReceiveCount|redrive",
+  "BullMQ (Redis-backed) for local comparison",
+ ],
+ dsa:[["Reverse Linked List","reverse-linked-list"],["Merge Two Sorted Lists","merge-two-sorted-lists"],["Linked List Cycle","linked-list-cycle"],["Reorder List","reorder-list"],["Remove Nth Node From End of List","remove-nth-node-from-end-of-list"],["LRU Cache (must be flawless)","lru-cache"],["Invert Binary Tree","invert-binary-tree"],["Maximum Depth of Binary Tree","maximum-depth-of-binary-tree"],["Diameter of Binary Tree","diameter-of-binary-tree"],["Same Tree","same-tree"],["Binary Tree Level Order Traversal","binary-tree-level-order-traversal"],["Binary Tree Right Side View","binary-tree-right-side-view"]],
+ lld:[
+  "Machine coding #1: Parking Lot (90 min timed)|floors, vehicle types, pricing Strategy, entry/exit gates, tests",
+  "Self-review|modularity, extensibility, naming, working demo",
+ ],
+ proj:[
+  "Retries|exponential backoff + full jitter, max attempts",
+  "deliveries table|one row per attempt: status, http_code, latency_ms, next_retry_at",
+  "DLQ state after max attempts",
+  "Replay API|POST /v1/events/:id/replay",
+ ],
+ career:[
+  "First LeetCode weekly contest (Sunday 08:00 IST)",
+  "Week-4 checkpoint|timed mediums <50% success? shift 15 min from LLD to DSA for weeks 5–6",
+ ]},
+/* ---------------- WEEK 5 ---------------- */
+{w:5, phase:2, title:"Connections & Replication, Kafka, Rate Limiter",
+ pg:[
+  "Process-per-connection model|why 500 connections hurt PG (memory, context switches)",
+  "PgBouncer modes|session vs transaction vs statement pooling",
+  "Transaction-mode gotchas|SET, session advisory locks, LISTEN, prepared statements",
+  "Pool sizing|start ≈ cores × 2; app pool × instances ≤ PgBouncer pool",
+  "RDS Proxy vs PgBouncer",
+  "WAL & checkpoints|synchronous_commit trade-off",
+  "Streaming replication & lag|read-your-writes problem with replicas",
+ ],
+ dist:[
+  "Kafka core|topics, partitions, offsets, consumer groups",
+  "Ordering per partition|choosing partition keys",
+  "Rebalancing, retention, compacted topics",
+  "Durability|replication factor, ISR, acks=all",
+  "Decision table: SQS vs Kafka vs RabbitMQ vs Redis Streams|throughput, ordering, replay, ops cost (concepts only, don't deploy Kafka)",
+ ],
+ dsa:[["Validate Binary Search Tree","validate-binary-search-tree"],["Kth Smallest Element in a BST","kth-smallest-element-in-a-bst"],["LCA of a Binary Search Tree","lowest-common-ancestor-of-a-binary-search-tree"],["LCA of a Binary Tree","lowest-common-ancestor-of-a-binary-tree"],["Construct BT from Preorder & Inorder","construct-binary-tree-from-preorder-and-inorder-traversal"],["Binary Tree Maximum Path Sum","binary-tree-maximum-path-sum"],["Serialize and Deserialize Binary Tree","serialize-and-deserialize-binary-tree"],["Kth Largest Element in an Array","kth-largest-element-in-an-array"],["K Closest Points to Origin","k-closest-points-to-origin"],["Task Scheduler","task-scheduler"],["Find Median from Data Stream","find-median-from-data-stream"],["Merge k Sorted Lists","merge-k-sorted-lists"]],
+ lld:[
+  "Machine coding #2: Rate Limiter|pluggable token bucket / sliding window, per-user & per-API config, swappable store interface",
+ ],
+ proj:[
+  "Per-tenant token-bucket rate limit in Redis (Lua)",
+  "Endpoint config cache|cache-aside, invalidate on update",
+  "PgBouncer in compose (transaction mode)",
+ ],
+ career:[]},
+/* ---------------- WEEK 6 ---------------- */
+{w:6, phase:2, title:"Partitioning, AWS Networking + ECS, Notification Engine",
+ pg:[
+  "Declarative partitioning|range by month, hash by tenant",
+  "Partition pruning|verify in EXPLAIN",
+  "DROP PARTITION vs DELETE|bloat & vacuum pressure",
+  "Keyset vs OFFSET pagination|measure on 5M rows",
+  "Bulk writes|COPY, multi-row INSERT, UNNEST batching",
+  "ON CONFLICT DO NOTHING RETURNING|idempotent inserts",
+ ],
+ dist:[
+  "VPC|public/private subnets across 2 AZs, route tables, IGW",
+  "NAT Gateway & its cost|VPC endpoints as alternative",
+  "Security groups vs NACLs",
+  "ALB|listeners, rules, target groups, health checks, deregistration delay",
+  "ECS Fargate|task definitions, services, rolling deploys",
+  "Autoscaling|target tracking on CPU and on SQS queue depth",
+  "ECR + Secrets Manager / SSM Parameter Store",
+ ],
+ dsa:[["Number of Islands","number-of-islands"],["Clone Graph","clone-graph"],["Rotting Oranges (multi-source BFS)","rotting-oranges"],["Pacific Atlantic Water Flow","pacific-atlantic-water-flow"],["Course Schedule","course-schedule"],["Course Schedule II (topological sort)","course-schedule-ii"],["Redundant Connection (Union-Find)","redundant-connection"],["Number of Provinces","number-of-provinces"],["Network Delay Time (Dijkstra)","network-delay-time"],["Word Ladder","word-ladder"]],
+ lld:[
+  "Machine coding #3: Notification Engine|channels via Strategy, templates, user prefs, priority, retries, Observer for delivery events",
+ ],
+ proj:[
+  "k6 load test baseline|ingest RPS, p50/p95/p99, delivery throughput",
+  "Find bottleneck|pool size, per-row inserts, missing outbox index…",
+  "Fix → re-measure → record before/after in BENCHMARKS.md",
+ ],
+ career:[]},
+/* ---------------- WEEK 7 ---------------- */
+{w:7, phase:2, title:"RDS & Ops, Observability, Concurrency LLD",
+ pg:[
+  "RDS Multi-AZ|sync standby, auto failover ~60–120s, standby NOT readable",
+  "Read replicas|async, readable, lag",
+  "Aurora differences|shared storage, faster failover",
+  "Backups|automated, PITR, snapshots",
+  "Parameter groups & Performance Insights",
+  "App behaviour during failover|connection retries, DNS TTL",
+ ],
+ dist:[
+  "Structured JSON logging (pino) + request/correlation IDs",
+  "RED metrics (services) & USE metrics (resources)",
+  "Percentiles|why p99 matters more than average",
+  "OpenTelemetry tracing|API → queue → worker",
+  "CloudWatch metrics + alarms; SLO & error budget basics",
+  "Resilience|circuit breaker (closed/open/half-open), bulkheads, timeouts everywhere",
+ ],
+ dsa:[["Subsets","subsets"],["Combination Sum","combination-sum"],["Permutations","permutations"],["Word Search","word-search"],["Merge Intervals","merge-intervals"],["Insert Interval","insert-interval"],["Non-overlapping Intervals","non-overlapping-intervals"],["Meeting Rooms II (or Car Pooling)","car-pooling"],["Jump Game","jump-game"],["Gas Station","gas-station"]],
+ lld:[
+  "Machine coding #4: BookMyShow seat booking|seat hold with expiry, optimistic vs pessimistic locking, release on payment timeout",
+ ],
+ proj:[
+  "AWS Budget alarm at $20 (do this FIRST)",
+  "Terraform|VPC, ECS Fargate (api + worker), ALB, RDS, ElastiCache, SQS + DLQ",
+  "GitHub Actions|lint → test → build → push ECR → deploy",
+  "Per-endpoint circuit breaker in worker",
+  "Monthly partitioning of deliveries table",
+ ],
+ career:[]},
+/* ---------------- WEEK 8 ---------------- */
+{w:8, phase:2, title:"HLD Foundations, Feature Freeze, Resume v1",
+ pg:[],
+ hld:[
+  "HLD framework|requirements (with numbers) → API → data model → diagram → deep-dive → bottlenecks → trade-offs",
+  "Back-of-envelope estimation|QPS, storage, bandwidth",
+  "CAP & PACELC",
+  "Consistent hashing",
+  "Sharding strategies & replication; leader election (concept)",
+  "Design: URL Shortener",
+  "Design: Distributed Rate Limiter",
+  "Design: Notification System",
+ ],
+ dist:[
+  "Teach-back review: record a 5-min explanation of each week 1–7 core topic; redo gaps",
+ ],
+ dsa:[["Climbing Stairs","climbing-stairs"],["House Robber","house-robber"],["House Robber II","house-robber-ii"],["Coin Change","coin-change"],["Longest Increasing Subsequence","longest-increasing-subsequence"],["Word Break","word-break"],["Decode Ways","decode-ways"],["Partition Equal Subset Sum","partition-equal-subset-sum"],["Maximum Product Subarray","maximum-product-subarray"]],
+ lld:[
+  "Machine coding #5: Splitwise|split strategies (equal/exact/percent), balance simplification",
+ ],
+ proj:[
+  "FEATURE FREEZE",
+  "Chaos: kill worker mid-delivery → prove no event lost",
+  "Chaos: RDS reboot with failover → measure recovery time",
+  "Chaos: Redis down → document fail-open vs fail-closed",
+  "README + ADRs + architecture & sequence diagrams",
+  "3-min demo video",
+  "Tear down AWS (keep Terraform)",
+ ],
+ career:[
+  "Resume v1 written (see Resume tab)",
+  "Resume reviewed by 2 product-company engineers",
+  "Update LinkedIn, Naukri, Instahyre, Cutshort, Wellfound",
+  "Build target list: 60 companies across 3 tiers",
+  "10 warm-up applications (Tier C)",
+ ]},
+/* ---------------- WEEK 9 ---------------- */
+{w:9, phase:3, title:"Mock Heavy",
+ dsa:[["Unique Paths","unique-paths"],["Longest Common Subsequence","longest-common-subsequence"],["Edit Distance","edit-distance"],["Best Time to Buy/Sell with Cooldown","best-time-to-buy-and-sell-stock-with-cooldown"],["Target Sum","target-sum"],["Implement Trie","implement-trie-prefix-tree"],["Design Add and Search Words","design-add-and-search-words-data-structure"],["Word Search II","word-search-ii"]],
+ hld:[
+  "Design: Payment system|idempotency keys, double-entry ledger, reconciliation, PG webhooks",
+  "Design: Chat app|WebSockets, presence, fan-out, message ordering",
+  "Design: News feed|fan-out on write vs read, celebrity problem",
+ ],
+ lld:[
+  "Machine coding: Elevator system",
+  "Machine coding: In-memory KV store with TTL + LRU/LFU eviction",
+ ],
+ proj:["Bug fixes only; rehearse 5-min Relay walkthrough"],
+ career:[
+  "25 applications",
+  "10 referral asks",
+  "1 live mock interview (peer / Pramp / interviewing.io)",
+  "Book first recruiter screens",
+ ]},
+/* ---------------- WEEK 10 ---------------- */
+{w:10, phase:3, title:"Real Interviews Begin",
+ dsa:[["Spiral Matrix","spiral-matrix"],["Rotate Image","rotate-image"],["Set Matrix Zeroes","set-matrix-zeroes"],["Longest Palindromic Substring","longest-palindromic-substring"],["Palindromic Substrings","palindromic-substrings"],["Accounts Merge","accounts-merge"],["Find the Duplicate Number","find-the-duplicate-number"],["Copy List with Random Pointer","copy-list-with-random-pointer"]],
+ hld:[
+  "Design: Ticket booking at scale / flash sale|queue-based admission, inventory locking",
+  "Design: E-commerce orders + inventory|saga pattern, outbox",
+  "Design: Food delivery dispatch|geo-indexing, rider assignment",
+ ],
+ lld:[
+  "Machine coding: Logger / Pub-Sub system",
+  "Machine coding: Snake & Ladder (60-min OOP speed drill)",
+ ],
+ proj:[],
+ career:[
+  "25 applications",
+  "10 referral asks",
+  "Company-tagged DSA for every company you're interviewing with",
+  "Debrief every interview within 2h (Pipeline tab notes)",
+ ]},
+/* ---------------- WEEK 11 ---------------- */
+{w:11, phase:3, title:"Loops Stack Up",
+ dsa:[["Insert Delete GetRandom O(1)","insert-delete-getrandom-o1"],["LFU Cache","lfu-cache"],["Min Cost to Connect All Points","min-cost-to-connect-all-points"],["Cheapest Flights Within K Stops","cheapest-flights-within-k-stops"],["Swim in Rising Water","swim-in-rising-water"],["Longest Increasing Path in a Matrix","longest-increasing-path-in-a-matrix"]],
+ hld:[
+  "Redo weakest HLD design #1",
+  "Redo weakest HLD design #2",
+  "Redo weakest HLD design #3",
+  "Design Relay at 100x scale|sharding by tenant, Kafka, S3 payloads, regional workers",
+ ],
+ lld:["Redo weakest machine coding in 60 min"],
+ proj:[],
+ career:[
+  "Push all active processes into same 2-week final-round window",
+  "Timed DSA mocks: 2 problems / 45 min, daily",
+ ]},
+/* ---------------- WEEK 12 ---------------- */
+{w:12, phase:3, title:"Close",
+ dsa:[["Error-log revisit: every problem marked 'struggled'",""]],
+ hld:[],
+ lld:[],
+ proj:[],
+ career:[
+  "Final & HR rounds",
+  "Negotiate using competing offers (see Resume tab)",
+  "Offer in writing: fixed / variable / ESOP vesting / joining bonus clawback",
+  "Keep 1 DSA + 1 speaking session daily between rounds",
+  "No offer yet? Debrief → re-target. Pipeline continues.",
+ ]},
+];
+
+const SCHEDULE = [
+ ["07:00","—","Wake. Water. No phone feed."],
+ ["07:30–08:45","A","Speaking protocol (15-min core) + technical verbal drills"],
+ ["08:45–09:00","—","Pre-workout meal (oats + eggs)"],
+ ["09:00–10:15","Gym","Non-negotiable"],
+ ["10:15–11:15","—","Shower, plate batch meal, eat"],
+ ["11:15–12:15","B","Project coding. Commit daily. Build, don't read."],
+ ["12:15–12:45","Commute","English tech talk audio; rehearse today's prompt"],
+ ["13:00–14:30","C1","DSA: 1 new pattern, 1 timed (25 min), 1 revisit"],
+ ["14:30–15:30","—","Lunch / office work"],
+ ["15:30–16:45","C2","PostgreSQL internals (W1–7) → HLD (W8–12)"],
+ ["16:45–18:00","C3","Distributed systems / AWS"],
+ ["18:00–19:00","C4","LLD / machine coding"],
+ ["19:00–20:30","—","Office work / buffer. Write 5-line daily log."],
+ ["20:30–21:00","Commute","Audio only"],
+ ["21:00–23:15","—","Dinner, family, 15-min flashcards max. Lights out 23:15."],
+];
+
+const PROMPTS = [
+ ["Tell me about yourself.","90 sec. Present (role + stack + one win) → Past → Future (why this role)."],
+ ["Walk me through the architecture of the most complex system you've built.","Use Relay from Week 6. Include one number and one trade-off."],
+ ["Tell me about a time you debugged a difficult production issue.","STAR. Symptoms → hypothesis → tools → root cause → fix → prevention."],
+ ["How does a database index work, and when can adding one make things worse?","B-tree, leftmost prefix, write amplification, HOT updates, planner choosing seq scan."],
+ ["After a deploy, API p99 jumped from 200ms to 2s. How do you investigate?","Scope → diff → metrics (DB, CPU, pool wait) → pg_stat_statements → EXPLAIN → rollback call."],
+ ["How would you guarantee a payment or webhook is processed exactly once?","At-least-once + idempotency key + unique constraint + outbox. Why true exactly-once is impossible."],
+ ["Tell me about a time you disagreed with a senior engineer or manager.","STAR. Data-driven disagreement, disagree-and-commit, outcome."],
+ ["Why are you leaving your current company?","No badmouthing. Low allocation → used it to go deep → want ownership at scale. 45 sec."],
+ ["Explain caching with Redis. How do you handle invalidation and stampede?","Cache-aside, TTL + jitter, delete-on-write, single-flight, consistency trade-off."],
+ ["Tell me about a mistake you made and what you changed afterwards.","Real mistake, full ownership, concrete process change."],
+];
+
+const TRADEOFFS = [
+ ["Delivery semantics","At-least-once + idempotent receivers","'Exactly-once'","Exactly-once over a network is impossible; receivers dedupe by event ID"],
+ ["Dual-write problem","Transactional outbox","Write DB then publish to SQS","Crash between writes = lost or phantom event"],
+ ["Outbox polling","FOR UPDATE SKIP LOCKED batches","LISTEN/NOTIFY only; CDC (Debezium)","Simple, horizontally scalable; cost: 100–500ms poll latency"],
+ ["Broker","SQS","Kafka","Managed, DLQ built-in, autoscaling signal; lose offset replay & high-throughput ordering"],
+ ["Ordering","Optional per-endpoint FIFO (group = endpoint_id)","Global ordering","Ordering kills parallelism; most consumers don't need it"],
+ ["Idempotency store","PG unique constraint (truth) + Redis fast path","Redis only","Redis eviction/failover → duplicates"],
+ ["Retries","Exp. backoff + full jitter, cap 24h → DLQ","Fixed interval","Avoid thundering herd on a recovering endpoint"],
+ ["Bad endpoints","Per-endpoint circuit breaker","Retry forever","One dead endpoint must not eat worker capacity"],
+ ["Multi-tenancy","Per-tenant token bucket","No limit","Fairness; protects Postgres"],
+ ["Rate limiter failure","Fail-open (documented)","Fail-closed","Availability of ingest > strict limiting"],
+ ["Connection pooling","PgBouncer transaction mode","Direct connections","Tasks × pool would exhaust max_connections; cost: no session state"],
+ ["Deliveries growth","Monthly partitions, drop after 30d","DELETE old rows","DELETE = bloat; DROP PARTITION = instant"],
+ ["Payload storage","jsonb in PG","S3","Simple at this scale; move >256KB to S3 at 10x"],
+];
+
+const README_REQ = [
+ "One-line pitch + 3-min demo video + CI badge",
+ "Problem: why webhook delivery is hard (3 bullets)",
+ "Guarantees: at-least-once, ordering mode, retry schedule, signature verification",
+ "Architecture diagram + sequence diagram of one event lifecycle",
+ "Data model ERD + why each index exists",
+ "Benchmarks table: config → RPS → p50/p95/p99 → what changed",
+ "Failure modes table: PG / Redis / SQS / endpoint / worker down → behaviour",
+ "ADRs: 0001-outbox, 0002-sqs-vs-kafka, 0003-pgbouncer-txn-mode …",
+ "Run locally: docker compose up + one curl, works in <5 min on fresh machine",
+ "Deploy: Terraform steps",
+ "What I'd change at 100x",
+ "Known limitations (honest)",
+];
+
+const PROOF_REQ = [
+ "BENCHMARKS.md with k6 script, instance sizes, real measured numbers",
+ "Chaos result: worker killed mid-delivery → zero lost events (with query proof)",
+ "Chaos result: RDS failover recovery time measured",
+ "Unit + integration tests (Testcontainers), CI green",
+ "AWS budget alarm set; infra torn down after demo",
+];
+
+const RESUME_REQ = [
+ "1 page, ATS-safe, no photo/DOB/rating bars",
+ "2-line summary naming stack + Relay",
+ "Skills grouped: Languages · Backend · Databases · Cloud/DevOps · Tools",
+ "4–6 experience bullets, every one follows the formula",
+ "Every number is real and I can defend it for 2 minutes",
+ "No 'assisted in' / 'part of' / 'responsible for'",
+ "Relay project: 3–4 bullets + GitHub link",
+ "Keywords: Node.js, TypeScript, PostgreSQL, Redis, AWS (ECS, RDS, SQS), Docker, Terraform, CI/CD",
+ "Real metric from current job measured (slow query fix etc.)",
+];
+
+/* =========================================================================
+   STATE
+   ========================================================================= */
+const KEY = "roadmap90.v1";
+const defaultState = () => ({done:{}, start:"", prompts:{}, fillers:[], apps:[], score:{}, notes:{}, activity:{}, badges:{}, ui:{tab:"dash", hideDone:false, week:null, topic:"dsa"}});
+let S = load();
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){ const d = JSON.parse(raw); const s = Object.assign(defaultState(), d); s.ui = Object.assign(defaultState().ui, d.ui||{}); return s; }
+  }catch(e){}
+  return defaultState();
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60);
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const todayStr = () => ymd(new Date());
+function bump(){ const k = todayStr(); S.activity[k] = (S.activity[k]||0) + 1; }
+
+/* Flatten all checkable items with stable IDs (unchanged from v1 so saved progress carries over) */
+const ALL = [];
+WEEKS.forEach(wk=>{
+  Object.keys(TRACKS).forEach(tk=>{
+    (wk[tk]||[]).forEach(raw=>{
+      let it;
+      if(Array.isArray(raw)) it = {title:raw[0], lc:raw[1], detail:""};
+      else { const [t,d] = raw.split("|"); it = {title:t, detail:d||""}; }
+      it.track = tk; it.w = wk.w; it.phase = wk.phase;
+      it.id = `${tk}-w${wk.w}-${slug(it.title)}`;
+      ALL.push(it);
+    });
+  });
+});
+
+const isDone = id => !!S.done[id];
+const pct = items => items.length ? Math.round(items.filter(i=>isDone(i.id)).length / items.length * 100) : 0;
+const doneN = items => items.filter(i=>isDone(i.id)).length;
+const parseStart = () => S.start ? new Date(S.start+"T00:00:00") : null;
+function dayNumber(){ const s = parseStart(); if(!s) return null; return Math.floor((new Date() - s) / 86400000) + 1; }
+function currentWeek(){ const d = dayNumber(); if(d==null) return null; if(d < 1) return 0; return Math.min(12, Math.floor((d-1)/7) + 1); }
+const dsaCount = () => doneN(ALL.filter(i=>i.track==="dsa"));
+const weekDone = w => { const it = ALL.filter(i=>i.w===w); return it.length>0 && it.every(i=>isDone(i.id)); };
+const phaseDone = p => ALL.filter(i=>i.phase===p).every(i=>isDone(i.id));
+
+/* ---------- Activity & streak ---------- */
+function activityMap(){
+  const m = Object.assign({}, S.activity);
+  Object.values(S.done).forEach(ts=>{ if(typeof ts==="number"){ const k = ymd(new Date(ts)); m[k] = (m[k]||0) + 1; } });
+  return m;
+}
+function streak(){
+  const m = activityMap(); const d = new Date(); let n = 0;
+  if(!m[ymd(d)]) d.setDate(d.getDate()-1);
+  while(m[ymd(d)]){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+
+/* ---------- XP & levels ---------- */
+const LEVELS = [[0,"Bench Warmer"],[200,"Intern Grind"],[600,"Junior Dev"],[1200,"SDE-1"],[2000,"SDE-2"],[3000,"15 LPA Ready"]];
+function xp(){
+  return Object.keys(S.done).length*10 + Object.values(S.prompts).reduce((a,b)=>a+b,0)*5 + S.fillers.length*5 + S.apps.length*5;
+}
+function level(){
+  const x = xp(); let i = 0;
+  LEVELS.forEach((l,j)=>{ if(x >= l[0]) i = j; });
+  const cur = LEVELS[i], nxt = LEVELS[i+1];
+  return {i, x, name:cur[1], next:nxt?nxt[0]:null, nextName:nxt?nxt[1]:null, p: nxt ? Math.round((x-cur[0])/(nxt[0]-cur[0])*100) : 100};
+}
+
+/* ---------- Badges ---------- */
+const BADGES = [
+  ["first","🚀","First Step","Complete your first item",()=>Object.keys(S.done).length>=1],
+  ["streak7","🔥","On Fire","7-day streak",()=>streak()>=7],
+  ["streak30","☄️","Unstoppable","30-day streak",()=>streak()>=30],
+  ["lru","🧠","LRU Master","Solve LRU Cache",()=>ALL.some(i=>i.lc==="lru-cache"&&isDone(i.id))],
+  ["dsa25","🧩","Pattern Hunter","25 DSA problems",()=>dsaCount()>=25],
+  ["dsa75","⚔️","Grinder","75 DSA problems",()=>dsaCount()>=75],
+  ["w1","🎯","Week 1 Cleared","Every Week 1 item done",()=>weekDone(1)],
+  ["p1","🏛️","Depth Unlocked","Complete Phase 1",()=>phaseDone(1)],
+  ["p2","📈","Scale Proven","Complete Phase 2",()=>phaseDone(2)],
+  ["mc3","🏗️","Machine Coder","3 machine codings",()=>ALL.filter(i=>i.track==="lld"&&/^Machine coding/.test(i.title)&&isDone(i.id)).length>=3],
+  ["voice","🎙️","Found Your Voice","Log 10 speaking sessions",()=>S.fillers.length>=10],
+  ["fluent","🗣️","Smooth Talker","Last 5 logs avg ≤4 fillers",()=>{const f=S.fillers.slice(-5); return f.length>=5 && f.reduce((a,x)=>a+(+x.f||0),0)/5<=4;}],
+  ["ship","🚢","Shipped","Relay feature freeze",()=>ALL.some(i=>i.title==="FEATURE FREEZE"&&isDone(i.id))],
+  ["apps10","📮","In The Market","10 companies in pipeline",()=>S.apps.length>=10],
+  ["offer","🏆","15 LPA","Land an offer",()=>S.apps.some(a=>a.stage==="Offer")],
+];
+function checkBadges(silent){
+  BADGES.forEach(b=>{
+    if(!S.badges[b[0]] && b[4]()){ S.badges[b[0]] = Date.now(); if(!silent){ toast(`${b[1]} Badge unlocked: <b>${esc(b[2])}</b>`,"badge"); confetti(); } }
+  });
+}
+
+/* ---------- Effects ---------- */
+function toast(html, kind=""){
+  const t = document.createElement("div"); t.className = "toast " + kind; t.innerHTML = html;
+  document.getElementById("toasts").appendChild(t);
+  setTimeout(()=>t.classList.add("out"), 2300); setTimeout(()=>t.remove(), 2800);
+}
+function confetti(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const c = document.createElement("canvas"); c.className = "confetti"; document.body.appendChild(c);
+  const ctx = c.getContext("2d"); const W = c.width = innerWidth, H = c.height = innerHeight;
+  const cols = ["#6366f1","#8b5cf6","#06b6d4","#22c55e","#f59e0b","#ec4899"];
+  const P = Array.from({length:150},()=>({x:W/2+(Math.random()-.5)*240, y:H*.35, vx:(Math.random()-.5)*16, vy:-Math.random()*13-4, s:5+Math.random()*5, r:Math.random()*6, vr:(Math.random()-.5)*.3, c:cols[Math.random()*cols.length|0]}));
+  let f = 0;
+  (function tick(){
+    ctx.clearRect(0,0,W,H);
+    P.forEach(p=>{ p.vy+=.35; p.x+=p.vx; p.y+=p.vy; p.vx*=.99; p.r+=p.vr; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6); ctx.restore(); });
+    if(++f < 160) requestAnimationFrame(tick); else c.remove();
+  })();
+}
+function beep(){
+  try{ const a = new (window.AudioContext||window.webkitAudioContext)(); const o = a.createOscillator(), g = a.createGain();
+    o.connect(g); g.connect(a.destination); o.frequency.value = 880; g.gain.value = .08; o.start(); o.stop(a.currentTime + .2); }catch(e){}
+}
+
+/* ---------- UI helpers ---------- */
+function ringBox(p, size, sw, color, inner, bg){
+  const r = (size - sw) / 2, c = 2 * Math.PI * r, h = size / 2;
+  return `<div class="ringbox" style="width:${size}px;height:${size}px;font-size:${Math.max(12,size/5.5)}px"><svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${h}" cy="${h}" r="${r}" fill="none" stroke="${bg||"var(--ring-bg)"}" stroke-width="${sw}"/><circle class="fg" cx="${h}" cy="${h}" r="${r}" fill="none" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${(c*(1-p/100)).toFixed(2)}" transform="rotate(-90 ${h} ${h})"/></svg><div class="rl">${inner||""}</div></div>`;
+}
+const lbar = (p, c) => `<div class="lbar" style="--c:${c||"var(--accent)"}"><i style="width:${Math.max(0,Math.min(100,p))}%"></i></div>`;
+const CHECK_SVG = `<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>`;
+function itemHTML(it, o={}){
+  const d = isDone(it.id), tc = TRACKS[it.track];
+  return `<div class="item ${d?"done":""}" ${o.color&&tc?`style="--c:var(${tc.c})"`:""}>
+    <label class="chk"><input type="checkbox" data-id="${it.id}" ${d?"checked":""}><span class="box">${CHECK_SVG}</span>
+    <span class="txt"><span class="t">${esc(it.title)}</span>${it.detail?`<span class="d">${esc(it.detail)}</span>`:""}</span></label>
+    <span class="meta">${o.week&&it.w?`<span class="chip ghost">W${it.w}</span>`:""}${it.lc?`<a class="lc" href="https://leetcode.com/problems/${it.lc}/" target="_blank" rel="noopener">Solve ↗</a>`:""}</span>
+  </div>`;
+}
+function checkLine(id, title, detail){
+  const d = isDone(id);
+  return `<div class="item ${d?"done":""}"><label class="chk"><input type="checkbox" data-id="${id}" ${d?"checked":""}><span class="box">${CHECK_SVG}</span><span class="txt"><span class="t">${esc(title)}</span>${detail?`<span class="d">${esc(detail)}</span>`:""}</span></label></div>`;
+}
+
+/* =========================================================================
+   SIDEBAR
+   ========================================================================= */
+const NAV = [["dash","🏠","Dashboard"],["weeks","🗓️","Weekly Plan"],["topics","🧭","By Topic"],["speak","🎙️","Speaking"],["project","🛠️","Project"],["resume","📄","Resume"],["pipeline","📮","Pipeline"],["schedule","⏰","Daily Schedule"],["score","📊","Scorecard"],["settings","⚙️","Settings"]];
+function renderSide(){
+  const L = level(), st = streak();
+  document.getElementById("side").innerHTML = `
+  <div class="brand"><div class="logo">90</div><div><div class="bt">Backend Roadmap</div><div class="bs">2 YOE → ₹15+ LPA</div></div>
+    <div class="mob-stat"><span>🔥 ${st}</span><span>Lv ${L.i+1}</span></div>
+    <button class="icon-btn" id="themeBtn" title="Toggle light/dark">◐</button></div>
+  <div class="lvl"><div class="row between"><span class="lvl-name">Lv ${L.i+1} · ${L.name}</span><span class="streak" title="Day streak">🔥 ${st}</span></div>
+    <div class="xpbar"><i style="width:${L.p}%"></i></div>
+    <div class="xpmeta">${L.x} XP${L.next?` · ${L.next-L.x} to ${L.nextName}`:" · max level"}</div></div>
+  <nav class="nav">${NAV.map(([k,ic,l])=>`<button data-tab="${k}" class="${S.ui.tab===k?"active":""}"><span class="ic">${ic}</span><span>${l}</span></button>`).join("")}</nav>
+  <div class="side-foot">Progress saves in this browser.<br><button class="linkbtn" data-tab="settings">Back up / sync →</button></div>`;
+}
+
+function render(){
+  renderSide();
+  const m = document.getElementById("main");
+  m.className = "inner" + (S.ui.hideDone ? " hide-done" : "");
+  ({dash, weeks, topics, speak, project, resume, pipeline, schedule, score, settings}[S.ui.tab] || dash)(m);
+}
+
+/* =========================================================================
+   DASHBOARD
+   ========================================================================= */
+function nextOpen(track, n, maxW){ return ALL.filter(i=>i.track===track && !isDone(i.id) && (!maxW || i.w<=maxW)).slice(0,n); }
+function missionBlocks(){
+  const cw = currentWeek() || 1, day = Math.max(1, dayNumber() || 1);
+  const pi = (day-1) % PROMPTS.length, pr = PROMPTS[pi];
+  const blk = (track, n) => {
+    const a = nextOpen(track, n, cw);
+    if(a.length) return a.map(i=>itemHTML(i,{week:true})).join("");
+    const nx = nextOpen(track, 1);
+    return nx.length ? `<div class="empty">Week ${cw} cleared here ✓ · Next up (W${nx[0].w}): ${esc(nx[0].title)}</div>` : `<div class="empty">Track complete 🎉</div>`;
+  };
+  const c2 = cw >= 8 ? "hld" : "pg";
+  const out = [
+    {time:"07:30", name:"Speak", c:"--speak", html:`<div class="prompt-mini"><span class="chip" style="--c:var(--speak)">Prompt #${pi+1} of the day</span><div class="t">${esc(pr[0])}</div><div class="d">${esc(pr[1])}</div><div class="row gap wrap"><button class="btn sm" data-pr="${pi+1}" data-delta="1">✓ Practised (${S.prompts[pi+1]||0}/8)</button><button class="btn sm ghost" data-tab="speak">Open drill timer →</button></div></div>`},
+    {time:"11:15", name:"Build", c:"--proj", html:blk("proj",1)},
+    {time:"13:00", name:"DSA", c:"--dsa", html:blk("dsa",3)},
+    {time:"15:30", name:c2==="hld"?"HLD":"Postgres", c:TRACKS[c2].c, html:blk(c2,2)},
+    {time:"16:45", name:"Systems", c:"--dist", html:blk("dist",2)},
+    {time:"18:00", name:"LLD", c:"--lld", html:blk("lld",1)},
+  ];
+  if(nextOpen("career",1,cw).length) out.push({time:"Any", name:"Career", c:"--career", html:blk("career",2)});
+  return out;
+}
+function heatmap(){
+  const m = activityMap();
+  let start = parseStart(); if(!start){ start = new Date(); start.setDate(start.getDate()-84); }
+  const s = new Date(start); s.setDate(s.getDate() - ((s.getDay()+6)%7));
+  const today = todayStr(); let cells = "";
+  for(let c=0; c<13; c++){
+    cells += `<div class="hcol">`;
+    for(let r=0; r<7; r++){
+      const d = new Date(s); d.setDate(s.getDate() + c*7 + r);
+      const k = ymd(d), n = m[k]||0, lv = n===0?0:n<3?1:n<6?2:n<10?3:4;
+      cells += `<i class="h${lv} ${k>today?"fut":""} ${k===today?"today":""}" title="${k}: ${n} action${n===1?"":"s"}"></i>`;
+    }
+    cells += `</div>`;
+  }
+  return `<div class="heat">${cells}</div><div class="heat-leg"><span>Less</span><i></i><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><span>More</span></div>`;
+}
+function dash(m){
+  const cw = currentWeek(), day = dayNumber(), wk = WEEKS[(cw||1)-1], L = level(), overall = pct(ALL);
+  const hr = new Date().getHours(), greet = hr<12?"Good morning":hr<17?"Good afternoon":"Good evening";
+  const headline = day==null ? "Set your start date to begin" : day<1 ? `Starts in ${1-day} day${1-day>1?"s":""}` : day>90 ? "90 days done. Close the offers." : `Day ${day} <span>of 90</span>`;
+  let html = `<section class="hero">
+    <div class="hero-l">
+      <div class="eyebrow">${greet} · ${new Date().toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"short"})}</div>
+      <h1>${headline}</h1>
+      <p>${cw ? `Week ${cw} · ${esc(wk.title)} — ${PHASES[wk.phase].name}` : "Pick your Week 1 Monday in Settings. Everything keys off it."}</p>
+      <div class="hero-stats"><div><b>${L.x}</b><span>XP · Lv ${L.i+1}</span></div><div><b>🔥 ${streak()}</b><span>day streak</span></div><div><b>${dsaCount()}</b><span>DSA solved</span></div><div><b>${Object.keys(S.badges).length}/${BADGES.length}</b><span>badges</span></div></div>
+      ${S.start?"":`<button class="btn light" data-tab="settings">Set start date →</button>`}
+    </div>
+    <div class="hero-r">${ringBox(overall,150,12,"#fff",`<b>${overall}%</b><span>${doneN(ALL)} / ${ALL.length}</span>`,"rgba(255,255,255,.22)")}</div>
+  </section>`;
+
+  if(cw){
+    const behind = ALL.filter(i=>i.w<cw && !isDone(i.id)).length;
+    if(behind) html += `<div class="note">⚠️ <b>${behind} items</b> from earlier weeks still open. Missed 2 weeks in a row → cut scope, don't add hours.</div>`;
+  }
+
+  html += `<section class="card"><div class="card-h"><h3>12-week journey</h3><span class="muted small">Tap a week to open it</span></div>
+    <div class="journey">${WEEKS.map(w=>{const p=pct(ALL.filter(i=>i.w===w.w)); return `<button class="jnode ${cw===w.w?"now":""} ${p===100?"full":""}" data-openweek="${w.w}" title="Week ${w.w}: ${esc(w.title)}">${ringBox(p,48,5,`var(--ph${w.phase})`,`<b>${w.w}</b>`)}<span class="jl">${p}%</span></button>`;}).join("")}</div>
+    <div class="phase-legend">${[1,2,3].map(p=>`<span><i style="background:var(--ph${p})"></i>${PHASES[p].name} · ${pct(ALL.filter(i=>i.phase===p))}%</span>`).join("")}</div></section>`;
+
+  html += `<section class="card"><div class="card-h"><h3>⚡ Today's mission</h3><span class="muted small">Next open item per time block${cw?` · through Week ${cw}`:""}</span></div>
+    <div class="blocks">${missionBlocks().map(b=>`<div class="mblock" style="--c:var(${b.c})"><div class="mtime"><b>${b.time}</b><span>${b.name}</span></div><div class="mbody">${b.html}</div></div>`).join("")}</div></section>`;
+
+  html += `<div class="grid two">
+    <section class="card"><div class="card-h"><h3>Activity</h3><span class="muted small">${S.start?"From your start week":"Last 13 weeks"}</span></div>${heatmap()}</section>
+    <section class="card"><div class="card-h"><h3>Topics</h3><span class="muted small">Tap to drill in</span></div><div class="track-rings">${Object.entries(TRACKS).map(([k,t])=>{const it=ALL.filter(i=>i.track===k); if(!it.length) return ""; const p=pct(it); return `<button class="tring" data-opentopic="${k}">${ringBox(p,64,7,`var(${t.c})`,`<b>${p}%</b>`)}<span>${t.name}</span></button>`;}).join("")}</div></section>
+  </div>`;
+
+  html += `<section class="card"><div class="card-h"><h3>🏅 Badges</h3><span class="muted small">${Object.keys(S.badges).length} of ${BADGES.length} unlocked</span></div>
+    <div class="badges">${BADGES.map(b=>`<div class="badge ${S.badges[b[0]]?"on":""}"><span class="bi">${b[1]}</span><b>${esc(b[2])}</b><span>${esc(b[3])}</span></div>`).join("")}</div></section>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   WEEKLY PLAN
+   ========================================================================= */
+function weeks(m){
+  const cw = currentWeek(); let w = S.ui.week || cw || 1; w = Math.max(1, Math.min(12, w));
+  const wk = WEEKS[w-1], items = ALL.filter(i=>i.w===w), p = pct(items), ph = PHASES[wk.phase];
+  let html = `<div class="weekchips">${WEEKS.map(x=>`<button class="wchip ph${x.phase} ${x.w===w?"sel":""} ${cw===x.w?"now":""}" data-week="${x.w}" style="--p:${pct(ALL.filter(i=>i.w===x.w))}%" title="${esc(x.title)}">W${x.w}</button>`).join("")}</div>`;
+  html += `<section class="week-hero ph${wk.phase}">
+    <div class="wh-l">
+      <div class="eyebrow">${ph.name} · ${ph.sub}${cw===w?` &nbsp;<span class="nowtag">THIS WEEK</span>`:""}</div>
+      <h1>Week ${w}: ${esc(wk.title)}</h1>
+      <div class="row gap wrap">${Object.entries(TRACKS).map(([k,t])=>{const ti=items.filter(i=>i.track===k); return ti.length?`<span class="chip" style="--c:var(${t.c})">${t.name} · ${doneN(ti)}/${ti.length}</span>`:"";}).join("")}</div>
+      <div class="row gap wrap" style="margin-top:16px"><button class="btn" data-week="${w-1}" ${w===1?"disabled":""}>← Prev</button><button class="btn" data-week="${w+1}" ${w===12?"disabled":""}>Next →</button>
+      <label class="toggle" style="margin-left:6px"><input type="checkbox" id="hideDone" ${S.ui.hideDone?"checked":""}><span></span>Hide done</label></div>
+    </div>
+    <div class="wh-r">${ringBox(p,124,11,`var(--ph${wk.phase})`,`<b>${p}%</b><span>${doneN(items)} / ${items.length}</span>`)}</div>
+  </section>`;
+  html += `<div class="track-grid">`;
+  Object.entries(TRACKS).forEach(([k,t])=>{
+    const ti = items.filter(i=>i.track===k); if(!ti.length) return;
+    html += `<section class="tcard" style="--c:var(${t.c})"><div class="tcard-h"><span class="tdot"></span><h3>${t.name}</h3><span class="tcount">${doneN(ti)}/${ti.length}</span></div><div class="tbar"><i style="width:${pct(ti)}%"></i></div><div class="items">${ti.map(i=>itemHTML(i)).join("")}</div></section>`;
+  });
+  html += `</div><div class="grid two">
+    <section class="card"><div class="card-h"><h3>📝 Week ${w} notes</h3><span class="muted small">Autosaves</span></div><textarea class="f" data-note="${w}" placeholder="What went well, what slipped, what to cut…">${esc(S.notes[w]||"")}</textarea></section>
+    <section class="card"><div class="card-h"><h3>🚪 ${ph.name.split(" — ")[0]} exit criteria</h3><span class="muted small">${ph.weeks}</span></div><ul class="ticks">${ph.exit.map(e=>`<li>${esc(e)}</li>`).join("")}</ul></section>
+  </div>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   BY TOPIC
+   ========================================================================= */
+const TOPIC_BLURB = {
+  pg:"Storage → indexes → planner → transactions → pooling → partitioning → RDS. The depth that separates 8 LPA from 15+.",
+  dist:"Docker, Redis, queues, Kafka concepts, AWS networking, ECS, observability.",
+  hld:"Framework first, then classic designs explained out loud in 35 minutes each.",
+  dsa:"Curated problems across 15 patterns. A medium in ≤30 minutes is the bar.",
+  lld:"SOLID and patterns, then timed 90-minute machine-coding rounds.",
+  proj:"Relay — the one project that proves production depth.",
+  career:"Positioning, resume, referrals, interviews, offers.",
+};
+function topics(m){
+  const k = S.ui.topic in TRACKS ? S.ui.topic : "dsa", t = TRACKS[k], items = ALL.filter(i=>i.track===k), p = pct(items);
+  let html = `<div class="topicchips">${Object.entries(TRACKS).map(([kk,tt])=>{const it=ALL.filter(i=>i.track===kk); if(!it.length) return ""; return `<button class="tchip ${kk===k?"sel":""}" style="--c:var(${tt.c})" data-topic="${kk}"><i></i>${tt.name}<span>${pct(it)}%</span></button>`;}).join("")}</div>`;
+  html += `<section class="week-hero" style="--c:var(${t.c})"><div class="wh-l"><div class="eyebrow">Topic track · ${items.length} items</div><h1>${t.name}</h1><p class="muted" style="margin:0 0 14px">${TOPIC_BLURB[k]||""}</p>
+    <label class="toggle"><input type="checkbox" id="hideDone" ${S.ui.hideDone?"checked":""}><span></span>Hide done</label></div>
+    <div class="wh-r">${ringBox(p,124,11,`var(${t.c})`,`<b>${p}%</b><span>${doneN(items)} / ${items.length}</span>`)}</div></section>`;
+  const byW = {}; items.forEach(i=>(byW[i.w]=byW[i.w]||[]).push(i));
+  html += `<div class="tl" style="--c:var(${t.c})">${Object.keys(byW).map(w=>{const ws=byW[w], wp=pct(ws); return `<div class="tl-row ${wp===100?"full":""}"><div class="tl-dot">${wp===100?"✓":w}</div><div class="tl-body"><div class="tl-h"><b>Week ${w}</b><span class="muted small">${esc(WEEKS[w-1].title)}</span><span class="tl-p">${doneN(ws)}/${ws.length}</span></div><div class="items">${ws.map(i=>itemHTML(i)).join("")}</div></div></div>`;}).join("")}</div>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   SPEAKING
+   ========================================================================= */
+const DRILL = [
+  ["Breath + slow read",2,"Diaphragmatic breathing 4-in / 6-out × 5. Read a tech paragraph aloud at ~120 wpm. Exaggerate word endings."],
+  ["Shadowing",3,"60s clip of a clear technical speaker. Speak with it, matching rhythm and pauses. Same clip all week, 3× daily."],
+  ["Structure plan",2,"Write only a skeleton for today's prompt: 3–4 keywords. No full sentences."],
+  ["Record answer",3,"Phone recorder. Cap 2 min (behavioural) / 3 min (technical). Filler coming → close mouth, pause 1 sec, continue."],
+  ["Playback + score",3,"Count fillers, restarts, ums. Structure stated upfront? Ended on a result? Log it below."],
+  ["Re-record",2,"Same prompt. Fix ONE thing only."],
+];
+const T = {i:0, left:DRILL[0][1]*60, run:false, end:0, id:null};
+function drillHTML(){
+  const mm = String(Math.floor(T.left/60)).padStart(2,"0"), ss = String(T.left%60).padStart(2,"0");
+  const sp = 100 - T.left / (DRILL[T.i][1]*60) * 100;
+  return `<div class="drill-top"><div class="clock">${mm}:${ss}</div>
+    <div><div class="eyebrow muted">Step ${T.i+1} of ${DRILL.length} · 15-min core drill</div><div class="drill-step">${DRILL[T.i][0]}</div><div class="muted small">${DRILL[T.i][2]}</div></div>
+    <div class="row gap wrap"><button class="btn primary" data-drill="toggle">${T.run?"⏸ Pause":"▶ Start"}</button><button class="btn" data-drill="skip">Skip</button><button class="btn ghost" data-drill="reset">Reset</button></div></div>
+    <div class="steps">${DRILL.map((d,i)=>`<div class="step ${i===T.i?"cur":""}"><div class="sb"><i style="width:${i<T.i?100:i===T.i?sp:0}%"></i></div><b>${d[0]}</b><span>${d[1]} min</span></div>`).join("")}</div>`;
+}
+function paintDrill(){ const el = document.getElementById("drill"); if(el) el.innerHTML = drillHTML(); }
+function drillTick(){
+  if(!T.run) return;
+  T.left = Math.max(0, Math.ceil((T.end - Date.now())/1000));
+  if(T.left === 0){
+    beep();
+    if(T.i < DRILL.length-1){ T.i++; T.left = DRILL[T.i][1]*60; T.end = Date.now() + T.left*1000; }
+    else { T.run = false; clearInterval(T.id); T.i = 0; T.left = DRILL[0][1]*60; bump(); save(); toast("🎙️ Drill complete — log your fillers below"); renderSide(); }
+  }
+  paintDrill();
+}
+function fillerChart(){
+  const f = S.fillers.slice().sort((a,b)=>a.d.localeCompare(b.d)).slice(-30);
+  if(f.length < 2) return `<div class="empty">Log 2+ sessions to see your trend line.</div>`;
+  const W = 640, H = 150, pad = 22, max = Math.max(10, ...f.map(x=>+x.f||0));
+  const y = v => H - pad - v/max*(H-2*pad);
+  const pts = f.map((x,i)=>[pad + i*(W-2*pad)/(f.length-1), y(+x.f||0)]);
+  return `<svg viewBox="0 0 ${W} ${H}" class="spark"><line x1="${pad}" x2="${W-pad}" y1="${y(4)}" y2="${y(4)}" class="target"/><text x="${W-pad}" y="${y(4)-6}" text-anchor="end" class="tlbl">target ≤ 4</text><polyline points="${pts.map(p=>p.map(n=>n.toFixed(1)).join(",")).join(" ")}" class="line"/>${pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4" class="pt"><title>${esc(f[i].d)}: ${esc(f[i].f)} fillers</title></circle>`).join("")}</svg>`;
+}
+function speak(m){
+  const fl = S.fillers.slice().sort((a,b)=>b.d.localeCompare(a.d));
+  const last5 = S.fillers.slice(-5);
+  const avg = last5.length ? (last5.reduce((s,x)=>s+(+x.f||0),0)/last5.length).toFixed(1) : "—";
+  const totalPr = Object.values(S.prompts).reduce((a,b)=>a+b,0);
+  let html = `<section class="drill" id="drill">${drillHTML()}</section>`;
+  html += `<div class="grid three">
+    <section class="card statbig"><span class="muted small">Sessions logged</span><span class="num">${S.fillers.length}</span></section>
+    <section class="card statbig"><span class="muted small">Avg fillers (last 5)</span><span class="num">${avg}</span><span class="muted small">Targets: W4 ≤10 · W8 ≤4 · W12 ≤2</span></section>
+    <section class="card statbig"><span class="muted small">Prompt reps</span><span class="num">${totalPr} / 80</span>${lbar(totalPr/80*100,"var(--speak)")}</section>
+  </div>`;
+  html += `<section class="card"><div class="card-h"><h3>📉 Filler trend</h3></div>${fillerChart()}
+    <div class="row gap wrap" style="margin-top:12px"><input type="date" class="f" id="flDate" value="${todayStr()}"><input type="number" class="f score-input" id="flF" placeholder="Fillers" min="0"><input type="number" class="f score-input" id="flR" placeholder="Restarts" min="0"><select class="f" id="flP">${PROMPTS.map((p,i)=>`<option value="${i+1}">Prompt #${i+1}</option>`).join("")}</select><button class="btn primary" data-act="addFiller">+ Log session</button></div>
+    ${fl.length?`<div class="table-wrap" style="margin-top:12px"><table><tr><th>Date</th><th>Prompt</th><th>Fillers</th><th>Restarts</th><th></th></tr>${fl.slice(0,10).map(x=>`<tr><td>${esc(x.d)}</td><td>#${esc(x.p)}</td><td><b>${esc(x.f)}</b></td><td>${esc(x.r)}</td><td><button class="btn sm ghost" data-delfiller="${esc(x.id)}">✕</button></td></tr>`).join("")}</table></div>`:""}
+  </section>`;
+  html += `<section class="card"><div class="card-h"><h3>🎯 The 10 prompts</h3><span class="muted small">Practise each ≥ 8 times</span></div><div class="prompts">${PROMPTS.map((p,i)=>{const n=S.prompts[i+1]||0; return `<div class="pcard ${n>=8?"ok":""}"><span class="pnum">#${i+1}${n>=8?" · ✓ mastered":""}</span><b>${esc(p[0])}</b><span class="d">${esc(p[1])}</span><div class="dots">${Array.from({length:8},(_,j)=>`<i class="${j<n?"on":""}"></i>`).join("")}</div><div class="counter"><button class="btn sm" data-pr="${i+1}" data-delta="-1">−</button><b>${n}</b><button class="btn sm primary" data-pr="${i+1}" data-delta="1">+ rep</button></div></div>`;}).join("")}</div></section>`;
+  html += `<div class="grid three">
+    <section class="tmpl"><h3>Behavioural · STAR (2 min)</h3><div class="star"><b>S</b><span>15s — "At [company], we had [system] serving [scale]. [Problem]."</span><b>T</b><span>10s — "I was responsible for [ownership]."</span><b>A</b><span>60s — "I did three things. First… Second… Third…" Say <i>I</i>, not <i>we</i>.</span><b>R</b><span>20s — "As a result, [metric]. I learned [one line]."</span></div></section>
+    <section class="tmpl"><h3>Technical concept (2–3 min)</h3><p class="small">"[X] is [definition]. Internally it works by [mechanism]. The trade-off is [cost vs benefit]. I'd use it when [condition] and avoid it when [condition]."</p><h3>Architecture walkthrough</h3><p class="small">Problem → request flow through N components → most interesting part → "I chose A over B because…" → what changes at 10x.</p></section>
+    <section class="tmpl"><h3>Swap fillers for signposts</h3><ul class="ticks small"><li>"There are three parts to this."</li><li>"Let me start high-level, then go deeper."</li><li>"The key trade-off here is…"</li><li>"To give a concrete example…"</li><li>"Let me take a second to think."</li><li>"So, to summarise…"</li></ul></section>
+  </div>
+  <div class="note">Rest of Block A (60 min): W1–8 → explain yesterday's topic out loud (10 min, recorded) + whiteboard one DSA solution (20 min) + read/shadow (30 min). W9–12 → mock answers for upcoming companies. Weekly: one live mock with a human. If blocks/repetitions happen regardless of prep, add 4–6 sessions with a speech-language pathologist.</div>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   PROJECT
+   ========================================================================= */
+function project(m){
+  const fn = (c, title, sub) => `<div class="fnode" style="--c:var(${c})"><b>${title}</b><div class="small">${sub}</div></div>`;
+  const ar = `<div class="farrow"></div>`;
+  const tDone = TRADEOFFS.filter(r=>isDone("tradeoff-"+slug(r[0]))).length;
+  const projItems = ALL.filter(i=>i.track==="proj");
+  let html = `<section class="hero" style="margin-bottom:16px"><div class="hero-l"><div class="eyebrow">The 15 LPA proof project</div><h1>Relay</h1><p>Multi-tenant webhook delivery engine. Tenants send events; Relay delivers each one as a signed HTTP POST to every subscribed endpoint, with retries, optional ordering, rate limits, a DLQ and replay. It's the same problem Stripe, Razorpay and Shopify solve.</p>
+    <div class="hero-stats"><div><b>${pct(projItems)}%</b><span>build milestones</span></div><div><b>${tDone}/${TRADEOFFS.length}</b><span>trade-offs defended</span></div><div><b>TS</b><span>one language only</span></div></div></div>
+    <div class="hero-r">${ringBox(pct(projItems),130,11,"#fff",`<b>${pct(projItems)}%</b><span>built</span>`,"rgba(255,255,255,.22)")}</div></section>`;
+
+  html += `<div class="grid two"><section class="card"><div class="card-h"><h3>Architecture</h3><span class="muted small">Request lifecycle</span></div><div class="flow">
+    ${fn("--muted","Client","HTTPS · API key")}${ar}
+    ${fn("--dist","ALB","listeners · target groups · health checks")}${ar}
+    ${fn("--proj","API service · ECS Fargate","Fastify/TS · zod validation · Redis token-bucket rate limit · idempotency check")}${ar}
+    ${fn("--pg","PostgreSQL · RDS (via PgBouncer txn mode)","events + outbox written in ONE transaction")}${ar}
+    ${fn("--pg","Dispatcher","SELECT … FOR UPDATE SKIP LOCKED · fan-out per subscribed endpoint")}${ar}
+    <div class="fside">${fn("--dist","SQS","Standard · FIFO per endpoint for ordered mode")}${fn("--danger","DLQ","after N receives · replay API")}</div>${ar}
+    ${fn("--dsa","Delivery workers","HMAC-SHA256 · 10s timeout · backoff + full jitter · circuit breaker · autoscale on queue depth")}${ar}
+    ${fn("--career","Customer endpoints","attempt recorded → deliveries (monthly partitions)")}
+    <div class="fside" style="margin-top:14px">${fn("--hld","Observability","pino logs · OpenTelemetry · CloudWatch")}${fn("--lld","Infra","Terraform · GitHub Actions · ECR · Secrets Manager")}</div>
+  </div></section>
+  <div><section class="card"><div class="card-h"><h3>Data model</h3></div><div class="items small">
+    <div><code>tenants(id, name, api_key_hash, rate_limit_rps)</code></div>
+    <div style="margin-top:8px"><code>endpoints(id, tenant_id, url, secret, event_types text[], ordered, status)</code><div class="muted">GIN on event_types</div></div>
+    <div style="margin-top:8px"><code>events(id, tenant_id, idempotency_key, type, payload jsonb, created_at)</code><div class="muted">UNIQUE(tenant_id, idempotency_key)</div></div>
+    <div style="margin-top:8px"><code>outbox(id, event_id, created_at, processed_at)</code><div class="muted">partial index WHERE processed_at IS NULL</div></div>
+    <div style="margin-top:8px"><code>deliveries(id, event_id, endpoint_id, attempt, status, http_code, latency_ms, next_retry_at, created_at)</code><div class="muted">monthly partitions · (endpoint_id, created_at DESC)</div></div>
+  </div></section>
+  <section class="card"><div class="card-h"><h3>API surface</h3></div><div class="row gap wrap">${["POST /v1/events","POST /v1/endpoints","GET /v1/endpoints","PATCH /v1/endpoints/:id","GET /v1/events/:id/deliveries","POST /v1/events/:id/replay","POST /v1/endpoints/:id/replay-dlq","GET /healthz","GET /readyz"].map(x=>`<code>${x}</code>`).join("")}</div><p class="small muted" style="margin-bottom:0">POST /v1/events takes an <code>Idempotency-Key</code> header.</p></section></div></div>`;
+
+  html += `<section class="card"><div class="card-h"><h3>⚖️ Trade-offs — tick when you can defend it out loud</h3><span class="muted small">${tDone}/${TRADEOFFS.length}</span></div><div class="tradeoffs">${TRADEOFFS.map(r=>{const id="tradeoff-"+slug(r[0]), d=isDone(id); return `<div class="tcardx ${d?"on":""}"><h3>${esc(r[0])}</h3><div class="vs"><div class="y"><small>Chose</small>${esc(r[1])}</div><div class="n"><small>Rejected</small>${esc(r[2])}</div></div><div class="why">${esc(r[3])}</div><label class="chk defend" style="--c:var(--ok)"><input type="checkbox" data-id="${id}" ${d?"checked":""}><span class="box">${CHECK_SVG}</span><span>I can defend this</span></label></div>`;}).join("")}</div></section>`;
+
+  html += `<div class="grid two"><section class="card" style="--c:var(--ok)"><div class="card-h"><h3>🧪 Proof requirements</h3><span class="muted small">${doneN(PROOF_REQ.map(t=>({id:"proof-"+slug(t)})))}/${PROOF_REQ.length}</span></div><div class="items">${PROOF_REQ.map(t=>checkLine("proof-"+slug(t),t)).join("")}</div><div class="note" style="margin:10px 0 0">Never invent numbers. Interviewers ask "how did you measure that?"</div></section>
+    <section class="card" style="--c:var(--proj)"><div class="card-h"><h3>📘 README checklist</h3><span class="muted small">${doneN(README_REQ.map(t=>({id:"readme-"+slug(t)})))}/${README_REQ.length}</span></div><div class="items">${README_REQ.map(t=>checkLine("readme-"+slug(t),t)).join("")}</div></section></div>`;
+
+  html += `<section class="card"><div class="card-h"><h3>🧱 Build milestones</h3></div><div class="tl" style="--c:var(--proj)">${[...new Set(projItems.map(i=>i.w))].map(w=>{const ws=projItems.filter(i=>i.w===w), wp=pct(ws); return `<div class="tl-row ${wp===100?"full":""}"><div class="tl-dot">${wp===100?"✓":w}</div><div class="tl-body"><div class="tl-h"><b>Week ${w}</b><span class="tl-p">${doneN(ws)}/${ws.length}</span></div><div class="items">${ws.map(i=>itemHTML(i)).join("")}</div></div></div>`;}).join("")}</div></section>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   RESUME
+   ========================================================================= */
+function resume(m){
+  const rewrites = [
+    ["Worked on REST APIs using Node.js and MongoDB.","Built 14 REST endpoints in Node.js/Express for order management serving ~8K DAU; added request validation + centralised error handling, cutting 5xx rate from 2.1% to 0.3%."],
+    ["Optimized database queries.","Reduced p95 latency of reports API from 3.2s to 280ms by replacing OFFSET with keyset pagination and adding a composite index (verified via EXPLAIN ANALYZE) on a 6M-row PostgreSQL table."],
+    ["Used AWS for deployment.","Containerised 3 services with multi-stage Docker builds (1.1GB → 180MB) and automated deploys to AWS via GitHub Actions, cutting release time from 40 min manual to 8 min."],
+    ["Implemented caching.","Added Redis cache-aside with TTL jitter for catalog reads, reducing PostgreSQL read load ~60% and p95 from 420ms to 45ms."],
+    ["Built a webhook project.","Built Relay, a multi-tenant webhook delivery engine (TypeScript, PostgreSQL, Redis, SQS, ECS) with at-least-once delivery via transactional outbox; sustained [X] events/s at p99 ingest [Y] ms in k6 load tests."],
+  ];
+  const rDone = doneN(RESUME_REQ.map(t=>({id:"resume-"+slug(t)})));
+  let html = `<section class="card"><div class="card-h"><h2 style="margin:0">The bullet formula</h2></div>
+    <div class="formula"><span style="--c:var(--proj)">Strong verb</span><em>+</em><span style="--c:var(--pg)">What you built / changed</span><em>+</em><span style="--c:var(--dist)">Using what</span><em>+</em><span style="--c:var(--ok)">Measurable result</span><em>+</em><span style="--c:var(--hld)">Scale context</span></div>
+    <div class="row gap wrap">${["latency p95/p99","throughput RPS","error rate","cost ₹/$","deploy time","users / rows / events/day"].map(x=>`<span class="chip ghost">${x}</span>`).join("")}</div>
+    <div class="note" style="margin:14px 0 0">No made-up numbers. If you don't have a metric, measure one at work this month (logs, APM, query timing) or use an honest relative statement ("eliminated N+1 queries on 4 endpoints"). Be ready to talk about every number for 2 minutes.</div></section>`;
+  html += `<section class="card"><div class="card-h"><h3>✍️ Before → After</h3></div>${rewrites.map(r=>`<div class="rw"><div class="before">${esc(r[0])}</div><div class="after">${esc(r[1])}</div></div>`).join("")}</section>`;
+  html += `<div class="grid two"><section class="card" style="--c:var(--career)"><div class="card-h"><h3>✅ Resume checklist</h3><span class="muted small">${rDone}/${RESUME_REQ.length}</span></div>${lbar(rDone/RESUME_REQ.length*100,"var(--career)")}<div class="items" style="margin-top:10px">${RESUME_REQ.map(t=>checkLine("resume-"+slug(t),t)).join("")}</div></section>
+    <section class="card"><div class="card-h"><h3>📐 Layout (1 page)</h3></div><ul class="ticks small"><li>Name · phone · email · LinkedIn · GitHub · city</li><li>Summary (2 lines): "Backend engineer, 2 years, Node.js/TypeScript + PostgreSQL. Built [Relay one-liner]. Focus: performance, reliability, AWS."</li><li>Skills, grouped</li><li>Experience: 4–6 formula bullets, strongest first</li><li>Project — Relay: 3–4 bullets + link</li><li>Education (1 line)</li></ul></section></div>`;
+  html += `<section class="card"><div class="card-h"><h3>💰 Negotiation (India)</h3></div><div class="grid two" style="margin:0">
+    <div class="tmpl"><h3>Current CTC</h3><p class="small">Answer truthfully (payslips get verified), then pivot: "My expectation is based on role scope and the market for this level — ₹X–Y fixed."</p></div>
+    <div class="tmpl"><h3>Expected</h3><p class="small">Quote <b>fixed</b> pay, not total CTC with variable/ESOP. Anchor 10–15% above your target (target 15 → ask for 17–18).</p></div>
+    <div class="tmpl"><h3>"Standard 30–50% hike"</h3><p class="small">The only strong counter is a competing offer, so batch your final rounds into the same 2 weeks.</p></div>
+    <div class="tmpl"><h3>Notice & paperwork</h3><p class="small">Be honest about notice period and ask "do you support buyout?" Never resign before a written offer and a cleared background check. Get fixed / variable / ESOP vesting / joining-bonus clawback in writing.</p></div>
+  </div></section>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   PIPELINE
+   ========================================================================= */
+const STAGES = ["Target","Referral asked","Applied","Screen","Tech round","Machine coding","HLD","HR / Final","Offer","Rejected","Dropped"];
+const COLS = [["🎯 Target",["Target"]],["🤝 Referral asked",["Referral asked"]],["📨 Applied",["Applied"]],["📞 Screen",["Screen"]],["💻 Interviewing",["Tech round","Machine coding","HLD","HR / Final"]],["🏆 Offer",["Offer"]],["🗂️ Closed",["Rejected","Dropped"]]];
+function pipeline(m){
+  const applied = S.apps.filter(a=>!["Target","Referral asked"].includes(a.stage)).length;
+  const refs = S.apps.filter(a=>a.ref).length, offers = S.apps.filter(a=>a.stage==="Offer").length;
+  const loops = S.apps.filter(a=>["Tech round","Machine coding","HLD","HR / Final"].includes(a.stage)).length;
+  let html = `<div class="grid three">
+    <section class="card statbig"><span class="muted small">Applications</span><span class="num">${applied}<span class="muted" style="font-size:16px"> / 80</span></span>${lbar(applied/80*100,"var(--career)")}</section>
+    <section class="card statbig"><span class="muted small">Referral asks</span><span class="num">${refs}<span class="muted" style="font-size:16px"> / 20</span></span>${lbar(refs/20*100,"var(--hld)")}</section>
+    <section class="card statbig"><span class="muted small">In loops · Offers</span><span class="num">${loops} · ${offers}</span><span class="muted small">Target: 8+ loops, ≥1 offer</span></section>
+  </div>`;
+  html += `<section class="card"><div class="card-h"><h3>➕ Add company</h3><span class="muted small">Tier C first → B → A</span></div>
+    <div class="addrow"><input class="f" id="apC" placeholder="Company"><select class="f" id="apT"><option value="C">Tier C</option><option value="B">Tier B</option><option value="A">Tier A</option></select><input class="f" id="apR" placeholder="Role"><select class="f" id="apCh"><option>Referral</option><option>Recruiter inbound</option><option>Naukri</option><option>LinkedIn</option><option>Instahyre</option><option>Cutshort</option><option>Wellfound</option><option>Career page</option></select><input class="f" id="apRef" placeholder="Referrer (optional)"><button class="btn primary" data-act="addApp">Add</button></div>
+    <p class="small muted" style="margin-bottom:0"><b>C</b> = GCCs / mid-size product (practice + backups) · <b>B</b> = funded Series B–D startups · <b>A</b> = top product companies / unicorns, once you're warmed up. Daily quota (Phase 3): 3 referral asks + 5 applications + reply to recruiters within 24h + refresh your Naukri profile.</p></section>`;
+  html += `<div class="kanban">${COLS.map(([name,st])=>{const list=S.apps.filter(a=>st.includes(a.stage)); return `<div class="kcol"><div class="kcol-h">${name}<span>${list.length}</span></div>${list.map(a=>`<div class="kcard">
+      <div class="row between gap"><b>${esc(a.c)}</b><span class="tier t${esc(a.t)}">${esc(a.t)}</span></div>
+      <div class="muted">${esc(a.r||"—")} · ${esc(a.ch)}</div>${a.ref?`<div class="muted">🤝 ${esc(a.ref)}</div>`:""}
+      <select class="f" data-appstage="${esc(a.id)}">${STAGES.map(s=>`<option ${a.stage===s?"selected":""}>${s}</option>`).join("")}</select>
+      <details ${a.n?"open":""}><summary>Notes / debrief</summary><textarea class="f" data-appnote="${esc(a.id)}" style="min-height:60px;margin-top:6px" placeholder="Next action + date; what they asked">${esc(a.n||"")}</textarea></details>
+      <div class="row between"><span class="muted small">${esc(a.d)}</span><button class="btn sm ghost" data-delapp="${esc(a.id)}">Remove</button></div>
+    </div>`).join("") || `<div class="muted small" style="padding:4px">—</div>`}</div>`;}).join("")}</div>`;
+  html += `<div class="grid two"><section class="card"><div class="card-h"><h3>✉️ Referral message (≤80 words)</h3><button class="btn sm" data-act="copyRef">Copy</button></div><div class="quote" id="refMsg">Hi [Name], I'm a backend engineer (2 YOE, Node/PostgreSQL/AWS). I saw [Role] at [Company] — [JD link]. I recently built Relay, a webhook delivery engine handling [X] events/s with at-least-once guarantees ([GitHub link]). Would you be open to referring me? Happy to send my resume and a 2-line summary for the form. Thanks either way.</div></section>
+    <section class="card"><div class="card-h"><h3>📊 Funnel math</h3></div><ul class="ticks small"><li>~100 applications + 30 referral asks → 15–20 screens → 6–10 loops → 1–3 offers</li><li>Screens below 10% of applications by Week 10 means the resume is the problem. Rewrite it.</li><li>Batch final rounds into one 2-week window so the offers compete.</li><li>Debrief every interview within 2h in the card notes.</li></ul></section></div>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   SCHEDULE
+   ========================================================================= */
+function schedule(m){
+  const now = new Date(), mins = now.getHours()*60 + now.getMinutes();
+  const toM = s => { const [h,mm] = s.split(":").map(Number); return h*60+mm; };
+  let cur = -1; SCHEDULE.forEach((r,i)=>{ if(toM(r[0].slice(0,5)) <= mins) cur = i; });
+  const BC = {A:"--speak",B:"--proj",C1:"--dsa",C2:"--pg",C3:"--dist",C4:"--lld",Gym:"--career",Commute:"--muted"};
+  let html = `<section class="week-hero" style="--c:var(--accent)"><div class="wh-l"><div class="eyebrow">Daily operating system</div><h1>${now.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})} — ${cur>=0?esc(SCHEDULE[cur][2]):"Sleep. Recovery is part of the plan."}</h1><p class="muted" style="margin:0">Weekdays. Gym and sleep are fixed. Everything else bends around them.</p></div></section>`;
+  html += `<div class="sched">${SCHEDULE.map((r,i)=>`<div class="srow ${i===cur?"cur":""} ${r[1]==="—"?"quiet":""}"><span class="tm">${r[0]}</span><span>${r[1]==="—"?"":`<span class="chip" style="--c:var(${BC[r[1]]||"--accent"})">${r[1]}</span>`}</span><span class="act">${esc(r[2])}</span></div>`).join("")}</div>`;
+  html += `<div class="grid two" style="margin-top:16px"><section class="card"><div class="card-h"><h3>📅 Weekly rhythm</h3></div><ul class="ticks small"><li><b>Friday C3+C4:</b> 90-min timed machine-coding mock + 30-min retro</li><li><b>Saturday:</b> 4h project sprint (Block D). Afternoon off.</li><li><b>Sunday:</b> 08:00 LeetCode weekly contest (from W4) · meal prep (4 days of chicken/rice) · 60-min review + Scorecard</li></ul></section>
+    <section class="card"><div class="card-h"><h3>🔁 Phase 3 reallocation (W9–12)</h3></div><ul class="ticks small"><li><b>A:</b> speaking + mock answers for this week's companies</li><li><b>B:</b> applications + referrals (daily quota)</li><li><b>C1:</b> 2 timed company-tagged mediums + 1 revisit</li><li><b>C2:</b> one HLD case out loud, 35 min</li><li><b>C3:</b> flashcards + rubber-duck explanations</li><li><b>C4:</b> redo a past machine coding, faster</li><li><b>Sat:</b> 2h full mock loop + 2h applications</li></ul></section></div>
+  <div class="note">Don't push personal code from the company laptop, keep company code in personal repos, or job-hunt on company devices or network if policy forbids it. Getting fired mid-search is the worst outcome.</div>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   SCORECARD
+   ========================================================================= */
+const METRICS = [["dsa","DSA solved (timed ≤30m)"],["fill","Avg fillers / 2-min"],["mc","Machine codings"],["proj","Project milestone hit (Y/N)"],["gym","Gym sessions"],["apps","Applications / referrals"],["int","Interviews / offers"]];
+function score(m){
+  const cw = currentWeek();
+  let html = `<section class="card"><div class="card-h"><h3>📊 Weekly scorecard</h3><span class="muted small">Fill in every Sunday · autosaves</span></div><div class="table-wrap"><table><tr><th>Metric</th>${WEEKS.map(w=>`<th style="text-align:center;${cw===w.w?"color:var(--accent)":""}">W${w.w}</th>`).join("")}</tr>`;
+  METRICS.forEach(([k,l])=>{ html += `<tr><td style="white-space:nowrap"><b>${l}</b></td>${WEEKS.map(w=>`<td><input class="f score-input" data-score="${w.w}.${k}" value="${esc((S.score[w.w]||{})[k]||"")}"></td>`).join("")}</tr>`; });
+  html += `</table></div></section><div class="note">Missed a milestone 2 weeks in a row? Cut scope, don't add hours. Sleep and gym are not the buffer.</div>`;
+  m.innerHTML = html;
+}
+
+/* =========================================================================
+   SETTINGS
+   ========================================================================= */
+function settings(m){
+  m.innerHTML = `<section class="card"><div class="card-h"><h3>📆 Start date (Week 1 Monday)</h3></div><div class="row gap wrap"><input type="date" class="f" id="startDate" value="${esc(S.start)}"><button class="btn primary" data-act="saveStart">Save</button></div><p class="small muted" style="margin-bottom:0">Drives "Day N of 90", the current week, today's mission and the heatmap.</p></section>
+  <section class="card"><div class="card-h"><h3>💾 Backup & sync</h3></div><p class="small muted">Progress lives in this browser's localStorage. Export weekly; import on another device to continue there.</p>
+    <div class="row gap wrap"><button class="btn primary" data-act="export">Export progress (.json)</button><label class="btn">Import .json<input type="file" id="importFile" accept="application/json" class="hidden"></label><button class="btn danger" data-act="reset">Reset everything</button></div></section>
+  <section class="card"><div class="card-h"><h3>🌐 Hosting on GitHub Pages</h3></div><ul class="ticks small"><li>Create a repo and commit this <code>index.html</code>.</li><li>Repo → Settings → Pages → Deploy from branch → <code>main</code> / <code>(root)</code>.</li><li>Open <code>https://&lt;username&gt;.github.io/&lt;repo&gt;/</code>.</li><li>A public repo means anyone with the link can read the plan. Your progress stays in your browser.</li></ul></section>`;
+}
+
+/* =========================================================================
+   EVENTS
+   ========================================================================= */
+function go(tab, extra){ Object.assign(S.ui, {tab}, extra||{}); save(); render(); window.scrollTo({top:0, behavior:"smooth"}); }
+document.addEventListener("click", e=>{
+  if(e.target.closest("#themeBtn")){
+    const cur = document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const nx = cur === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nx; try{ localStorage.setItem(KEY+".theme", nx); }catch(err){}
+    return;
+  }
+  const t = e.target.closest("[data-tab],[data-act],[data-pr],[data-delfiller],[data-delapp],[data-openweek],[data-opentopic],[data-week],[data-topic],[data-drill]");
+  if(!t) return;
+  const ds = t.dataset;
+  if(ds.tab) return go(ds.tab);
+  if(ds.openweek) return go("weeks", {week:+ds.openweek});
+  if(ds.opentopic) return go("topics", {topic:ds.opentopic});
+  if(ds.week){ S.ui.week = Math.max(1, Math.min(12, +ds.week)); save(); render(); return; }
+  if(ds.topic){ S.ui.topic = ds.topic; save(); render(); return; }
+  if(ds.pr){
+    const k = ds.pr, before = level().i, d = +ds.delta;
+    S.prompts[k] = Math.max(0, (S.prompts[k]||0) + d);
+    if(d > 0){ bump(); toast(`🎙️ +5 XP · Prompt #${k} rep ${S.prompts[k]}`); if(S.prompts[k] === 8) confetti(); }
+    afterChange(before); return;
+  }
+  if(ds.drill){
+    if(ds.drill === "toggle"){
+      if(T.run){ T.run = false; clearInterval(T.id); }
+      else { T.run = true; T.end = Date.now() + T.left*1000; clearInterval(T.id); T.id = setInterval(drillTick, 250); }
+    } else if(ds.drill === "skip"){
+      if(T.i < DRILL.length-1){ T.i++; T.left = DRILL[T.i][1]*60; T.end = Date.now() + T.left*1000; }
+    } else if(ds.drill === "reset"){ T.run = false; clearInterval(T.id); T.i = 0; T.left = DRILL[0][1]*60; }
+    paintDrill(); return;
+  }
+  if(ds.delfiller){ S.fillers = S.fillers.filter(x=>x.id!==ds.delfiller); save(); render(); return; }
+  if(ds.delapp){ if(confirm("Remove this company?")){ S.apps = S.apps.filter(x=>x.id!==ds.delapp); save(); render(); } return; }
+  const a = ds.act;
+  if(a === "saveStart"){ S.start = document.getElementById("startDate").value; S.ui.week = null; save(); toast("📆 Start date saved"); render(); return; }
+  if(a === "addFiller"){
+    const f = document.getElementById("flF").value; if(f === "") return;
+    const before = level().i;
+    S.fillers.push({id:Date.now()+"", d:document.getElementById("flDate").value, f, r:document.getElementById("flR").value||"0", p:document.getElementById("flP").value});
+    bump(); toast("🎙️ +5 XP · Session logged"); afterChange(before); return;
+  }
+  if(a === "addApp"){
+    const c = document.getElementById("apC").value.trim(); if(!c) return;
+    const before = level().i, ref = document.getElementById("apRef").value.trim();
+    S.apps.unshift({id:Date.now()+"", c, t:document.getElementById("apT").value, r:document.getElementById("apR").value.trim(), ch:document.getElementById("apCh").value, ref, stage: ref ? "Referral asked" : "Target", d:todayStr(), n:""});
+    bump(); toast(`📮 +5 XP · ${esc(c)} added`); afterChange(before); return;
+  }
+  if(a === "copyRef"){ navigator.clipboard?.writeText(document.getElementById("refMsg").innerText).then(()=>toast("📋 Copied")); return; }
+  if(a === "export"){
+    const blob = new Blob([JSON.stringify(S,null,2)], {type:"application/json"});
+    const u = URL.createObjectURL(blob), l = document.createElement("a");
+    l.href = u; l.download = `roadmap-progress-${todayStr()}.json`; l.click(); URL.revokeObjectURL(u); return;
+  }
+  if(a === "reset"){ if(confirm("Delete ALL progress? Export first if unsure.")){ S = defaultState(); save(); render(); } return; }
+});
+
+function afterChange(levelBefore){
+  checkBadges(false);
+  const L = level();
+  if(L.i > levelBefore){ toast(`⬆️ Level up! <b>Lv ${L.i+1} · ${L.name}</b>`,"badge"); confetti(); }
+  save(); render();
+}
+
+document.addEventListener("change", e=>{
+  const t = e.target;
+  if(t.dataset.id){
+    const before = level().i, it = ALL.find(i=>i.id===t.dataset.id);
+    const wasWeek = it ? weekDone(it.w) : false, wasPhase = it ? phaseDone(it.phase) : false;
+    if(t.checked) S.done[t.dataset.id] = Date.now(); else delete S.done[t.dataset.id];
+    if(t.checked){
+      if(it && !wasWeek && weekDone(it.w)){ toast(`🎉 Week ${it.w} cleared!`,"badge"); confetti(); }
+      else if(it && !wasPhase && phaseDone(it.phase)){ toast(`🏁 ${PHASES[it.phase].name} complete!`,"badge"); confetti(); }
+      else toast("✓ +10 XP");
+    }
+    afterChange(before); return;
+  }
+  if(t.id === "hideDone"){ S.ui.hideDone = t.checked; save(); document.getElementById("main").classList.toggle("hide-done", t.checked); return; }
+  if(t.dataset.appstage){
+    const a = S.apps.find(x=>x.id===t.dataset.appstage);
+    if(a){ const before = level().i; a.stage = t.value; bump(); if(t.value==="Offer"){ toast(`🏆 Offer from ${esc(a.c)}!`,"badge"); confetti(); } afterChange(before); }
+    return;
+  }
+  if(t.id === "importFile" && t.files[0]){
+    const r = new FileReader();
+    r.onload = () => { try{ const d = JSON.parse(r.result); S = Object.assign(defaultState(), d); S.ui = Object.assign(defaultState().ui, d.ui||{}); save(); render(); toast("✅ Imported"); }catch(err){ alert("Invalid file."); } };
+    r.readAsText(t.files[0]);
+  }
+});
+document.addEventListener("input", e=>{
+  const t = e.target;
+  if(t.dataset.note){ S.notes[t.dataset.note] = t.value; save(); }
+  if(t.dataset.appnote){ const a = S.apps.find(x=>x.id===t.dataset.appnote); if(a){ a.n = t.value; save(); } }
+  if(t.dataset.score){ const [w,k] = t.dataset.score.split("."); S.score[w] = S.score[w]||{}; S.score[w][k] = t.value; save(); }
+});
+
+/* Theme + boot */
+(function(){ let th = null; try{ th = localStorage.getItem(KEY+".theme"); }catch(e){} if(th) document.documentElement.dataset.theme = th; })();
+checkBadges(true); save();
+render();
+</script>
+</body>
+</html>
