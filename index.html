@@ -356,6 +356,59 @@ th,td{text-align:left;padding:8px;border-bottom:1px solid var(--border);vertical
 th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
 .score-input{width:62px;text-align:center}
 
+/* ---------- DSA Bootcamp ---------- */
+a.btn{text-decoration:none;display:inline-block}
+.subtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;background:var(--surface);border:1px solid var(--border);padding:5px;border-radius:14px;width:fit-content;max-width:100%}
+.subtabs button{border:0;background:transparent;color:var(--muted);padding:8px 14px;border-radius:10px;cursor:pointer;font:600 13px Inter,sans-serif}
+.subtabs button:hover{color:var(--text)}
+.subtabs button.sel{background:var(--accent);color:#fff}
+.kkfilters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.kkfilters #kq{flex:1;min-width:200px}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--surface)}
+.seg button{border:0;border-left:1px solid var(--border);background:transparent;color:var(--muted);padding:5px 9px;cursor:pointer;font:600 12px Inter,sans-serif;white-space:nowrap}
+.seg button:first-child{border-left:0}
+.seg button:hover{color:var(--text);background:var(--surface-2)}
+.seg button.on{color:#fff;background:var(--accent)}
+.seg button.on.done{background:var(--ok)}.seg button.on.review{background:var(--warn)}.seg button.on.later{background:var(--hld)}.seg button.on.watching{background:var(--pg)}
+:root[data-theme="dark"] .seg button.on{color:#0b0c14}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg button.on{color:#0b0c14}}
+.seg.big button{padding:7px 12px;font-size:13px}
+.kktopic{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow)}
+.kktopic.cur{border-color:var(--dsa);box-shadow:0 0 0 1px var(--dsa)}
+.kktopic>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 16px}
+.kktopic>summary::-webkit-details-marker{display:none}
+.kkt{display:flex;flex-direction:column;flex:1;min-width:0}
+.kkt b{font:700 16px "Space Grotesk",sans-serif}
+.kkcount{font-size:12px;color:var(--muted)}
+.kkbody{padding:0 10px 10px;border-top:1px solid var(--border)}
+.kklinks{padding:10px 6px}
+.kkrow{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:10px}
+.kkrow:hover{background:var(--surface-2)}
+.kkname{flex:1;min-width:0;color:var(--text);text-decoration:none;font-weight:500}
+.kkname:hover{color:var(--accent);text-decoration:underline}
+.kkrow.st-done .kkname{color:var(--muted);text-decoration:line-through}
+.kkrow.st-review .kkname{color:var(--warn)}
+.kkwhen{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.dpill{font:700 10.5px "JetBrains Mono",monospace;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;flex-shrink:0}
+.dpill.dE{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.dpill.dM{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.dpill.dH{background:color-mix(in srgb,var(--danger) 16%,transparent);color:var(--danger)}
+.qwrap{display:flex;flex-direction:column;padding:6px 0;border-bottom:1px solid var(--border)}
+.qwrap:last-child{border-bottom:0}
+.qwrap .chip{align-self:flex-start;margin-left:8px}
+.lecs{display:flex;flex-direction:column;gap:8px}
+.lec{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 14px}
+.lec.cur{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.lec.st-done{background:color-mix(in srgb,var(--ok) 5%,var(--surface))}
+.lec-n{width:44px;height:44px;border-radius:12px;border:2px solid var(--border-strong);display:grid;place-items:center;font:700 14px "Space Grotesk",sans-serif}
+.lec.st-done .lec-n{background:var(--ok);color:#fff;border-color:var(--ok)}
+.lec.st-watching .lec-n{border-color:var(--pg);color:var(--pg)}
+@media (max-width:640px){
+  .kkrow{flex-wrap:wrap}.kkname{flex-basis:calc(100% - 40px)}
+  .seg button span{display:none}
+  .lec{grid-template-columns:44px minmax(0,1fr)}.lec .seg{grid-column:1/-1;justify-self:start}
+}
+
 /* ---------- Toast / confetti ---------- */
 #toasts{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:8px;z-index:100;pointer-events:none}
 .toast{background:var(--text);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:tin .25s ease-out;transition:opacity .4s,transform .4s}
@@ -817,7 +870,7 @@ const RESUME_REQ = [
    ========================================================================= */
 const STAGES = ["Target","Referral asked","Applied","Screen","Tech round","Machine coding","HLD","HR / Final","Offer","Rejected","Dropped"];
 const KEY = "roadmap90.v1";
-const defaultState = () => ({done:{}, start:"", prompts:{}, fillers:[], apps:[], score:{}, notes:{}, activity:{}, badges:{}, ui:{tab:"dash", hideDone:false, week:null, topic:"dsa"}});
+const defaultState = () => ({done:{}, start:"", prompts:{}, fillers:[], apps:[], score:{}, notes:{}, activity:{}, badges:{}, kk:{}, lec:{}, kkGoal:3, ui:{tab:"dash", hideDone:false, week:null, topic:"dsa", bt:"problems", kdiff:"all", kstat:"all", kq:"", kopen:{}}});
 /* Coerce untrusted state (localStorage / imported JSON) into expected types before it reaches the DOM */
 function normalize(d){
   const s = defaultState(); if(!d || typeof d !== "object") return s;
@@ -839,6 +892,14 @@ function normalize(d){
   s.ui.hideDone = ui.hideDone === true;
   s.ui.week = num(ui.week) || null;
   s.ui.topic = typeof ui.topic === "string" ? ui.topic : "dsa";
+  s.ui.bt = ["problems","queue","lectures","js"].includes(ui.bt) ? ui.bt : "problems";
+  s.ui.kdiff = ["all","E","M","H"].includes(ui.kdiff) ? ui.kdiff : "all";
+  s.ui.kstat = ["all","todo","done","review","later"].includes(ui.kstat) ? ui.kstat : "all";
+  s.ui.kq = str(ui.kq).slice(0,60);
+  Object.entries(obj(ui.kopen)).forEach(([k,v])=>{ if(/^[0-9a-z-]+$/.test(k)) s.ui.kopen[k] = v === true; });
+  Object.entries(obj(d.kk)).forEach(([k,v])=>{ if(/^[a-z0-9-]+$/.test(k) && v && ["done","review","later"].includes(v.s)) s.kk[k] = {s:v.s, t:num(v.t)||Date.now()}; });
+  Object.entries(obj(d.lec)).forEach(([k,v])=>{ if(/^\d{2}$/.test(k) && ["watching","done"].includes(v)) s.lec[k] = v; });
+  s.kkGoal = Math.min(20, num(d.kkGoal)) || 3;
   return s;
 }
 let S = load();
@@ -886,6 +947,7 @@ const phaseDone = p => ALL.filter(i=>i.phase===p).every(i=>isDone(i.id));
 function activityMap(){
   const m = Object.assign({}, S.activity);
   Object.values(S.done).forEach(ts=>{ if(typeof ts==="number"){ const k = ymd(new Date(ts)); m[k] = (m[k]||0) + 1; } });
+  Object.entries(S.kk).forEach(([slug,v])=>{ if(!RID[slug] && v.t){ const k = ymd(new Date(v.t)); m[k] = (m[k]||0) + 1; } });
   return m;
 }
 function streak(){
@@ -898,7 +960,7 @@ function streak(){
 /* ---------- XP & levels ---------- */
 const LEVELS = [[0,"Bench Warmer"],[200,"Intern Grind"],[600,"Junior Dev"],[1200,"SDE-1"],[2000,"SDE-2"],[3000,"15 LPA Ready"]];
 function xp(){
-  return Object.keys(S.done).length*10 + Object.values(S.prompts).reduce((a,b)=>a+b,0)*5 + S.fillers.length*5 + S.apps.length*5;
+  return Object.keys(S.done).length*10 + Object.values(S.prompts).reduce((a,b)=>a+b,0)*5 + S.fillers.length*5 + S.apps.length*5 + kkXP();
 }
 function level(){
   const x = xp(); let i = 0;
@@ -923,6 +985,9 @@ const BADGES = [
   ["fluent","🗣️","Smooth Talker","Last 5 logs avg ≤4 fillers",()=>{const f=S.fillers.slice(-5); return f.length>=5 && f.reduce((a,x)=>a+(+x.f||0),0)/5<=4;}],
   ["ship","🚢","Shipped","Relay feature freeze",()=>ALL.some(i=>i.title==="FEATURE FREEZE"&&isDone(i.id))],
   ["apps10","📮","In The Market","10 companies in pipeline",()=>S.apps.length>=10],
+  ["kk50","🎓","Bootcamper","50 bootcamp problems",()=>kkCount("done")>=50],
+  ["kk150","🧗","Assignment Machine","150 bootcamp problems",()=>kkCount("done")>=150],
+  ["lec10","🎬","Binge Learner","10 lectures done",()=>Object.values(S.lec).filter(v=>v==="done").length>=10],
   ["offer","🏆","15 LPA","Land an offer",()=>S.apps.some(a=>a.stage==="Offer")],
 ];
 function checkBadges(silent){
@@ -976,9 +1041,191 @@ function checkLine(id, title, detail){
 }
 
 /* =========================================================================
+   DSA BOOTCAMP (Kunal Kushwaha) — assignments + lectures
+   Source: github.com/kunal-kushwaha/DSA-Bootcamp-Java
+   ========================================================================= */
+const KK_REPO = "https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main";
+const KK_PLAYLIST = "https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ";
+const KK = [{"id":"03-conditionals-loops","name":"Conditionals & Loops","week":1,"lec":"06","vids":[["Video Link","https://youtu.be/ldYLYRNaucM"]],"probs":[["Subtract the Product and Sum of Digits of an Integer","subtract-the-product-and-sum-of-digits-of-an-integer","E"]]},{"id":"05-arrays","name":"Arrays","week":1,"lec":"08","vids":[["Video Link","https://youtu.be/n60Dn0UsbEk"]],"probs":[["Build Array from Permutation","build-array-from-permutation","E"],["Concatenation of Array","concatenation-of-array","E"],["Running Sum of 1d Array","running-sum-of-1d-array","E"],["Richest Customer Wealth","richest-customer-wealth","E"],["Shuffle the Array","shuffle-the-array","E"],["Kids With the Greatest Number of Candies","kids-with-the-greatest-number-of-candies","E"],["Number of Good Pairs","number-of-good-pairs","E"],["How Many Numbers Are Smaller Than the Current Number","how-many-numbers-are-smaller-than-the-current-number","E"],["Create Target Array in the Given Order","create-target-array-in-the-given-order","E"],["Check if the Sentence Is Pangram","check-if-the-sentence-is-pangram","E"],["Count Items Matching a Rule","count-items-matching-a-rule","E"],["Find the Highest Altitude","find-the-highest-altitude","E"],["Flipping an Image","flipping-an-image","E"],["Cells with Odd Values in a Matrix","cells-with-odd-values-in-a-matrix","E"],["Matrix Diagonal Sum","matrix-diagonal-sum","E"],["Find Numbers with Even Number of Digits","find-numbers-with-even-number-of-digits","E"],["Transpose Matrix","transpose-matrix","E"],["Add to Array-Form of Integer","add-to-array-form-of-integer","E"],["Maximum Population Year","maximum-population-year","E"],["Determine Whether Matrix Can Be Obtained By Rotation","determine-whether-matrix-can-be-obtained-by-rotation","E"],["Two Sum","two-sum","E"],["Find N Unique Integers Sum up to Zero","find-n-unique-integers-sum-up-to-zero","E"],["Lucky Number In a Matrix","lucky-numbers-in-a-matrix","E"],["Maximum Subarray","maximum-subarray","E"],["Reshape the Matrix","reshape-the-matrix","E"],["Plus One","plus-one","E"],["Remove Duplicates from Sorted Array","remove-duplicates-from-sorted-array","E"],["Minimum Cost to Move Chips to The Same Position","minimum-cost-to-move-chips-to-the-same-position","E"],["Spiral Matrix","spiral-matrix","M"],["Spiral Matrix II","spiral-matrix-ii","M"],["Spiral Matrix III","spiral-matrix-iii","M"],["Set Matrix Zeroes","set-matrix-zeroes","M"],["Product of Array Except Self","product-of-array-except-self","M"],["Find First and Last Position of Element in Sorted Array","find-first-and-last-position-of-element-in-sorted-array","M"],["Jump Game","jump-game","M"],["Rotate Array","rotate-array","M"],["Sort Colors","sort-colors","M"],["House Robber","house-robber","M"],["Max Value of Equation","max-value-of-equation","H"],["First Missing Positive","first-missing-positive","H"],["Good Array","check-if-it-is-a-good-array","H"]]},{"id":"07-sorting","name":"Sorting (incl. Cyclic Sort)","week":1,"lec":"11","vids":[["Bubble Sort","https://youtu.be/F5MZyqRp_IM"],["Selection Sort","https://youtu.be/Nd4SCCIHFWk"],["Insertion Sort","https://youtu.be/By_5-RRqVeE"],["Merge Sort","https://youtu.be/iKGAgWdgoRk"],["Quick Sort","https://youtu.be/Z8svOqamag8"]],"probs":[["Merge Sorted Array","merge-sorted-array","E"],["Majority Element","majority-element","E"],["Contains Duplicate","contains-duplicate","E"],["Missing Number","missing-number","E"],["Intersection of Two Arrays","intersection-of-two-arrays","E"],["Intersection of Two Arrays II","intersection-of-two-arrays-ii","E"],["Third Maximum Number","third-maximum-number","E"],["Assign Cookies","assign-cookies","E"],["Array Partition I","array-partition-i","E"],["Maximum Product of Three Numbers","maximum-product-of-three-numbers","E"],["Sort Array By Parity","sort-array-by-parity","E"],["Sort Array By Parity II","sort-array-by-parity-ii","E"],["Largest Perimeter Triangle","largest-perimeter-triangle","E"],["Squares of a Sorted Array","squares-of-a-sorted-array","E"],["Matrix Cells in Distance Order","matrix-cells-in-distance-order","E"],["Height Checker","height-checker","E"],["Relative Sort Array","relative-sort-array","E"],["Minimum Absolute Difference","minimum-absolute-difference","E"],["Rank Transform of an Array","rank-transform-of-an-array","E"],["Sort Integers by The Number of 1 Bits","sort-integers-by-the-number-of-1-bits","E"],["How Many Numbers Are Smaller Than the Current Number","how-many-numbers-are-smaller-than-the-current-number","E"],["Maximum Product of Two Elements in an Array","maximum-product-of-two-elements-in-an-array","E"],["Average Salary Excluding the Minimum and Maximum Salary","average-salary-excluding-the-minimum-and-maximum-salary","E"],["Make Two Arrays Equal by Reversing Sub-arrays","make-two-arrays-equal-by-reversing-sub-arrays","E"],["Can Make Arithmetic Progression From Sequence","can-make-arithmetic-progression-from-sequence","E"],["Sort Array by Increasing Frequency","sort-array-by-increasing-frequency","E"],["Special Array With X Elements Greater Than or Equal X","special-array-with-x-elements-greater-than-or-equal-x","E"],["Find all numbers disappeared in an array","find-all-numbers-disappeared-in-an-array","E"],["Set Mismatch","set-mismatch","E"],["2Sum","two-sum","E"],["3Sum","3sum","M"],["3Sum Closest","3sum-closest","M"],["4Sum","4sum","M"],["Group Anagrams","group-anagrams","M"],["Merge Intervals","merge-intervals","M"],["Sort Colors","sort-colors","M"],["Insertion Sort List","insertion-sort-list","M"],["Sort List","sort-list","M"],["Largest Number","largest-number","M"],["Kth Largest Element in an Array","kth-largest-element-in-an-array","M"],["Find the Duplicate Number","find-the-duplicate-number","M"],["Find all Duplicates in an array","find-all-duplicates-in-an-array","M"],["First missing Positive","first-missing-positive","H"]]},{"id":"08-strings","name":"Strings","week":2,"lec":"12","vids":[["Video Link","https://youtu.be/zL1DPZ0Ovlo"]],"probs":[["Defanging an Ip address","defanging-an-ip-address","E"],["Shuffle String","shuffle-string","E"],["Goal Parser Interpretation","goal-parser-interpretation","E"],["Count Items Matching a rule","count-items-matching-a-rule","E"],["Sorting the Sentence","sorting-the-sentence","E"],["Check if two strings are equivalent","check-if-two-string-arrays-are-equivalent","E"],["To Lower Case","to-lower-case","E"],["Determine if string halves are alike","determine-if-string-halves-are-alike","E"],["Decrypt String from Alphabet to Integer Mapping","decrypt-string-from-alphabet-to-integer-mapping","E"],["Number of Strings That Appear as Substrings in Word","number-of-strings-that-appear-as-substrings-in-word","E"],["Robot Return to Origin","robot-return-to-origin","E"],["Reverse Words in a String III","reverse-words-in-a-string-iii","E"],["Excel Sheet Column Title","excel-sheet-column-title","E"],["Implement strStr()","implement-strstr","E"],["Long Pressed Name","long-pressed-name","E"],["Valid Palindrome","valid-palindrome","E"],["Valid Palindrome II","valid-palindrome-ii","E"],["Longest Common Prefix","longest-common-prefix","E"],["Maximum Repeating Substring","maximum-repeating-substring","E"],["Check if Binary String Has at Most One Segment of Ones","check-if-binary-string-has-at-most-one-segment-of-ones","E"],["Merge Strings Alternately","merge-strings-alternately","E"],["Reverse Prefix of Word","reverse-prefix-of-word","E"],["Roman to Integer","roman-to-integer","E"],["Valid Parentheses","valid-parentheses","E"],["Length of last word","length-of-last-word","E"],["Jump Game VII","jump-game-vii","M"],["Split Two Strings to Make Palindrome","split-two-strings-to-make-palindrome","M"],["Number of Ways to Split a String","number-of-ways-to-split-a-string","M"],["Sentence Similarity III","sentence-similarity-iii","M"],["Repeated String Match","repeated-string-match","M"],["Next Greater Element III","next-greater-element-iii","M"],["Maximum Number of Removable Characters","maximum-number-of-removable-characters","M"],["Swap Adjacent in LR String","swap-adjacent-in-lr-string","M"],["Multiply Strings","multiply-strings","M"],["Basic Calculator II","basic-calculator-ii","M"],["Minimum Length of String After Deleting Similar Ends","minimum-length-of-string-after-deleting-similar-ends","M"],["Number of Substrings With Only 1s","number-of-substrings-with-only-1s","M"],["Count Number of Homogenous Substrings","count-number-of-homogenous-substrings","M"],["Get Equal Substrings Within Budget","get-equal-substrings-within-budget","M"],["Shifting Letters","shifting-letters","M"],["Minimum Time Difference","minimum-time-difference","M"],["Find Kth Bit in Nth Binary String","find-kth-bit-in-nth-binary-string","M"],["Camelcase Matching","camelcase-matching","M"],["Print Words Vertically","print-words-vertically","M"],["Valid Number","valid-number","H"],["Regular Expression Matching","regular-expression-matching","H"],["Last Substring in Lexicographical Order","last-substring-in-lexicographical-order","H"],["Basic Calculator","basic-calculator","H"],["Minimum Number of Operations to Make String Sorted","minimum-number-of-operations-to-make-string-sorted","H"],["Check If String Is Transformable With Substring Sort Operations","check-if-string-is-transformable-with-substring-sort-operations","H"],["Orderly Queue","orderly-queue","H"],["Special Binary String","special-binary-string","H"]]},{"id":"06-searching","name":"Searching & Binary Search","week":3,"lec":"10","vids":[["Linear Search","https://youtu.be/_HRA37X8N_Q"],["Binary Search","https://youtu.be/f6UU7V3szVw"],["Binary Search Questions","https://youtu.be/W9QJ8HaRvJQ"],["Binary Search in 2D Arrays","https://youtu.be/enI_KyGLYPo"]],"probs":[["Square Root","sqrtx","E"],["Guess Number Higher or Lower","guess-number-higher-or-lower","E"],["First Bad Version","first-bad-version","E"],["Two Sum II - Input array is sorted","two-sum-ii-input-array-is-sorted","E"],["Valid Perfect Square","valid-perfect-square","E"],["Arranging Coins","arranging-coins","E"],["Find Smallest Letter Greater Than Target","find-smallest-letter-greater-than-target","E"],["Kth Missing Positive Number","kth-missing-positive-number","E"],["Search Insert Position","search-insert-position","E"],["Peak Index in a Mountain Array","peak-index-in-a-mountain-array","E"],["Count Negative Numbers in a Sorted Matrix","count-negative-numbers-in-a-sorted-matrix","E"],["Intersection of Two Arrays","intersection-of-two-arrays","E"],["Intersection of Two Arrays II","intersection-of-two-arrays-ii","E"],["Fair Candy Swap","fair-candy-swap","E"],["Check If N and Its Double Exist","check-if-n-and-its-double-exist","E"],["Special Array With X Elements Greater Than or Equal X","special-array-with-x-elements-greater-than-or-equal-x","E"],["Binary Search","binary-search","E"],["Find First and Last Position of Element in Sorted Array","find-first-and-last-position-of-element-in-sorted-array","M"],["Single Element in a Sorted Array","single-element-in-a-sorted-array","M"],["Search in Rotated Sorted Array","search-in-rotated-sorted-array","M"],["Search in Rotated Sorted Array II","search-in-rotated-sorted-array-ii","M"],["Find Minimum in Rotated Sorted Array","find-minimum-in-rotated-sorted-array","M"],["Find Peak Element","find-peak-element","M"],["Find Right Interval","find-right-interval","M"],["Reach a Number","reach-a-number","M"],["Maximum Value at a Given Index in a Bounded Array","maximum-value-at-a-given-index-in-a-bounded-array","M"],["Koko Eating Bananas","koko-eating-bananas","M"],["Minimum Absolute Sum Difference","minimum-absolute-sum-difference","M"],["Search a 2D Matrix","search-a-2d-matrix","M"],["Find a Peak Element II","find-a-peak-element-ii","M"],["Frequency of the Most Frequent Element","frequency-of-the-most-frequent-element","M"],["Find the Duplicate Number","find-the-duplicate-number","M"],["Capacity To Ship Packages Within D Days","capacity-to-ship-packages-within-d-days","M"],["4 Sum","4sum","M"],["Median of Two Sorted Arrays","median-of-two-sorted-arrays","H"],["Find Minimum in Rotated Sorted Array II","find-minimum-in-rotated-sorted-array-ii","H"],["Split Array Largest Sum","split-array-largest-sum","H"],["Find in Mountain Array","find-in-mountain-array","H"],["Count smaller number after Self","count-of-smaller-numbers-after-self","H"]]},{"id":"16-stack-queue","name":"Stacks & Queues","week":3,"lec":"19","vids":[],"probs":[["Next greater element I","next-greater-element-i","E"],["Valid Parentheses","valid-parentheses","E"],["Min Stack","min-stack","E"],["Remove Outermost Parentheses","remove-outermost-parentheses","E"],["Remove All Adjacent Duplicates In String","remove-all-adjacent-duplicates-in-string","E"],["Number of Recent Calls","number-of-recent-calls","E"],["Flood fill","flood-fill","E"],["Implement Queue using Stacks","implement-queue-using-stacks","E"],["Design a Stack With Increment Operation","design-a-stack-with-increment-operation","M"],["Minimum Add to Make Parentheses Valid","minimum-add-to-make-parentheses-valid","M"],["Decode String","decode-string","M"],["Asteroid Collision","asteroid-collision","M"],["132 Pattern","132-pattern","M"],["Design circular Queue","design-circular-queue","M"],["Find the Most Competitive Subsequence","find-the-most-competitive-subsequence","M"],["Design Front Middle Back Queue","design-front-middle-back-queue","M"],["Task Scheduler","task-scheduler","M"],["Binary Tree Right Side View","binary-tree-right-side-view","M"],["Snake and Ladders","snakes-and-ladders","M"],["Longest Valid Parantheses","longest-valid-parentheses","H"],["Sliding window maximum","sliding-window-maximum","H"],["Brace Expansion II","brace-expansion-ii","H"],["Count number of islands","number-of-islands","H"]]},{"id":"15-linkedlist","name":"Linked List","week":4,"lec":"18","vids":[],"probs":[["Convert Binary Number in a Linked List to Integer","convert-binary-number-in-a-linked-list-to-integer","E"],["Reverse Linked List","reverse-linked-list","E"],["Middle of the Linked List","middle-of-the-linked-list","E"],["Merge Two Sorted Lists","merge-two-sorted-lists","E"],["Delete Node in a Linked List","delete-node-in-a-linked-list","E"],["Palindrome Linked List","palindrome-linked-list","E"],["Intersection of Two Linked Lists","intersection-of-two-linked-lists","E"],["Linked List Cycle","linked-list-cycle","E"],["Remove Duplicates from Sorted List","remove-duplicates-from-sorted-list","E"],["Find All Numbers Disappeared in an Array","find-all-numbers-disappeared-in-an-array","E"],["Remove Linked List Elements","remove-linked-list-elements","E"],["Design Twitter","design-twitter","M"],["Design Linked List","design-linked-list","M"],["Reverse Linked List II","reverse-linked-list-ii","M"],["Reorder List","reorder-list","M"],["Remove Nth Node From End of List","remove-nth-node-from-end-of-list","M"],["Swapping Nodes in a Linked List","swapping-nodes-in-a-linked-list","M"],["Add Two Numbers","add-two-numbers","M"],["Add Two Numbers II","add-two-numbers-ii","M"],["Linked List Cycle II","linked-list-cycle-ii","M"],["Flatten a Multilevel Doubly Linked List","flatten-a-multilevel-doubly-linked-list","M"],["Rotate List","rotate-list","M"],["Copy List with Random Pointer","copy-list-with-random-pointer","M"],["LRU Cache","lru-cache","M"],["Remove Duplicates from Sorted List II","remove-duplicates-from-sorted-list-ii","M"],["Design Browser History","design-browser-history","M"],["Partition list","partition-list","M"],["Swap Nodes in Pairs","swap-nodes-in-pairs","M"],["Remove Zero Sum Consecutive Nodes from Linked List","remove-zero-sum-consecutive-nodes-from-linked-list","M"],["Insertion Sort List","insertion-sort-list","M"],["Reverse Nodes in Even Length Groups","reverse-nodes-in-even-length-groups","M"],["Linked List Random Node","linked-list-random-node","M"],["Sort List","sort-list","M"],["Merge In Between Linked Lists","merge-in-between-linked-lists","M"],["Delete the Middle Node of a Linked List","delete-the-middle-node-of-a-linked-list","M"],["Next Greater Node In Linked List","next-greater-node-in-linked-list","M"],["Odd Even Linked List","odd-even-linked-list","M"],["Split Linked List in Parts","split-linked-list-in-parts","M"],["Find the Minimum and Maximum Number of Nodes Between Critical Points","find-the-minimum-and-maximum-number-of-nodes-between-critical-points","M"],["Reverse Nodes in k-Group","reverse-nodes-in-k-group","H"],["LFU Cache","lfu-cache","H"],["Merge k Sorted Lists","merge-k-sorted-lists","H"],["All O'one Data Structure","all-oone-data-structure","H"],["Design Skiplist","design-skiplist","H"]]},{"id":"17-trees","name":"Trees","week":5,"lec":"20","vids":[],"probs":[["Binary Tree Inorder Traversal","binary-tree-inorder-traversal","E"],["Same Tree","same-tree","E"],["Symmetric Tree","symmetric-tree","E"],["Maximum Depth of Binary Tree","maximum-depth-of-binary-tree","E"],["Convert Sorted Array to Binary Search Tree","convert-sorted-array-to-binary-search-tree","E"],["Balanced Binary Tree","balanced-binary-tree","E"],["Minimum Depth of Binary Tree","minimum-depth-of-binary-tree","E"],["Path Sum","path-sum","E"],["Binary Tree Preorder Traversal","binary-tree-preorder-traversal","E"],["Binary Tree Postorder Traversal","binary-tree-postorder-traversal","E"],["Invert Binary Tree","invert-binary-tree","E"],["Binary Tree Paths","binary-tree-paths","E"],["Sum of Left Leaves","sum-of-left-leaves","E"],["Find Mode in Binary Search Tree","find-mode-in-binary-search-tree","E"],["Minimum Absolute Difference in BST","minimum-absolute-difference-in-bst","E"],["Diameter of Binary Tree","diameter-of-binary-tree","E"],["Validate Binary Search Tree","validate-binary-search-tree","M"],["All Nodes Distance K in Binary Tree","all-nodes-distance-k-in-binary-tree","M"],["Validate Binary Tree Nodes","validate-binary-tree-nodes","M"],["Longest Univalue Path","longest-univalue-path","M"],["Closest Nodes Queries in a Binary Search Tree","closest-nodes-queries-in-a-binary-search-tree","M"],["Maximum Width of Binary Tree","maximum-width-of-binary-tree","M"],["Linked List in Binary Tree","linked-list-in-binary-tree","M"],["Operations on Tree","operations-on-tree","M"],["Verify Preorder Serialization of a Binary Tree","verify-preorder-serialization-of-a-binary-tree","M"],["Kth Largest Sum in a Binary Tree","kth-largest-sum-in-a-binary-tree","M"],["Count Nodes With the Highest Score","count-nodes-with-the-highest-score","M"],["Path Sum III","path-sum-iii","M"],["Maximum Product of Splitted Binary Tree","maximum-product-of-splitted-binary-tree","M"],["Most Profitable Path in a Tree","most-profitable-path-in-a-tree","M"],["Step-By-Step Directions From a Binary Tree Node to Another","step-by-step-directions-from-a-binary-tree-node-to-another","M"],["Logical OR of Two Binary Grids Represented as Quad-Trees","logical-or-of-two-binary-grids-represented-as-quad-trees","M"],["Flip Binary Tree To Match Preorder Traversal","flip-binary-tree-to-match-preorder-traversal","M"],["Kth Ancestor of a Tree Node","kth-ancestor-of-a-tree-node","H"],["Difference Between Maximum and Minimum Price Sum","difference-between-maximum-and-minimum-price-sum","H"],["Merge BSTs to Create Single BST","merge-bsts-to-create-single-bst","H"],["Frog Position After T Seconds","frog-position-after-t-seconds","H"],["Height of Binary Tree After Subtree Removal Queries","height-of-binary-tree-after-subtree-removal-queries","H"],["Collect Coins in a Tree","collect-coins-in-a-tree","H"],["Binary Tree Maximum Path Sum","binary-tree-maximum-path-sum","H"],["Tree of Coprimes","tree-of-coprimes","H"],["Maximum Sum BST in Binary Tree","maximum-sum-bst-in-binary-tree","H"],["Minimize the Total Price of the Trips","minimize-the-total-price-of-the-trips","H"],["Number Of Ways To Reconstruct A Tree","number-of-ways-to-reconstruct-a-tree","H"],["Smallest Missing Genetic Value in Each Subtree","smallest-missing-genetic-value-in-each-subtree","H"],["Vertical Order Traversal of a Binary Tree","vertical-order-traversal-of-a-binary-tree","H"],["Binary Tree Cameras","binary-tree-cameras","H"],["Number of Ways to Reorder Array to Get Same BST","number-of-ways-to-reorder-array-to-get-same-bst","H"],["Count Number of Possible Root Nodes","count-number-of-possible-root-nodes","H"],["Count Ways to Build Rooms in an Ant Colony","count-ways-to-build-rooms-in-an-ant-colony","H"],["Minimum Score After Removals on a Tree","minimum-score-after-removals-on-a-tree","H"],["Create Components With Same Value","create-components-with-same-value","H"],["Serialize and Deserialize Binary Tree","serialize-and-deserialize-binary-tree","H"],["Longest Path With Different Adjacent Characters","longest-path-with-different-adjacent-characters","H"]]},{"id":"10-recursion","name":"Recursion & Backtracking","week":7,"lec":"14","vids":[],"probs":[["Binary Search using recursion","binary-search","E"],["Reverse String","reverse-string","E"],["Fibonacci Number","fibonacci-number","E"],["Power of Two","power-of-two","E"],["Power of Three","power-of-three","E"],["Power of Four","power-of-four","E"],["Number of Steps to Reduce a Number to Zero.","number-of-steps-to-reduce-a-number-to-zero","E"],["Combination Sum","combination-sum","M"],["Word Search","word-search","M"],["Target sum","target-sum","M"],["Find Kth Bit in Nth Binary String","find-kth-bit-in-nth-binary-string","M"],["K-th Symbol in Grammar","k-th-symbol-in-grammar","M"],["Count Good Numbers","count-good-numbers","M"],["Pow(x, n)","powx-n","M"],["Minimum Non-Zero Product of the Array Elements","minimum-non-zero-product-of-the-array-elements","M"],["Perfect squares","perfect-squares","M"],["decode string","decode-string","M"],["find the winner of the circular game","find-the-winner-of-the-circular-game","M"],["Different ways to add parantheses in the expression","different-ways-to-add-parentheses","M"],["Letter Combinations of a Phone Number","letter-combinations-of-a-phone-number","M"],["Predict the winner.","predict-the-winner","M"],["Combination Sum II","combination-sum-ii","M"],["combination Sum III","combination-sum-iii","M"],["Sudoku Solver","sudoku-solver","M"],["Letter tile possibilities","letter-tile-possibilities","M"],["All Paths From Source to Target","all-paths-from-source-to-target","M"],["Beautiful Arrangement","beautiful-arrangement","M"],["Path with Maximum Gold","path-with-maximum-gold","M"],["Reorder List","reorder-list","M"],["Parsing A Boolean Expression","parsing-a-boolean-expression","H"],["Special Binary String","special-binary-string","H"],["Permutation Sequence","permutation-sequence","H"],["Basic Calculator","basic-calculator","H"],["Integer to English Words","integer-to-english-words","H"],["Maximize Number of Nice Divisors","maximize-number-of-nice-divisors","H"],["N Queens","n-queens","H"],["N Queens II","n-queens-ii","H"],["Word break II","word-break-ii","H"],["Unique paths III","unique-paths-iii","H"],["Concatenated Words","concatenated-words","H"]]},{"id":"11-bitwise","name":"Bitwise","week":8,"lec":"16","vids":[["Video link","https://youtu.be/fzip9Aml6og"]],"probs":[["Add Binary","add-binary","E"],["Single Number","single-number","E"],["Reverse Bits","reverse-bits","E"],["Number of 1 Bits","number-of-1-bits","E"],["Counting Bits","counting-bits","E"],["Binary Watch","binary-watch","E"],["Hamming Distance","hamming-distance","E"],["Number Complement","number-complement","E"],["Set Mismatch","set-mismatch","E"],["Binary Number with Alternating Bits","binary-number-with-alternating-bits","E"],["Prime Number of Set Bits in Binary Representation","prime-number-of-set-bits-in-binary-representation","E"],["Binary Gap","binary-gap","E"],["Number of Steps to Reduce a Number to Zero","number-of-steps-to-reduce-a-number-to-zero","E"],["Sort Integers by The Number of 1 Bits","sort-integers-by-the-number-of-1-bits","E"],["XOR Operation in an Array","xor-operation-in-an-array","E"],["Count the Number of Consistent Strings","count-the-number-of-consistent-strings","E"],["Decode XORed Array","decode-xored-array","E"],["Sum of All Subset XOR Totals","sum-of-all-subset-xor-totals","E"],["Longest Nice Substring","longest-nice-substring","E"],["Subsets","subsets","M"],["Subsets II","subsets-ii","M"],["Single Number II","single-number-ii","M"],["Divide Two Integers","divide-two-integers","M"],["Gray Code","gray-code","M"],["Repeated DNA Sequences","repeated-dna-sequences","M"],["Minimum Number of Flips to onvert Binary Matrix to zero matrix","minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix","H"],["Minimum cost to connect two group of points","minimum-cost-to-connect-two-groups-of-points","H"],["Find XOR Sum of All Pairs Bitwise AND","find-xor-sum-of-all-pairs-bitwise-and","H"]]},{"id":"12-math","name":"Maths","week":8,"lec":"16","vids":[["Video link","https://youtu.be/lmSpZ0bjCyQ"]],"probs":[["Roman to Integer.","roman-to-integer","E"],["Happy Number.","happy-number","E"],["Power of Four","power-of-four","E"],["Excel Sheet Column Title","excel-sheet-column-title","E"],["Maximum Product of Three Numbers","maximum-product-of-three-numbers","E"],["Climbing Stairs","climbing-stairs","E"],["Self Dividing Numbers","self-dividing-numbers","E"],["Add Binary","add-binary","E"],["Power of Two","power-of-two","E"],["Integer to Roman","integer-to-roman","M"],["Unique Paths","unique-paths","M"],["Gray Code","gray-code","M"],["Perfect Squares","perfect-squares","M"],["Next Greater Element III","next-greater-element-iii","M"],["Angle Between Hands of a Clock","angle-between-hands-of-a-clock","M"],["String to Integer (atoi)","string-to-integer-atoi","M"],["The ksupth/sup Factor of n","the-kth-factor-of-n","M"],["Queries on Number of Points Inside a Circle","queries-on-number-of-points-inside-a-circle","M"],["Product of Array Except Self","product-of-array-except-self","M"],["Multiply Strings","multiply-strings","M"],["Encode and Decode TinyURL","encode-and-decode-tinyurl","M"],["Integer Break","integer-break","M"],["Permutation Sequence","permutation-sequence","H"],["Basic Calculator","basic-calculator","H"],["Max Points on a Line","max-points-on-a-line","H"],["Number of Digit One","number-of-digit-one","H"]]}];
+/* [id, folder, name, relevance, roadmap week (0 = none), tip] */
+const KK_LECS = [
+  ["01","01-git","Git & GitHub","skim",0,"You already use Git daily. Skim the cheat sheet only."],
+  ["02","02-intro to programming","Intro to Programming","skip",0,"Basics. Skip at 2 YOE."],
+  ["03","03-flow of program","Flow of Program","skip",0,"Flowcharts and pseudocode. Skip."],
+  ["04","04-introduction to java","Introduction to Java","java",0,"JVM/JDK internals. Java-only; you solve in JavaScript."],
+  ["05","05-first-java-program","First Java Program","java",0,"Java syntax. Skip."],
+  ["06","06-conditions-loops","Conditions & Loops","skim",1,"Skim at 2×."],
+  ["07","07-methods","Methods / Functions","skim",1,"Pass-by-value vs reference is still worth a skim."],
+  ["08","08-arrays","Arrays & ArrayList","core",1,"JS: Array. Build 2D arrays with Array.from (see Java → JS)."],
+  ["09","09-linear search","Linear Search","core",2,""],
+  ["10","10-binary search","Binary Search","core",3,"High interview value: order-agnostic BS, ceiling/floor, rotated arrays, binary search on answer."],
+  ["11","11-sorting","Sorting (Bubble, Selection, Insertion, Cyclic)","core",1,"Cyclic sort is the key pattern for 'missing / duplicate number in 1..N'."],
+  ["12","12-strings","Strings & StringBuilder","core",2,"JS strings are immutable too: build with an array + join."],
+  ["13","13-patterns","Patterns","optional",0,"Star patterns. Low interview value; skip unless loops feel rusty."],
+  ["14","14-recursion","Recursion, Merge/Quick Sort, Backtracking","core",3,"Watch the recursion intro before Trees (W4); the backtracking part is W7."],
+  ["15","15-complexity","Time & Space Complexity","core",1,"Say the Big-O of every solution out loud."],
+  ["16","16-math","Maths & Bitwise","core",8,"JS bitwise operators work on 32-bit signed ints."],
+  ["17","17-oop","OOP: classes, inheritance, polymorphism, abstraction, interfaces, generics","core",1,"Feeds the LLD track. Rewrite the examples in TypeScript."],
+  ["18","18-linkedlist","Linked List","core",4,""],
+  ["19","19-stacks-n-queues","Stacks & Queues","core",3,"JS: array as stack. For queues avoid shift() (O(n)); use a head index."],
+  ["20","20-trees","Trees: BT, BST, AVL, Segment Tree, advanced questions","core",4,"Spans W4–W5. AVL / segment tree: know the concept, rarely coded in interviews."],
+  ["21","21-StringBuffer","StringBuffer","java",0,"Java-only. JS: array.join."],
+  ["22","22-large numbers","Large Numbers (BigInteger)","java",0,"JS: BigInt (10n ** 30n)."],
+  ["23","23-file handling","File Handling","java",0,"Java I/O. JS equivalent: Node fs / streams (backend skill, not DSA)."],
+  ["24","24-heaps","Heaps","core",5,"JS has no built-in heap. Write a MinHeap class once; LeetCode's JS runtime ships MinPriorityQueue."],
+  ["25","25-hashmaps","HashMaps & Karp-Rabin","core",1,"JS: Map / Set. Hashing internals also help in HLD (consistent hashing)."],
+  ["26","26-advance-sorting","Count & Radix Sort","optional",0,""],
+  ["27","27-huffman-coding","Huffman Coding","optional",0,""],
+  ["28","28-sqrt-decomposition","Sqrt Decomposition","optional",0,""],
+];
+const KK_REL = {core:["Core","--ok"], skim:["Skim","--pg"], optional:["Optional","--muted"], java:["Java-only","--danger"], skip:["Skip","--muted"]};
+const KK_SLUGS = new Set(KK.flatMap(t=>t.probs.map(p=>p[1])));
+const KK_TOTAL = KK_SLUGS.size;
+const RID = {}; ALL.forEach(i=>{ if(i.lc) RID[i.lc] = i.id; });
+const kkStatus = slug => (S.kk[slug]||{}).s || "";
+const kkCount = s => { let n = 0; KK_SLUGS.forEach(x=>{ if(kkStatus(x)===s) n++; }); return n; };
+function kkToday(){ const t = todayStr(); let n = 0; KK_SLUGS.forEach(x=>{ const v = S.kk[x]; if(v && v.s==="done" && ymd(new Date(v.t))===t) n++; }); return n; }
+function setKK(slug, s){
+  if(s) S.kk[slug] = {s, t:Date.now()}; else delete S.kk[slug];
+  const rid = RID[slug];
+  if(rid){ if(s==="done") S.done[rid] = Date.now(); else delete S.done[rid]; }
+}
+function totalSolved(){ let n = dsaCount(); KK_SLUGS.forEach(x=>{ if(!RID[x] && kkStatus(x)==="done") n++; }); return n; }
+function kkXP(){
+  let n = 0; KK_SLUGS.forEach(x=>{ if(!RID[x] && kkStatus(x)==="done") n++; });
+  return n*10 + Object.values(S.lec).filter(v=>v==="done").length*15;
+}
+function kkNext(n){
+  const cw = currentWeek() || 1, pool = [], seen = new Set(), ord = {M:0,H:1,E:2};
+  KK.filter(t=>t.week<=cw).sort((a,b)=>b.week-a.week).forEach(t=>t.probs.forEach(p=>{ if(!kkStatus(p[1]) && !seen.has(p[1])){ seen.add(p[1]); pool.push(p); } }));
+  return pool.sort((a,b)=>ord[a[2]]-ord[b[2]]).slice(0,n);
+}
+function kkRow(p){
+  const [name, slug, d] = p, s = kkStatus(slug), rid = RID[slug];
+  const rw = rid ? ALL.find(i=>i.id===rid).w : null;
+  const v = S.kk[slug];
+  const when = v ? (s==="done" ? "" : "· ") + new Date(v.t).toLocaleDateString(undefined,{day:"numeric",month:"short"}) : "";
+  return `<div class="kkrow st-${s||"todo"}" data-name="${esc(name.toLowerCase())}" data-diff="${d}" data-st="${s||"todo"}">
+    <span class="dpill d${d}" title="${{E:"Easy",M:"Medium",H:"Hard"}[d]}">${d}</span>
+    <a class="kkname" href="https://leetcode.com/problems/${slug}/" target="_blank" rel="noopener">${esc(name)}</a>
+    ${rw?`<span class="chip ghost" title="Also in roadmap Week ${rw}; ticking syncs both">⭐ W${rw}</span>`:""}
+    ${when?`<span class="kkwhen">${when}</span>`:""}
+    <span class="seg">${[["done","✓","Done"],["review","↻","Review"],["later","⏳","Later"]].map(([k,ic,l])=>`<button class="${s===k?"on "+k:""}" data-kk="${slug}" data-ks="${k}" title="${l}">${ic}<span> ${l}</span></button>`).join("")}</span>
+  </div>`;
+}
+function kkMission(){
+  const nx = kkNext(2), rev = kkCount("review");
+  return (nx.length ? nx.map(kkRow).join("") : `<div class="empty">No open bootcamp problems up to this week.</div>`) +
+    `<div class="small muted" style="margin-top:6px;padding:0 8px">Today ${kkToday()}/${S.kkGoal||3}${rev?` · <button class="linkbtn" data-openbt="queue">${rev} to review</button>`:""} · <button class="linkbtn" data-openbt="problems">All problems →</button></div>`;
+}
+function applyKKFilter(){
+  const q = (S.ui.kq||"").toLowerCase().trim(), df = S.ui.kdiff||"all", st = S.ui.kstat||"all";
+  document.querySelectorAll(".kktopic").forEach(t=>{
+    let n = 0;
+    t.querySelectorAll(".kkrow").forEach(r=>{
+      const ok = (df==="all"||r.dataset.diff===df) && (st==="all"||r.dataset.st===st) && (!q||r.dataset.name.includes(q));
+      r.classList.toggle("hidden", !ok); if(ok) n++;
+    });
+    t.classList.toggle("hidden", n===0);
+    const c = t.querySelector(".kkcount"); if(c) c.textContent = (q||df!=="all"||st!=="all") ? `${n} shown` : "";
+    if(q && n && !t.open) t.open = true;
+  });
+}
+
+function bootcamp(m){
+  const sub = S.ui.bt || "problems";
+  const done = kkCount("done"), rev = kkCount("review"), later = kkCount("later"), today = kkToday(), goal = S.kkGoal||3;
+  const lecDone = Object.values(S.lec).filter(v=>v==="done").length;
+  let html = `<section class="hero">
+    <div class="hero-l"><div class="eyebrow">DSA Bootcamp · Kunal Kushwaha · solve in JavaScript</div>
+      <h1>${done} <span>of ${KK_TOTAL} solved</span></h1>
+      <p>${KK_TOTAL} LeetCode assignments across ${KK.length} topics, plus ${KK_LECS.length} lectures. The videos use Java; write every solution in JavaScript.</p>
+      <div class="hero-stats"><div><b>${today}/${goal}</b><span>today</span></div><div><b>↻ ${rev}</b><span>to review</span></div><div><b>⏳ ${later}</b><span>later</span></div><div><b>${lecDone}/${KK_LECS.length}</b><span>lectures</span></div></div>
+      <div class="row gap wrap" style="margin-top:10px"><a class="btn light" href="${KK_PLAYLIST}" target="_blank" rel="noopener">▶ Playlist</a><a class="btn light" href="${KK_REPO}" target="_blank" rel="noopener">GitHub repo ↗</a></div></div>
+    <div class="hero-r">${ringBox(Math.min(100,today/goal*100),140,12,"#fff",`<b>${today}/${goal}</b><span>daily goal</span>`,"rgba(255,255,255,.22)")}</div>
+  </section>`;
+  html += `<div class="subtabs">${[["problems","🧩 Problems"],["queue",`↻ Review queue (${rev+later})`],["lectures","🎬 Lectures"],["js","☕ → 🟨 Java → JS"]].map(([k,l])=>`<button class="${sub===k?"sel":""}" data-bt="${k}">${l}</button>`).join("")}</div>`;
+  html += sub==="queue" ? kkQueue() : sub==="lectures" ? kkLectures() : sub==="js" ? kkJS() : kkProblems();
+  m.innerHTML = html;
+  if(sub==="problems") applyKKFilter();
+}
+function kkProblems(){
+  const cw = currentWeek() || 1;
+  let h = `<div class="note small">Treat this as a pool to pick from, not a list to finish. 391 problems won't fit in 90 days next to the roadmap. In each topic's roadmap week, do <b>all the Mediums</b> first, then Hards if you have time. Only do Easies where a pattern still feels shaky. ⭐ means the problem is also in the roadmap list, and ticking either one updates both.</div>
+  <div class="kkfilters"><input class="f" id="kq" placeholder="Search problems…" value="${esc(S.ui.kq||"")}">
+    <div class="seg big">${[["all","All"],["E","Easy"],["M","Medium"],["H","Hard"]].map(([k,l])=>`<button class="${(S.ui.kdiff||"all")===k?"on":""}" data-kdiff="${k}">${l}</button>`).join("")}</div>
+    <div class="seg big">${[["all","All"],["todo","To do"],["done","Done"],["review","Review"],["later","Later"]].map(([k,l])=>`<button class="${(S.ui.kstat||"all")===k?"on":""}" data-kstat="${k}">${l}</button>`).join("")}</div>
+    <label class="row gap small">Daily goal <input type="number" min="1" max="20" class="f score-input" id="kkGoal" value="${S.kkGoal||3}"></label></div>`;
+  h += KK.slice().sort((a,b)=>a.week-b.week).map(t=>{
+    const ps = t.probs, dn = ps.filter(p=>kkStatus(p[1])==="done").length, pc = Math.round(dn/ps.length*100);
+    const lec = KK_LECS.find(l=>l[0]===t.lec);
+    const kopen = S.ui.kopen || {};
+    const open = (t.id in kopen) ? kopen[t.id] : t.week===cw;
+    const cnt = k => ps.filter(p=>p[2]===k).length;
+    return `<details class="kktopic ${t.week===cw?"cur":""}" data-kt="${t.id}" ${open?"open":""}><summary>
+      ${ringBox(pc,46,5,"var(--dsa)",`<b style="font-size:11px">${pc}%</b>`)}
+      <div class="kkt"><b>${esc(t.name)}</b><span class="muted small">Roadmap W${t.week}${t.week===cw?" · <b style='color:var(--dsa)'>this week</b>":""} · ${dn}/${ps.length} done · ${cnt("E")} easy · ${cnt("M")} medium · ${cnt("H")} hard</span></div>
+      <span class="kkcount"></span></summary>
+      <div class="kkbody"><div class="row gap wrap kklinks">${t.vids.map(v=>`<a class="lc" href="${v[1]}" target="_blank" rel="noopener">▶ ${esc(/video link/i.test(v[0])?"Lecture video":v[0])}</a>`).join("")}${lec?`<a class="lc" href="${KK_REPO}/lectures/${encodeURIComponent(lec[1])}" target="_blank" rel="noopener">📄 Notes (PDF)</a>`:""}<a class="lc" href="${KK_REPO}/assignments/${t.id}.md" target="_blank" rel="noopener">Assignment list ↗</a></div>
+      ${ps.map(kkRow).join("")}</div></details>`;
+  }).join("");
+  return h;
+}
+function kkQueue(){
+  const items = [], seen = new Set();
+  KK.forEach(t=>t.probs.forEach(p=>{ if(seen.has(p[1])) return; seen.add(p[1]); const s = kkStatus(p[1]); if(s==="review"||s==="later") items.push({p, t, s, ts:S.kk[p[1]].t}); }));
+  const sec = (s, title, hint) => {
+    const it = items.filter(x=>x.s===s).sort((a,b)=>a.ts-b.ts);
+    return `<section class="card"><div class="card-h"><h3>${title} <span class="muted small">(${it.length})</span></h3><span class="muted small">${hint}</span></div>${it.length ? it.map(x=>`<div class="qwrap"><span class="chip" style="--c:var(--dsa)">${esc(x.t.name)} · ${Math.floor((Date.now()-x.ts)/86400000)}d ago</span>${kkRow(x.p)}</div>`).join("") : `<div class="empty">Nothing here.</div>`}</section>`;
+  };
+  return sec("review","↻ Review","Solved but shaky. Re-solve from a blank editor after 3 days, then 7. Oldest first.") + sec("later","⏳ Later","Parked. Clear these on Sundays.");
+}
+function kkLectures(){
+  const cw = currentWeek() || 1;
+  return `<div class="note small">You know JavaScript and have 2 years of experience, so <b>skip the Java-only and basics lectures</b>. Watch the <b>Core</b> ones at 1.5× and write your notes in JS. If a lecture has no direct video link, find it in the playlist; the order is the same.</div>
+  <div class="lecs">${KK_LECS.map(l=>{
+    const [id, dir, name, rel, wk, tip] = l, st = S.lec[id]||"", r = KK_REL[rel];
+    const vids = KK.filter(t=>t.lec===id).flatMap(t=>t.vids);
+    return `<div class="lec st-${st||"todo"} ${wk&&wk===cw?"cur":""}">
+      <div class="lec-n">${st==="done"?"✓":id}</div>
+      <div class="lec-b"><div class="row gap wrap"><b>${esc(name)}</b><span class="chip" style="--c:var(${r[1]})">${r[0]}</span>${wk?`<span class="chip ghost">Roadmap W${wk}</span>`:""}</div>
+        ${tip?`<div class="small muted">${esc(tip)}</div>`:""}
+        <div class="row gap wrap" style="margin-top:6px">${vids.map(v=>`<a class="lc" href="${v[1]}" target="_blank" rel="noopener">▶ ${esc(/video link/i.test(v[0])?"Video":v[0])}</a>`).join("")}<a class="lc" href="${KK_REPO}/lectures/${encodeURIComponent(dir)}" target="_blank" rel="noopener">📄 Notes & code</a></div></div>
+      <div class="seg">${[["watching","▶","Watching"],["done","✓","Done"]].map(([k,ic,lb])=>`<button class="${st===k?"on "+k:""}" data-lec="${id}" data-ls="${k}">${ic}<span> ${lb}</span></button>`).join("")}</div>
+    </div>`;
+  }).join("")}</div>`;
+}
+function kkJS(){
+  const rows = [
+    ["ArrayList<Integer> list","const list = []; list.push(x); list.length"],
+    ["int[] arr = new int[n]","const arr = new Array(n).fill(0)"],
+    ["int[][] g = new int[m][n]","Array.from({length: m}, () => new Array(n).fill(0))\n// NOT new Array(m).fill(new Array(n)): every row is the same array"],
+    ["HashMap<K, V>","const map = new Map(); map.set(k, (map.get(k) ?? 0) + 1); map.has(k)"],
+    ["HashSet<T>","const set = new Set(); set.add(x); set.has(x)"],
+    ["Stack<T>","stack.push(x); stack.pop(); stack.at(-1) // peek"],
+    ["Queue / Deque","Use an array + head index; shift() is O(n) and TLEs on big inputs"],
+    ["PriorityQueue<T>","LeetCode JS ships MinPriorityQueue / MaxPriorityQueue.\nAlso write your own MinHeap once; interviewers may ask."],
+    ["StringBuilder","const parts = []; parts.push(c); parts.join('')"],
+    ["s.charAt(i) - 'a'","s.charCodeAt(i) - 97"],
+    ["a / b  (int division)","Math.trunc(a / b)  // JS division is floating point"],
+    ["Integer.MAX_VALUE","Infinity  (or Number.MAX_SAFE_INTEGER = 2^53 − 1)"],
+    ["long / BigInteger","BigInt: 10n ** 20n  // can't mix BigInt and Number"],
+    ["Arrays.sort(arr)","arr.sort((a, b) => a - b)  // default sort is lexicographic: [10, 9, 1] → [1, 10, 9]"],
+    ["swap(arr, i, j)","[arr[i], arr[j]] = [arr[j], arr[i]]"],
+    ["x >>> 1,  x & 1,  x ^ y","Same operators, on 32-bit signed ints. x >>> 0 gives unsigned."],
+    ["class Node { int val; Node next; }","class ListNode { constructor(val, next = null) { this.val = val; this.next = next; } }"],
+    ["Deep recursion","The JS call stack holds roughly 10k frames; inputs around 10^5 deep need an iterative version"],
+    ["Generics <T>","Use TypeScript generics when practising OOP / LLD"],
+  ];
+  return `<section class="card"><div class="card-h"><h3>☕ Java → 🟨 JavaScript cheat sheet</h3><span class="muted small">Watch in Java, solve in JS</span></div>
+    <div class="table-wrap"><table><tr><th style="width:34%">Java (in the videos)</th><th>JavaScript (what you write)</th></tr>${rows.map(r=>`<tr><td><code>${esc(r[0])}</code></td><td><code style="white-space:pre-wrap">${esc(r[1])}</code></td></tr>`).join("")}</table></div></section>
+    <div class="note small">On LeetCode, switch the language dropdown to JavaScript (or TypeScript). Each solved problem is also a small speaking drill: say the approach and Big-O out loud before you type.</div>`;
+}
+
+/* =========================================================================
    SIDEBAR
    ========================================================================= */
-const NAV = [["dash","🏠","Dashboard"],["weeks","🗓️","Weekly Plan"],["topics","🧭","By Topic"],["speak","🎙️","Speaking"],["project","🛠️","Project"],["resume","📄","Resume"],["pipeline","📮","Pipeline"],["schedule","⏰","Daily Schedule"],["score","📊","Scorecard"],["settings","⚙️","Settings"]];
+const NAV = [["dash","🏠","Dashboard"],["weeks","🗓️","Weekly Plan"],["topics","🧭","By Topic"],["bootcamp","🎓","DSA Bootcamp"],["speak","🎙️","Speaking"],["project","🛠️","Project"],["resume","📄","Resume"],["pipeline","📮","Pipeline"],["schedule","⏰","Daily Schedule"],["score","📊","Scorecard"],["settings","⚙️","Settings"]];
 function renderSide(){
   const L = level(), st = streak();
   document.getElementById("side").innerHTML = `
@@ -996,7 +1243,7 @@ function render(){
   renderSide();
   const m = document.getElementById("main");
   m.className = "inner" + (S.ui.hideDone ? " hide-done" : "");
-  ({dash, weeks, topics, speak, project, resume, pipeline, schedule, score, settings}[S.ui.tab] || dash)(m);
+  ({dash, weeks, topics, bootcamp, speak, project, resume, pipeline, schedule, score, settings}[S.ui.tab] || dash)(m);
 }
 
 /* =========================================================================
@@ -1017,6 +1264,7 @@ function missionBlocks(){
     {time:"07:30", name:"Speak", c:"--speak", html:`<div class="prompt-mini"><span class="chip" style="--c:var(--speak)">Prompt #${pi+1} of the day</span><div class="t">${esc(pr[0])}</div><div class="d">${esc(pr[1])}</div><div class="row gap wrap"><button class="btn sm" data-pr="${pi+1}" data-delta="1">✓ Practised (${S.prompts[pi+1]||0}/8)</button><button class="btn sm ghost" data-tab="speak">Open drill timer →</button></div></div>`},
     {time:"11:15", name:"Build", c:"--proj", html:blk("proj",1)},
     {time:"13:00", name:"DSA", c:"--dsa", html:blk("dsa",3)},
+    {time:"13:45", name:"Bootcamp", c:"--dsa", html:kkMission()},
     {time:"15:30", name:c2==="hld"?"HLD":"Postgres", c:TRACKS[c2].c, html:blk(c2,2)},
     {time:"16:45", name:"Systems", c:"--dist", html:blk("dist",2)},
     {time:"18:00", name:"LLD", c:"--lld", html:blk("lld",1)},
@@ -1049,7 +1297,7 @@ function dash(m){
       <div class="eyebrow">${greet} · ${new Date().toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"short"})}</div>
       <h1>${headline}</h1>
       <p>${cw ? `Week ${cw} · ${esc(wk.title)} — ${PHASES[wk.phase].name}` : "Pick your Week 1 Monday in Settings. Everything keys off it."}</p>
-      <div class="hero-stats"><div><b>${L.x}</b><span>XP · Lv ${L.i+1}</span></div><div><b>🔥 ${streak()}</b><span>day streak</span></div><div><b>${dsaCount()}</b><span>DSA solved</span></div><div><b>${Object.keys(S.badges).length}/${BADGES.length}</b><span>badges</span></div></div>
+      <div class="hero-stats"><div><b>${L.x}</b><span>XP · Lv ${L.i+1}</span></div><div><b>🔥 ${streak()}</b><span>day streak</span></div><div><b>${totalSolved()}</b><span>DSA solved</span></div><div><b>${Object.keys(S.badges).length}/${BADGES.length}</b><span>badges</span></div></div>
       ${S.start?"":`<button class="btn light" data-tab="settings">Set start date →</button>`}
     </div>
     <div class="hero-r">${ringBox(overall,150,12,"#fff",`<b>${overall}%</b><span>${doneN(ALL)} / ${ALL.length}</span>`,"rgba(255,255,255,.22)")}</div>
@@ -1339,9 +1587,28 @@ document.addEventListener("click", e=>{
     document.documentElement.dataset.theme = nx; try{ localStorage.setItem(KEY+".theme", nx); }catch(err){}
     return;
   }
-  const t = e.target.closest("[data-tab],[data-act],[data-pr],[data-delfiller],[data-delapp],[data-openweek],[data-opentopic],[data-week],[data-topic],[data-drill]");
+  const t = e.target.closest("[data-tab],[data-act],[data-pr],[data-delfiller],[data-delapp],[data-openweek],[data-opentopic],[data-week],[data-topic],[data-drill],[data-kk],[data-lec],[data-bt],[data-openbt],[data-kdiff],[data-kstat]");
   if(!t) return;
   const ds = t.dataset;
+  if(ds.kk){
+    const before = level().i, nx = kkStatus(ds.kk)===ds.ks ? "" : ds.ks;
+    setKK(ds.kk, nx);
+    if(nx==="done"){ const td = kkToday(), g = S.kkGoal||3; if(td===g){ toast(`🎯 Daily goal hit: ${td}/${g}`,"badge"); confetti(); } else toast(`✓ +10 XP · ${td}/${g} today`); }
+    else if(nx==="review") toast("↻ Added to review queue"); else if(nx==="later") toast("⏳ Parked for later");
+    afterChange(before); return;
+  }
+  if(ds.lec){
+    const before = level().i, nx = S.lec[ds.lec]===ds.ls ? "" : ds.ls;
+    if(nx) S.lec[ds.lec] = nx; else delete S.lec[ds.lec];
+    if(nx==="done"){ bump(); toast("🎬 +15 XP · Lecture done"); }
+    afterChange(before); return;
+  }
+  if(ds.bt){ S.ui.bt = ds.bt; save(); render(); return; }
+  if(ds.openbt) return go("bootcamp", {bt:ds.openbt});
+  if(ds.kdiff || ds.kstat){
+    const key = ds.kdiff ? "kdiff" : "kstat"; S.ui[key] = ds[key]; save();
+    document.querySelectorAll(`[data-${key}]`).forEach(b=>b.classList.toggle("on", b===t)); applyKKFilter(); return;
+  }
   if(ds.tab) return go(ds.tab);
   if(ds.openweek) return go("weeks", {week:+ds.openweek});
   if(ds.opentopic) return go("topics", {topic:ds.opentopic});
@@ -1400,6 +1667,7 @@ document.addEventListener("change", e=>{
     const before = level().i, it = ALL.find(i=>i.id===t.dataset.id);
     const wasWeek = it ? weekDone(it.w) : false, wasPhase = it ? phaseDone(it.phase) : false;
     if(t.checked) S.done[t.dataset.id] = Date.now(); else delete S.done[t.dataset.id];
+    if(it && it.lc && KK_SLUGS.has(it.lc)){ if(t.checked) S.kk[it.lc] = {s:"done", t:Date.now()}; else if(kkStatus(it.lc)==="done") delete S.kk[it.lc]; }
     if(t.checked){
       if(it && !wasWeek && weekDone(it.w)){ toast(`🎉 Week ${it.w} cleared!`,"badge"); confetti(); }
       else if(it && !wasPhase && phaseDone(it.phase)){ toast(`🏁 ${PHASES[it.phase].name} complete!`,"badge"); confetti(); }
@@ -1422,9 +1690,13 @@ document.addEventListener("change", e=>{
 document.addEventListener("input", e=>{
   const t = e.target;
   if(t.dataset.note){ S.notes[t.dataset.note] = t.value; save(); }
+  if(t.id === "kq"){ S.ui.kq = t.value.slice(0,60); save(); applyKKFilter(); }
+  if(t.id === "kkGoal"){ const g = Math.floor(+t.value); if(g >= 1 && g <= 20){ S.kkGoal = g; save(); } }
   if(t.dataset.appnote){ const a = S.apps.find(x=>x.id===t.dataset.appnote); if(a){ a.n = t.value; save(); } }
   if(t.dataset.score){ const [w,k] = t.dataset.score.split("."); S.score[w] = S.score[w]||{}; S.score[w][k] = t.value; save(); }
 });
+
+document.addEventListener("toggle", e=>{ const d = e.target; if(d && d.dataset && d.dataset.kt){ S.ui.kopen = S.ui.kopen||{}; S.ui.kopen[d.dataset.kt] = d.open; save(); } }, true);
 
 /* Theme + boot */
 (function(){ let th = null; try{ th = localStorage.getItem(KEY+".theme"); }catch(e){} if(th) document.documentElement.dataset.theme = th; })();
