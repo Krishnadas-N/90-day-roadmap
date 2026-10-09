@@ -409,6 +409,22 @@ a.btn{text-decoration:none;display:inline-block}
   .lec{grid-template-columns:44px minmax(0,1fr)}.lec .seg{grid-column:1/-1;justify-self:start}
 }
 
+/* ---------- Item guides ---------- */
+.item{flex-wrap:wrap}
+.guide{flex-basis:100%;margin:2px 0 4px 32px}
+.guide>summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--accent);list-style:none;display:inline-flex;gap:6px;align-items:center;padding:3px 10px;border-radius:8px;background:var(--accent-soft);user-select:none}
+.guide>summary::-webkit-details-marker{display:none}
+.guide>summary::before{content:"▸";transition:transform .2s}
+.guide[open]>summary::before{transform:rotate(90deg)}
+.gbody{margin-top:8px;padding:12px 14px;border-left:3px solid var(--c,var(--accent));background:var(--surface-2);border-radius:0 10px 10px 0;font-size:13.5px;line-height:1.55}
+.ggoal{font-weight:600;margin-bottom:4px}
+.gbody ol{margin:6px 0 8px;padding-left:20px}
+.gbody li{margin:5px 0}
+.gk{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px;margin-top:6px}
+.gk b{font-size:12.5px}
+.playbook .tmpl h3{font-size:14px}
+@media (max-width:600px){.gk{grid-template-columns:1fr;gap:2px}.guide{margin-left:0}}
+
 /* ---------- Toast / confetti ---------- */
 #toasts{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:8px;z-index:100;pointer-events:none}
 .toast{background:var(--text);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:tin .25s ease-out;transition:opacity .4s,transform .4s}
@@ -866,6 +882,297 @@ const RESUME_REQ = [
 ];
 
 /* =========================================================================
+   GUIDES — "How to do this" dropdown per checklist item, keyed by item title
+   g: goal · s: steps · d: deliverable · w: done when · q: interview check · r: resources
+   Backticks in text render as inline code.
+   ========================================================================= */
+const RG = p => ["Refactoring.Guru: " + p, "https://refactoring.guru/design-patterns/" + p.toLowerCase().replace(/ /g,"-")];
+const GUIDES = {
+  /* ---------- Week 1: SOLID ---------- */
+  "Single Responsibility": {
+    g:"A class should have exactly one reason to change.",
+    s:["Write a deliberately bad `InvoiceService` in TypeScript that calculates totals, saves to Postgres and sends an email, all in one class.",
+       "List every 'reason to change' it has: tax rules change, DB schema changes, email provider changes. Three reasons = three responsibilities.",
+       "Split it into `InvoiceCalculator`, `InvoiceRepository` and `InvoiceMailer`. Keep a thin `InvoiceService` that only orchestrates them.",
+       "Write one unit test for `InvoiceCalculator` that needs no database and no email mock.",
+       "Find one real SRP violation in your current work codebase (a 500-line controller or service). That is your best interview story."],
+    d:"lld-practice/01-solid/srp.ts", w:"You can test the calculation logic with zero mocks.",
+    q:"Show me a class in your current project that violates SRP. How would you split it?"},
+  "Open/Closed": {
+    g:"Add new behaviour by adding new code, not by editing code that already works.",
+    s:["Write `PaymentProcessor.pay(type, amount)` with an if/else for card, UPI and netbanking.",
+       "Add 'wallet'. Notice you must edit (and re-test) the existing function. That is the problem OCP solves.",
+       "Refactor: `interface PaymentMethod { pay(amount: number): Promise<Receipt> }`, one class per method, plus a registry `Map<string, PaymentMethod>`.",
+       "Add `WalletPayment` by creating one new class and registering it, with no changes to existing files.",
+       "Write down the cost: more files and indirection. Rule of thumb: refactor towards OCP when the second or third variation appears, not on day one."],
+    d:"lld-practice/01-solid/ocp.ts", w:"Adding a new payment method touches zero existing classes.",
+    q:"How would you add a new payment method without modifying existing code?"},
+  "Liskov Substitution": {
+    g:"A subclass must work anywhere its parent is expected, with no surprises.",
+    s:["Code the classic trap: `Square extends Rectangle` where `setWidth` also changes height.",
+       "Write `resize(r: Rectangle)` that sets width 5 and height 4 and asserts area = 20. Pass a Square and watch it fail.",
+       "Backend version: `ReadOnlyUserRepo extends UserRepo` whose `save()` throws. Any caller of `UserRepo.save()` breaks.",
+       "Fix both with better modelling: a `Shape` interface with `area()`; separate `UserReader` and `UserWriter` interfaces.",
+       "Memorise the rule: a subclass may not demand more (preconditions), promise less (postconditions) or throw new kinds of errors."],
+    d:"lld-practice/01-solid/lsp.ts", w:"You can explain both broken examples and why the fix works in 60 seconds.",
+    q:"Give me an example of an LSP violation you've seen or could imagine in a backend."},
+  "Interface Segregation": {
+    g:"Callers shouldn't be forced to depend on methods they don't use.",
+    s:["Write a fat `interface Worker { code(); test(); deploy(); attendStandup(); }` and a `CiBot` class forced to stub `attendStandup()`.",
+       "Split into `Coder`, `Tester`, `Deployer`; each class implements only what it really does.",
+       "Backend version: a `UserRepository` with 15 methods, but your handler only needs `findById`. Define a narrow `UserReader` and depend on that.",
+       "Write a unit test for the handler and notice how small the fake becomes."],
+    d:"lld-practice/01-solid/isp.ts", w:"Every fake in your tests implements 1–3 methods, not 15.",
+    q:"Why would you split an interface that 'works fine'?"},
+  "Dependency Inversion": {
+    g:"Business logic depends on abstractions; databases, email and SDKs plug in from outside.",
+    s:["Write `OrderService` that does `new PostgresOrderRepo()` and `new SesEmailClient()` inside its methods.",
+       "Try to unit-test it. You can't without a real DB and AWS. That is the pain DIP removes.",
+       "Define `OrderRepo` and `Notifier` interfaces and inject them through the constructor.",
+       "Write tests using in-memory fakes. Wire the real implementations in one place (`main.ts`).",
+       "Apply it to Relay: the delivery worker should receive an `HttpClient` interface so tests never hit the network."],
+    d:"lld-practice/01-solid/dip.ts", w:"OrderService tests run in milliseconds with no infrastructure.",
+    q:"What's the difference between Dependency Inversion and Dependency Injection? (Principle vs technique.)"},
+  "Composition over inheritance": {
+    g:"Build behaviour by combining small objects instead of deep class trees.",
+    s:["Model `Bird → FlyingBird / SwimmingBird` with inheritance, then add `Duck` (flies and swims) and `Penguin` (swims only). Watch the hierarchy explode.",
+       "Redo it with `FlyBehavior` and `SwimBehavior` objects passed into `Bird`. Duck gets both; Penguin gets one.",
+       "TypeScript rule: `interface` for pure contracts; `abstract class` only when sharing real code plus forcing subclasses to fill in hooks.",
+       "Write 3 bullets on when inheritance is still right: a true is-a relationship, a template method with shared steps, framework base classes."],
+    d:"lld-practice/01-solid/composition.ts", w:"You can explain interface vs abstract class in TS with one example each.",
+    q:"When would you choose an abstract class over an interface?"},
+
+  /* ---------- Week 2: creational ---------- */
+  "Factory & Abstract Factory": {
+    g:"Centralise object creation so callers never `new` concrete classes.",
+    s:["Simple factory: `NotifierFactory.create('email' | 'sms' | 'push')` returns a `Notifier`.",
+       "Factory Method: an abstract `ReportExporter.createWriter()` overridden by `CsvExporter` and `PdfExporter`. Learn how it differs from a simple factory.",
+       "Abstract Factory: `CloudFactory` with `createQueue()` and `createStorage()`; `AwsFactory` returns SQS + S3, `LocalFactory` returns in-memory versions. Families that must match.",
+       "Use it for real: Relay picks the SQS or in-memory queue through a factory, based on an env variable."],
+    d:"lld-practice/02-creational/factory.ts", r:[RG("Factory Method"), RG("Abstract Factory")],
+    w:"Business code never imports a concrete queue or notifier class.",
+    q:"Factory vs Abstract Factory vs Builder: when do you use each?"},
+  "Builder": {
+    g:"Construct complex objects step by step, readably, with validation at the end.",
+    s:["Write `new HttpRequestBuilder().url(u).method('POST').header(k, v).body(b).timeout(5000).build()`.",
+       "Validate required fields inside `build()` and return an immutable object (`readonly` fields or `Object.freeze`).",
+       "Compare with the idiomatic TS alternative: a plain options object with defaults. Builders win for step-by-step or conditional construction; options objects win for simple config.",
+       "Real-world examples to mention: Knex/Prisma query builders, the AWS SDK command objects."],
+    d:"lld-practice/02-creational/builder.ts", r:[RG("Builder")],
+    w:"Calling `build()` without a URL throws a clear error.",
+    q:"Why not just use a constructor with 8 parameters?"},
+  "Singleton": {
+    g:"Exactly one instance, and know why it's mostly an anti-pattern.",
+    s:["Implement it in TS: private constructor + `static getInstance()`.",
+       "Note that Node already caches modules, so `export const pool = new Pool()` is effectively a singleton.",
+       "List the problems: hidden global state, hard to mock in tests, can't run two configs side by side, initialisation-order bugs.",
+       "Show the fix: create the object once in your composition root and inject it (this connects to DI).",
+       "For Java-heavy interviewers, know the term 'double-checked locking' for thread-safe lazy init."],
+    d:"lld-practice/02-creational/singleton.ts", r:[RG("Singleton")],
+    w:"You can give a balanced 45-second answer: where it's fine (config, logger, pool) and why you still inject it.",
+    q:"Is Singleton a good pattern?"},
+  "Dependency Injection by hand": {
+    g:"Wire a whole app without a framework, so you understand what NestJS does for you.",
+    s:["Create `main.ts` as the composition root: config → DB pool → repositories → services → HTTP handlers, all passed through constructors.",
+       "Rule: business classes never `new` their dependencies. Only `main.ts` does.",
+       "Write tests that build each service with fakes in 2–3 lines.",
+       "Explain in 30 seconds how NestJS's `@Injectable()` container automates exactly this.",
+       "Use this structure in Relay from Week 2 onwards."],
+    d:"lld-practice/02-creational/di/main.ts", w:"Grepping for `new Postgres` finds it only in main.ts.",
+    q:"How do you make a Node service testable without a DI framework?"},
+
+  /* ---------- Week 3: behavioural/structural ---------- */
+  "Strategy": {
+    g:"Swap one algorithm for another at runtime behind a single interface.",
+    s:["Define `interface RetryPolicy { nextDelayMs(attempt: number): number | null }` (null = give up).",
+       "Implement `FixedDelay`, `ExponentialBackoff` and `ExponentialWithFullJitter`.",
+       "Make the worker receive a `RetryPolicy` in its constructor; config decides which one.",
+       "Second example you'll reuse in Week 4: parking fee strategies (hourly, flat, weekend).",
+       "Know the difference from State: the client picks a Strategy; a State changes itself."],
+    d:"lld-practice/03-behavioural/strategy.ts", r:[RG("Strategy")],
+    w:"Relay's retry logic uses this interface for real.",
+    q:"Where have you used the Strategy pattern, maybe without naming it?"},
+  "Observer": {
+    g:"Notify many listeners when something happens, without the source knowing who they are.",
+    s:["Build a typed `EventBus<{ 'order.paid': Order; 'order.cancelled': Order }>` with `subscribe`, `unsubscribe` and `publish`.",
+       "Add `EmailListener`, `AnalyticsListener` and `InventoryListener`.",
+       "Handle the hard parts: one failing listener must not break the others; sync vs async listeners; memory leaks from never unsubscribing.",
+       "Connect it to what you know: Node's `EventEmitter` in-process, SNS/Kafka across services. Same idea, different boundary."],
+    d:"lld-practice/03-behavioural/observer.ts", r:[RG("Observer")],
+    w:"A listener that throws is logged and the other listeners still run.",
+    q:"How is Observer different from a message queue?"},
+  "Decorator": {
+    g:"Add behaviour by wrapping an object that has the same interface.",
+    s:["Define `interface HttpClient { request(req): Promise<Res> }` and a basic `FetchClient`.",
+       "Write `LoggingClient`, `RetryingClient` and `TimingClient`. Each wraps another `HttpClient`.",
+       "Compose them: `new LoggingClient(new RetryingClient(new FetchClient()))`. Reorder them and explain how the behaviour changes.",
+       "Don't confuse it with TypeScript's `@decorator` syntax, which is annotation sugar and a different thing."],
+    d:"lld-practice/03-behavioural/decorator.ts", r:[RG("Decorator")],
+    w:"You can add caching as a new wrapper without touching the others.",
+    q:"Decorator vs inheritance: why wrap instead of subclass?"},
+  "Adapter": {
+    g:"Make an incompatible interface fit the one your code expects.",
+    s:["Your code depends on `interface SmsSender { send(to: string, text: string): Promise<void> }`.",
+       "Write `TwilioAdapter` and `Msg91Adapter` that wrap two fake SDKs with different method names and argument shapes.",
+       "Switching provider becomes one line in `main.ts`, with zero business-code changes.",
+       "One line each: Adapter changes an interface, Facade simplifies many classes, Decorator keeps the interface and adds behaviour."],
+    d:"lld-practice/03-behavioural/adapter.ts", r:[RG("Adapter")],
+    w:"Business code imports no vendor SDK types.",
+    q:"How would you make it easy to switch SMS providers?"},
+  "State": {
+    g:"Behaviour changes with internal state, without a giant switch statement.",
+    s:["Model an order: Created → Paid → Shipped → Delivered, plus Cancelled.",
+       "First write it with `switch (status)` in every method. Then add 'Refunded' and feel the mess.",
+       "Refactor: each state is a class implementing `pay()`, `ship()` and `cancel()`; invalid transitions throw.",
+       "Backend reality: status lives in Postgres too. Enforce transitions with a conditional update, `UPDATE orders SET status='SHIPPED' WHERE id=$1 AND status='PAID'`, and check the affected row count.",
+       "You'll reuse this for seats in Week 7 (Available → Held → Booked)."],
+    d:"lld-practice/03-behavioural/state.ts", r:[RG("State")],
+    w:"Calling `ship()` on a Created order throws a clear error.",
+    q:"How do you prevent invalid status transitions when two requests arrive at once?"},
+  "Chain of Responsibility": {
+    g:"Pass a request through a chain of handlers; each one handles it or passes it on.",
+    s:["Define `type Middleware = (req, next) => Promise<Res>`.",
+       "Write `compose(middlewares)` yourself. It's about 15 lines and is exactly how Express and Koa work.",
+       "Add `auth`, `rateLimit`, `validate` and a final handler; show that `auth` can stop the chain early.",
+       "Second example: an expense approval chain (Team Lead → Manager → Director by amount)."],
+    d:"lld-practice/03-behavioural/chain.ts", r:[RG("Chain of Responsibility")],
+    w:"Your `compose` passes a test where middleware order matters.",
+    q:"Which design pattern is Express middleware?"},
+
+  /* ---------- Machine-coding rounds ---------- */
+  "Machine coding #1: Parking Lot (90 min timed)": {
+    g:"Your first full machine-coding round under real interview conditions.",
+    s:["0–10 min, requirements: write them down. Multiple floors; spot types (bike/car/truck); vehicle-to-spot fit; ticket on entry; payment on exit; hourly pricing; show availability.",
+       "10–20 min, model: entities and relationships on paper. `ParkingLot`, `Floor`, `Spot`, `Vehicle`, `Ticket`, `Gate`, `PricingStrategy`, `SpotAllocationStrategy`.",
+       "20–70 min, code in TS: interfaces first, then in-memory repositories, then `ParkingService.park()` / `unpark()`. Use Strategy for pricing and allocation.",
+       "70–80 min, prove it works: a `main.ts` that runs a scenario and prints results, plus 2–3 unit tests.",
+       "80–90 min, review: could you add EV-charging spots without editing old classes?",
+       "Rules: timer on, no internet except TS docs, commit whatever you have at 90 minutes."],
+    d:"lld-practice/mc01-parking-lot/ + README.md with your assumptions",
+    w:"main.ts runs a park → unpark → fee scenario, and handles 'lot full' and 'invalid ticket'.",
+    q:"Interviewers grade: working code > feature count, then modularity, extensibility, edge cases and naming."},
+  "Self-review": {
+    g:"Score your own round the way an interviewer would.",
+    s:["Rate yourself 1–5 on: requirements clarified, entity modelling, working demo, extensibility, naming/readability, edge cases, tests.",
+       "Extensibility test: add 'EV spots with a charging fee' right now and time it. Under 10 minutes means your design was good.",
+       "Compare with 1–2 public solutions (search 'parking lot LLD'). Write down 3 things they did better.",
+       "Put those 3 improvements in your Week 4 notes and apply them in the next round."],
+    d:"Week 4 notes (in this tracker) with your scores and 3 improvements",
+    w:"You have a written score and 3 specific improvements."},
+  "Machine coding #2: Rate Limiter": {
+    g:"An in-memory rate-limiter library with pluggable algorithms.",
+    s:["Requirements: limits per user and per API; config like `{ key, limit, windowMs }`; return `{ allowed, retryAfterMs }`.",
+       "Interfaces: `RateLimiter { allow(key): Decision }` and `Store` (in-memory now, Redis later).",
+       "Implement `TokenBucket` (refill from elapsed time, no timers) and `SlidingWindowLog`.",
+       "Test with a fake clock (inject `now()`). Never use real sleeps in tests.",
+       "Explain concurrency: fine in-memory on one Node process; across many instances you need Redis + a Lua script (Week 3 topic)."],
+    d:"lld-practice/mc02-rate-limiter/", w:"Tests prove a burst over the limit is rejected and allowed again after the window.",
+    q:"How does your design change when the API runs on 10 servers?"},
+  "Machine coding #3: Notification Engine": {
+    g:"A multi-channel notification service with priorities and retries.",
+    s:["Requirements: email/SMS/push; templates with variables; user preferences (opt out per channel); priority (OTP before marketing); retries with backoff; delivery status.",
+       "Entities: `Notification`, `Template`, `Channel` (Strategy), `UserPreference`, `NotificationService`, `RetryPolicy`, `DeliveryListener` (Observer).",
+       "Flow: `send(request)` → render template → filter by preferences → priority queue → `channel.send()` → record status → retry on failure.",
+       "Use fake channels that fail 20% of the time so the retries actually run.",
+       "Extensibility check: add WhatsApp by adding one class."],
+    d:"lld-practice/mc03-notification-engine/", w:"An OTP queued after 50 marketing messages is sent first.",
+    q:"How would you avoid sending the same notification twice?"},
+  "Machine coding #4: BookMyShow seat booking": {
+    g:"A concurrency-focused LLD. This exact question is very common in Indian interviews.",
+    s:["Requirements: city → theatre → screen → show → seats; search shows; hold seats for 5 minutes; confirm on payment; release on timeout.",
+       "Entities: `Movie`, `Theatre`, `Screen`, `Show`, `Seat`, `ShowSeat` (status per show), `Booking`, `SeatLockService`.",
+       "Core problem: two users click the same seat. Build `SeatLockService` with an in-memory lock map plus expiry.",
+       "Then explain the database version. Optimistic: `UPDATE show_seats SET status='HELD', held_until=now()+interval '5 min' WHERE id = ANY($1) AND status='AVAILABLE'` and check the row count. Pessimistic: `SELECT … FOR UPDATE`.",
+       "Timeout release: a lazy check on read vs a background sweeper. Know the trade-off."],
+    d:"lld-practice/mc04-bookmyshow/", w:"Two simulated users booking the same seat: exactly one succeeds.",
+    q:"Optimistic or pessimistic locking for seat booking, and why?"},
+  "Machine coding #5: Splitwise": {
+    g:"An expense-sharing app with multiple split types and balance simplification.",
+    s:["Requirements: users, groups, expenses split EQUAL / EXACT / PERCENT, show balances, settle up.",
+       "Entities: `User`, `Group`, `Expense`, abstract `Split` → `EqualSplit` / `ExactSplit` / `PercentSplit`, `BalanceSheet`.",
+       "Validation: exact splits must sum to the total; percents must sum to 100. Store money as integer paise, never floats.",
+       "Simplify balances: compute each person's net, then greedily match the biggest creditor with the biggest debtor (two heaps).",
+       "Drive the demo with commands like `EXPENSE u1 1000 4 u1 u2 u3 u4 EQUAL`."],
+    d:"lld-practice/mc05-splitwise/", w:"₹100 split 3 ways balances to the paisa, and settle-up gives the minimal set of transfers.",
+    q:"Why integers for money? How do you handle ₹100 / 3?"},
+  "Machine coding: Elevator system": {
+    g:"A classic state + scheduling design.",
+    s:["Requirements: N elevators, M floors, up/down requests from floors, floor requests from inside, current state display.",
+       "Entities: `ElevatorSystem`, `Elevator`, `Request`, `Direction`; `ElevatorState` via the State pattern (Idle / MovingUp / MovingDown / DoorsOpen); `Scheduler` via Strategy.",
+       "Scheduling: start with 'nearest idle elevator', then implement LOOK (serve all requests in the current direction, then reverse).",
+       "Simulate time with a `step()` tick instead of real timers. That makes it easy to test."],
+    d:"lld-practice/mc06-elevator/", w:"A 20-tick simulation serves every request with no elevator going the wrong way.",
+    q:"How would you change the scheduler for a 60-floor office building at 9 am?"},
+  "Machine coding: In-memory KV store with TTL + LRU/LFU eviction": {
+    g:"A mini Redis: get/set/delete with TTL and pluggable eviction.",
+    s:["API: `get`, `set(key, value, ttlMs?)`, `delete`; fixed capacity; pluggable `EvictionPolicy` (LRU, LFU).",
+       "LRU two ways: the JS `Map` trick (delete + re-set on access), and a hand-written doubly linked list + hashmap. Interviewers want the second.",
+       "LFU in O(1): a frequency map plus an ordered set per frequency.",
+       "TTL: lazy expiry on `get` plus a periodic sweep. Inject the clock for tests.",
+       "Optional: snapshot to a JSON file, like Redis RDB."],
+    d:"lld-practice/mc07-kv-store/", w:"Tests cover eviction order, TTL expiry and capacity.",
+    q:"How does Redis expire keys? (Lazy + active sampling.)"},
+  "Machine coding: Logger / Pub-Sub system": {
+    g:"Two infrastructure-flavoured designs: pick one for the 90-minute round, do the other in 60.",
+    s:["Logger: levels (DEBUG → ERROR); multiple sinks (console, file, remote) via Strategy; formatters; buffered async writes; level filtering via Chain of Responsibility.",
+       "Pub-Sub: topics, publishers, subscribers, acks, per-subscriber offsets (Kafka-style), retry and dead-letter.",
+       "Link the Pub-Sub version to the Kafka concepts from Week 5 when you explain it."],
+    d:"lld-practice/mc08-logger/ and mc09-pubsub/", w:"A slow subscriber doesn't block the others.",
+    q:"How do you guarantee a subscriber doesn't miss messages if it restarts?"},
+  "Machine coding: Snake & Ladder (60-min OOP speed drill)": {
+    g:"A speed drill: fluent class modelling without overthinking.",
+    s:["Requirements: board size, snakes, ladders, N players, dice (normal or crooked via Strategy), win condition.",
+       "Entities: `Board`, `Jump` (snake or ladder), `Player`, `Dice`, `Game`.",
+       "Target: a working game loop printing every move within 45 minutes; use the last 15 to refactor."],
+    d:"lld-practice/mc10-snake-ladder/", w:"Working in under 45 minutes."},
+  "Redo weakest machine coding in 60 min": {
+    g:"Prove you've improved on the round you did worst.",
+    s:["Pick the lowest-scored round from your self-review notes.",
+       "Start from an empty folder with a 60-minute timer. Don't open your old code.",
+       "Compare with the old attempt: time to a working demo, cleaner names, easier to extend?",
+       "Record a 5-minute walkthrough of the design. This doubles as speaking practice."],
+    d:"lld-practice/redo-<name>/", w:"Working demo in 60 minutes, and the recording has under 4 fillers."},
+};
+
+const LLD_PLAYBOOK = `<section class="card playbook"><div class="card-h"><h3>📘 How to work this track</h3><span class="muted small">Read once, then follow the dropdowns</span></div>
+<div class="grid two" style="margin:0">
+  <div class="tmpl"><h3>Setup (once)</h3><ul class="ticks small">
+    <li>Create a personal GitHub repo <code>lld-practice</code> (TypeScript, <code>ts-node</code> or <code>tsx</code>, Vitest).</li>
+    <li>One folder per item, for example <code>01-solid/srp.ts</code> and <code>mc01-parking-lot/</code>. Each item's dropdown names its folder.</li>
+    <li>Write in TypeScript, not Java. Interviewers accept any OOP language, and TS matches your stack.</li></ul></div>
+  <div class="tmpl"><h3>Daily routine (18:00–19:00, block C4)</h3><ul class="ticks small">
+    <li><b>15 min</b> learn: read the pattern on Refactoring.Guru, or the matching part of Kunal's OOP lecture.</li>
+    <li><b>30 min</b> code: the "bad" version first, then the refactor. Follow the dropdown steps.</li>
+    <li><b>10 min</b> README: "when to use / when not to / real example".</li>
+    <li><b>5 min</b> say it out loud: definition → example → trade-off. Speaking practice too.</li></ul></div>
+  <div class="tmpl"><h3>Machine-coding weeks (W4 onwards)</h3><ul class="ticks small">
+    <li>The full 90-minute round happens in the <b>Friday</b> block, with a timer and no internet.</li>
+    <li>Monday–Thursday: practise the hard parts (the concurrency piece, the algorithm, the tests).</li>
+    <li>After each round: do the self-review rubric and write 3 improvements in the week notes.</li></ul></div>
+  <div class="tmpl"><h3>What interviewers grade</h3><ul class="ticks small">
+    <li>Working, runnable code beats an unfinished "perfect" design.</li>
+    <li>Clear entities, small classes, interfaces at the boundaries.</li>
+    <li>Extensibility: "add feature X" should take minutes.</li>
+    <li>Edge cases handled, readable names, a few tests.</li></ul></div>
+</div>
+<div class="row gap wrap" style="margin-top:12px"><a class="lc" href="https://refactoring.guru/design-patterns/catalog" target="_blank" rel="noopener">Refactoring.Guru catalog ↗</a><a class="lc" href="https://github.com/ashishps1/awesome-low-level-design" target="_blank" rel="noopener">awesome-low-level-design ↗</a><a class="lc" href="https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures/17-oop" target="_blank" rel="noopener">Kunal: OOP lecture notes ↗</a></div>
+</section>`;
+
+const OPEN_GUIDES = new Set();
+const fmtGuide = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+function guideHTML(title){
+  const g = GUIDES[title]; if(!g) return "";
+  return `<details class="guide" data-g="${esc(title)}" ${OPEN_GUIDES.has(title)?"open":""}><summary>How to do this</summary><div class="gbody">
+    <div class="ggoal">🎯 ${fmtGuide(g.g)}</div>
+    <ol>${g.s.map(x=>`<li>${fmtGuide(x)}</li>`).join("")}</ol>
+    ${g.d?`<div class="gk"><b>📁 Deliverable</b><span>${fmtGuide(g.d)}</span></div>`:""}
+    ${g.w?`<div class="gk"><b>✅ Done when</b><span>${fmtGuide(g.w)}</span></div>`:""}
+    ${g.q?`<div class="gk"><b>🎤 Interview check</b><span>${fmtGuide(g.q)}</span></div>`:""}
+    ${g.r?`<div class="row gap wrap" style="margin-top:8px">${g.r.map(([l,u])=>`<a class="lc" href="${u}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
+  </div></details>`;
+}
+
+/* =========================================================================
    STATE
    ========================================================================= */
 const STAGES = ["Target","Referral asked","Applied","Screen","Tech round","Machine coding","HLD","HR / Final","Offer","Rejected","Dropped"];
@@ -1033,6 +1340,7 @@ function itemHTML(it, o={}){
     <label class="chk"><input type="checkbox" data-id="${it.id}" ${d?"checked":""}><span class="box">${CHECK_SVG}</span>
     <span class="txt"><span class="t">${esc(it.title)}</span>${it.detail?`<span class="d">${esc(it.detail)}</span>`:""}</span></label>
     <span class="meta">${o.week&&it.w?`<span class="chip ghost">W${it.w}</span>`:""}${it.lc?`<a class="lc" href="https://leetcode.com/problems/${it.lc}/" target="_blank" rel="noopener">Solve ↗</a>`:""}</span>
+    ${guideHTML(it.title)}
   </div>`;
 }
 function checkLine(id, title, detail){
@@ -1372,6 +1680,7 @@ function topics(m){
   html += `<section class="week-hero" style="--c:var(${t.c})"><div class="wh-l"><div class="eyebrow">Topic track · ${items.length} items</div><h1>${t.name}</h1><p class="muted" style="margin:0 0 14px">${TOPIC_BLURB[k]||""}</p>
     <label class="toggle"><input type="checkbox" id="hideDone" ${S.ui.hideDone?"checked":""}><span></span>Hide done</label></div>
     <div class="wh-r">${ringBox(p,124,11,`var(${t.c})`,`<b>${p}%</b><span>${doneN(items)} / ${items.length}</span>`)}</div></section>`;
+  if(k==="lld") html += LLD_PLAYBOOK;
   const byW = {}; items.forEach(i=>(byW[i.w]=byW[i.w]||[]).push(i));
   html += `<div class="tl" style="--c:var(${t.c})">${Object.keys(byW).map(w=>{const ws=byW[w], wp=pct(ws); return `<div class="tl-row ${wp===100?"full":""}"><div class="tl-dot">${wp===100?"✓":w}</div><div class="tl-body"><div class="tl-h"><b>Week ${w}</b><span class="muted small">${esc(WEEKS[w-1].title)}</span><span class="tl-p">${doneN(ws)}/${ws.length}</span></div><div class="items">${ws.map(i=>itemHTML(i)).join("")}</div></div></div>`;}).join("")}</div>`;
   m.innerHTML = html;
@@ -1696,7 +2005,7 @@ document.addEventListener("input", e=>{
   if(t.dataset.score){ const [w,k] = t.dataset.score.split("."); S.score[w] = S.score[w]||{}; S.score[w][k] = t.value; save(); }
 });
 
-document.addEventListener("toggle", e=>{ const d = e.target; if(d && d.dataset && d.dataset.kt){ S.ui.kopen = S.ui.kopen||{}; S.ui.kopen[d.dataset.kt] = d.open; save(); } }, true);
+document.addEventListener("toggle", e=>{ const d = e.target; if(d && d.dataset && d.dataset.g){ if(d.open) OPEN_GUIDES.add(d.dataset.g); else OPEN_GUIDES.delete(d.dataset.g); } if(d && d.dataset && d.dataset.kt){ S.ui.kopen = S.ui.kopen||{}; S.ui.kopen[d.dataset.kt] = d.open; save(); } }, true);
 
 /* Theme + boot */
 (function(){ let th = null; try{ th = localStorage.getItem(KEY+".theme"); }catch(e){} if(th) document.documentElement.dataset.theme = th; })();
